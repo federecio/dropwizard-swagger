@@ -24,7 +24,6 @@ How to use it
             <groupId>com.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
             <version>0.1-SNAPSHOT</version>
-            <scope>test</scope>
         </dependency>
 
 
