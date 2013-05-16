@@ -66,6 +66,7 @@
             <groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
             <version>0.6.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.wordnik</groupId>
