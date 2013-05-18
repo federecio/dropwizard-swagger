@@ -10,12 +10,10 @@ How to use it
 
 * Add the Maven repository
 
-        <repositories>
-            <repository>
-                <id>dropwizard-swagger</id>
-                <url>https://raw.github.com/federecio/dropwizard-swagger/mvn-repo/</url>
-            </repository>
-        </repositories>
+        <repository>
+			<id>federecio-snapshots</id>
+			<url>https://repository-federecio1.forge.cloudbees.com/snapshot/</url>
+		</repository>
 
 
 * Add the Maven dependency
