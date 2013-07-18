@@ -4,8 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!--<groupId>com.federecio</groupId>-->
-    <groupId>com.prefabsoft</groupId>
+    <groupId>com.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
     <version>0.1-SNAPSHOT</version>
 
@@ -49,7 +48,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.prefabsoft</groupId>
+            <groupId>com.federecio</groupId>
             <artifactId>dropwizard-junit</artifactId>
             <version>0.1-SNAPSHOT</version>
             <scope>test</scope>
