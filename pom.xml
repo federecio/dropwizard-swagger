@@ -6,7 +6,7 @@
 
     <groupId>com.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
 
     <scm>
         <connection>scm:git:git://github.com:federecio/dropwizard-swagger.git</connection>
@@ -16,7 +16,19 @@
 
     <properties>
         <dropwizard.version>0.7.0-SNAPSHOT</dropwizard.version>
+        <dropwizard-assets.version>0.7.0-SNAPSHOT</dropwizard-assets.version>
     </properties>
+
+    <developers>
+        <developer>
+            <name>Federico Recio</name>
+            <url>http://about.me/federecio</url>
+        </developer>
+        <developer>
+            <name>Jochen Szostek</name>
+            <url>http://prefabsoft.com</url>
+        </developer>
+    </developers>
 
     <dependencies>
         <!-- DropWizard -->
@@ -28,7 +40,7 @@
         <dependency>
             <groupId>com.codahale.dropwizard</groupId>
             <artifactId>dropwizard-assets</artifactId>
-            <version>${dropwizard.version}</version>
+            <version>${dropwizard-assets.version}</version>
         </dependency>
         <dependency>
             <groupId>com.wordnik</groupId>
@@ -48,7 +60,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.federecio</groupId>
+            <groupId>com.prefabsoft</groupId>
+            <!--<groupId>com.federecio</groupId>-->
             <artifactId>dropwizard-junit</artifactId>
             <version>0.1-SNAPSHOT</version>
             <scope>test</scope>

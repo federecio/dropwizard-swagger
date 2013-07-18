@@ -3,4 +3,3 @@
 *.iws
 target/
 .idea/
-dropwizard-swagger.iml
