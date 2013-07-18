@@ -1,21 +1,25 @@
 package com.federecio.dropwizard.swagger;
 
-import com.yammer.dropwizard.Service;
-import com.yammer.dropwizard.config.Bootstrap;
-import com.yammer.dropwizard.config.Environment;
+import com.codahale.dropwizard.Application;
+import com.codahale.dropwizard.setup.Bootstrap;
+import com.codahale.dropwizard.setup.Environment;
 
 /**
  * @author Federico Recio
  */
-public class TestService extends Service<TestConfiguration> {
+public class TestService extends Application<TestConfiguration> {
+
 
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle());
+
     }
 
     @Override
     public void run(TestConfiguration configuration, Environment environment) throws Exception {
-        environment.addResource(new TestResource());
+
+        environment.jersey().register(new TestResource());
     }
+
 }

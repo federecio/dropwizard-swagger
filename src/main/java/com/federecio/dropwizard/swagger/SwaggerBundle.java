@@ -1,8 +1,8 @@
 package com.federecio.dropwizard.swagger;
 
+import com.codahale.dropwizard.assets.AssetsBundle;
+import com.codahale.dropwizard.setup.Environment;
 import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
-import com.yammer.dropwizard.assets.AssetsBundle;
-import com.yammer.dropwizard.config.Environment;
 
 /**
  * @author Federico Recio
@@ -17,7 +17,7 @@ public class SwaggerBundle extends AssetsBundle {
 
     @Override
     public void run(Environment environment) {
-        environment.addResource(new ApiListingResourceJSON());
+        environment.jersey().register(new ApiListingResourceJSON());
         super.run(environment);
     }
 }
