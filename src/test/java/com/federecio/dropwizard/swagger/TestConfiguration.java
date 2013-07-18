@@ -1,6 +1,6 @@
 package com.federecio.dropwizard.swagger;
 
-import com.yammer.dropwizard.config.Configuration;
+import com.codahale.dropwizard.Configuration;
 
 /**
  * @author Federico Recio

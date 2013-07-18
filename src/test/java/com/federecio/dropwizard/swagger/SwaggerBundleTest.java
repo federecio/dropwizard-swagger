@@ -12,7 +12,7 @@ import com.jayway.restassured.RestAssured;
  * @author Federico Recio
  */
 @RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(serviceClass = TestService.class, yamlFile = "/test.yaml")
+@DropwizardTestConfig(applicationClass = TestService.class, yamlFile = "/test.yaml")
 public class SwaggerBundleTest {
 
     @Test
