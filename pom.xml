@@ -6,7 +6,7 @@
 
     <groupId>com.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
 
     <scm>
         <connection>scm:git:git://github.com:federecio/dropwizard-swagger.git</connection>
@@ -14,12 +14,33 @@
         <url>http://github.com/federecio/dropwizard-swagger</url>
     </scm>
 
+    <properties>
+        <dropwizard.version>0.7.0-SNAPSHOT</dropwizard.version>
+        <dropwizard-assets.version>0.7.0-SNAPSHOT</dropwizard-assets.version>
+    </properties>
+
+    <developers>
+        <developer>
+            <name>Federico Recio</name>
+            <url>http://about.me/federecio</url>
+        </developer>
+        <developer>
+            <name>Jochen Szostek</name>
+            <url>http://prefabsoft.com</url>
+        </developer>
+    </developers>
+
     <dependencies>
+        <!-- DropWizard -->
         <dependency>
-            <groupId>com.yammer.dropwizard</groupId>
+            <groupId>com.codahale.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>0.6.2</version>
-            <scope>provided</scope>
+            <version>${dropwizard.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codahale.dropwizard</groupId>
+            <artifactId>dropwizard-assets</artifactId>
+            <version>${dropwizard-assets.version}</version>
         </dependency>
         <dependency>
             <groupId>com.wordnik</groupId>
@@ -41,8 +62,13 @@
         <dependency>
             <groupId>com.federecio</groupId>
             <artifactId>dropwizard-junit</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2-SNAPSHOT</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.codahale.dropwizard</groupId>
+            <artifactId>dropwizard-assets</artifactId>
+            <version>0.7.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
