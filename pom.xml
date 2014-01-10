@@ -33,12 +33,12 @@
     <dependencies>
         <!-- DropWizard -->
         <dependency>
-            <groupId>com.codahale.dropwizard</groupId>
+            <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
             <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.codahale.dropwizard</groupId>
+            <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-assets</artifactId>
             <version>${dropwizard-assets.version}</version>
         </dependency>
