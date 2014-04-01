@@ -1,7 +1,7 @@
 package com.federecio.dropwizard.swagger;
 
-import com.codahale.dropwizard.assets.AssetsBundle;
-import com.codahale.dropwizard.setup.Environment;
+import io.dropwizard.assets.AssetsBundle;
+import io.dropwizard.setup.Environment;
 import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
 
 /**
