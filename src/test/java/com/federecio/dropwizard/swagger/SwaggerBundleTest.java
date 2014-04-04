@@ -22,8 +22,8 @@ public class SwaggerBundleTest {
 
     @Test
     public void swaggerIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs.json");
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs.json/test");
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs");
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs/test");
         RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/swagger-ui/index.html");
     }
 }

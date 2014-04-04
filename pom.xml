@@ -15,8 +15,7 @@
     </scm>
 
     <properties>
-        <dropwizard.version>0.7.0-SNAPSHOT</dropwizard.version>
-        <dropwizard-assets.version>0.7.0-SNAPSHOT</dropwizard-assets.version>
+        <dropwizard.version>0.7.0-rc3</dropwizard.version>
     </properties>
 
     <developers>
@@ -40,12 +39,12 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-assets</artifactId>
-            <version>${dropwizard-assets.version}</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>com.wordnik</groupId>
             <artifactId>swagger-jaxrs_2.10</artifactId>
-            <version>1.3.1</version>
+            <version>1.3.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
