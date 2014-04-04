@@ -8,6 +8,8 @@ a Dropwizard bundle that serves Swagger UI static content and loads Swagger endp
 How to use it
 -------------
 
+__NOTE__: current version has been tested with Dropwizard 0.7.0-rc3 and Swagger 1.3.2
+
 * Add the Maven repository
 
         <repository>
