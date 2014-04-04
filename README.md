@@ -11,9 +11,9 @@ How to use it
 * Add the Maven repository
 
         <repository>
-			<id>federecio-snapshots</id>
-			<url>https://repository-federecio1.forge.cloudbees.com/snapshot/</url>
-		</repository>
+            <id>federecio-releases</id>
+            <url>https://repository-federecio1.forge.cloudbees.com/release/</url>
+        </repository>
 
 
 * Add the Maven dependency
@@ -21,7 +21,7 @@ How to use it
         <dependency>
             <groupId>com.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2</version>
         </dependency>
 
 
@@ -37,4 +37,4 @@ How to use it
 * As usual, add Swagger annotations to your resource classes and methods
 
 
-* Open a browser and hit `http://localhost:8080/index.html`
+* Open a browser and hit `http://localhost:8080/swagger-ui`
