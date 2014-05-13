@@ -15,7 +15,7 @@
     </scm>
 
     <properties>
-        <dropwizard.version>0.7.0-rc3</dropwizard.version>
+        <dropwizard.version>0.7.0</dropwizard.version>
     </properties>
 
     <developers>
