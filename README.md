@@ -40,3 +40,10 @@ __NOTE__: current version has been tested with Dropwizard 0.7.0 and Swagger 1.3.
 
 
 * Open a browser and hit `http://localhost:8080/swagger-ui`
+
+
+Contributors
+------------
+
+* Federico Recio ([@federecio](http://twitter.com/federecio))
+* Damien Raude-Morvan ([drazzib](https://github.com/drazzib))
