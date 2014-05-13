@@ -23,7 +23,7 @@ __NOTE__: current version has been tested with Dropwizard 0.7.0 and Swagger 1.3.
         <dependency>
             <groupId>com.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.2</version>
+            <version>0.3</version>
         </dependency>
 
 
