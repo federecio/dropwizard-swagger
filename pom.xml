@@ -61,7 +61,7 @@
         <dependency>
             <groupId>com.federecio</groupId>
             <artifactId>dropwizard-junit</artifactId>
-            <version>0.2-SNAPSHOT</version>
+            <version>0.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -69,7 +69,17 @@
     <repositories>
         <repository>
             <id>federecio-snapshots</id>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <url>https://repository-federecio1.forge.cloudbees.com/snapshot/</url>
+        </repository>
+        <repository>
+            <id>federecio-release</id>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>https://repository-federecio1.forge.cloudbees.com/release/</url>
         </repository>
         <repository>
             <id>sonatype-snapshots</id>
