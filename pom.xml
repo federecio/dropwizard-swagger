@@ -6,7 +6,7 @@
 
     <groupId>com.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.3</version>
 
     <scm>
         <connection>scm:git:git://github.com:federecio/dropwizard-swagger.git</connection>
