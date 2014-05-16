@@ -39,7 +39,7 @@ How to use it (last stable build)
 
 * Open a browser and hit `http://localhost:8080/swagger-ui/` (replace port 8080 accordingly)
 
-__NOTE__: I still haven't figured out the reason, but the path has to have a `/` at the end.
+__NOTE__: Make sure you add a `/` at the end, otherwise static resources are not loaded correctly. This is fixed in the next version.
 
 
 How to use it (latest snapshot)
@@ -81,10 +81,7 @@ How to use it (latest snapshot)
 * As usual, add Swagger annotations to your resource classes and methods
 
 
-* Open a browser and hit `http://localhost:8080/swagger/` (replace port 8080 accordingly)
-
-__NOTE__: I still haven't figured out the reason, but the path has to have a `/` at the end.
-
+* Open a browser and hit `http://localhost:8080/swagger` (replace port 8080 accordingly)
 
 Contributors
 ------------
