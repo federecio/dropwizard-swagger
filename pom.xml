@@ -16,6 +16,7 @@
 
     <properties>
         <dropwizard.version>0.7.0</dropwizard.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <developers>
