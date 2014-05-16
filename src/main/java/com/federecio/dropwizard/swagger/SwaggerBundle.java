@@ -35,7 +35,7 @@ import io.dropwizard.setup.Environment;
 public class SwaggerBundle extends AssetsBundle {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SwaggerBundle.class);
-    public static final String PATH = "/swagger-ui";
+    public static final String PATH = "/swagger-static";
 
     public SwaggerBundle() {
         super(PATH);
@@ -79,10 +79,13 @@ public class SwaggerBundle extends AssetsBundle {
             }
         }
 
+        String applicationContextPath = "/";
+
         ServerFactory serverFactory = configuration.getServerFactory();
         HttpConnectorFactory httpConnectorFactory = null;
 
         if (serverFactory instanceof SimpleServerFactory) {
+            applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
             ConnectorFactory cf = ((SimpleServerFactory) serverFactory).getConnector();
             if (cf instanceof HttpConnectorFactory) {
                 httpConnectorFactory = (HttpConnectorFactory) cf;
@@ -100,6 +103,6 @@ public class SwaggerBundle extends AssetsBundle {
             throw new IllegalStateException("Could not get HttpConnectorFactory");
         }
 
-        return String.format("%s:%s", host, httpConnectorFactory.getPort());
+        return String.format("%s:%s%s", host, httpConnectorFactory.getPort(), applicationContextPath);
     }
 }

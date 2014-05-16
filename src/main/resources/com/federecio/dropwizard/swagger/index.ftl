@@ -1,26 +1,27 @@
+<#-- @ftlvariable name="" type="com.federecio.dropwizard.swagger.SwaggerView" -->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Swagger UI</title>
   <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
-  <link href='css/highlight.default.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-  <script type="text/javascript" src="lib/shred.bundle.js"></script>
-  <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='lib/handlebars-1.0.0.js' type='text/javascript'></script>
-  <script src='lib/underscore-min.js' type='text/javascript'></script>
-  <script src='lib/backbone-min.js' type='text/javascript'></script>
-  <script src='lib/swagger.js' type='text/javascript'></script>
-  <script src='swagger-ui.js' type='text/javascript'></script>
-  <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
+  <link href='${swaggerStaticPath}/css/highlight.default.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='${swaggerStaticPath}/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+  <script type="text/javascript" src="${swaggerStaticPath}/lib/shred.bundle.js"></script>
+  <script src='${swaggerStaticPath}/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/jquery.slideto.min.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/jquery.wiggle.min.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/handlebars-1.0.0.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/underscore-min.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/backbone-min.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/swagger.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/swagger-ui.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/highlight.7.3.pack.js' type='text/javascript'></script>
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
       //url: "http://petstore.swagger.wordnik.com/api/api-docs",
-      url: "/api-docs",
+      url: "${contextPath}/api-docs",
       dom_id: "swagger-ui-container",
       supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
       onComplete: function(swaggerApi, swaggerUi){
@@ -59,10 +60,10 @@
 
     <form id='api_selector'>
       <div class='input icon-btn'>
-        <img id="show-pet-store-icon" src="images/pet_store_api.png" title="Show Swagger Petstore Example Apis">
+        <img id="show-pet-store-icon" src="${swaggerStaticPath}/images/pet_store_api.png" title="Show Swagger Petstore Example Apis">
       </div>
       <div class='input icon-btn'>
-        <img id="show-wordnik-dev-icon" src="images/wordnik_api.png" title="Show Wordnik Developer Apis">
+        <img id="show-wordnik-dev-icon" src="${swaggerStaticPath}/images/wordnik_api.png" title="Show Wordnik Developer Apis">
       </div>
       <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
       <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>

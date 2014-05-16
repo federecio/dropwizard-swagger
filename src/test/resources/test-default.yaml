@@ -1,0 +1,8 @@
+server:
+  type: default
+  applicationConnectors:
+    - type: http
+      port: 44444
+  adminConnectors:
+    - type: http
+      port: 44445
