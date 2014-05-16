@@ -39,8 +39,9 @@ __NOTE__: current version has been tested with Dropwizard 0.7.0 and Swagger 1.3.
 * As usual, add Swagger annotations to your resource classes and methods
 
 
-* Open a browser and hit `http://localhost:8080/swagger-ui`
+* Open a browser and hit `http://localhost:8080/swagger-ui/`
 
+__NOTE__: I still haven't figured out the reason, but the path has to have a `/` at the end.
 
 Contributors
 ------------
