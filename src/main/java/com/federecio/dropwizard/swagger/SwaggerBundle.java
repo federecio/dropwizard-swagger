@@ -34,8 +34,8 @@ import io.dropwizard.setup.Environment;
  */
 public class SwaggerBundle extends AssetsBundle {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SwaggerBundle.class);
     public static final String PATH = "/swagger-static";
+    private static final Logger LOGGER = LoggerFactory.getLogger(SwaggerBundle.class);
 
     public SwaggerBundle() {
         super(PATH);
@@ -55,16 +55,6 @@ public class SwaggerBundle extends AssetsBundle {
         config.setApiPath(swaggerBasePath);
     }
 
-    @Override
-    public void run(Environment environment) {
-        environment.jersey().register(new ApiListingResourceJSON());
-        environment.jersey().register(new ApiDeclarationProvider());
-        environment.jersey().register(new ResourceListingProvider());
-        ScannerFactory.setScanner(new DefaultJaxrsScanner());
-        ClassReaders.setReader(new DefaultJaxrsApiReader());
-        super.run(environment);
-    }
-
     private static String getSwaggerBasePath(Configuration configuration) throws IOException {
         String host;
 
@@ -79,7 +69,7 @@ public class SwaggerBundle extends AssetsBundle {
             }
         }
 
-        String applicationContextPath = "/";
+        String applicationContextPath = null;
 
         ServerFactory serverFactory = configuration.getServerFactory();
         HttpConnectorFactory httpConnectorFactory = null;
@@ -103,6 +93,20 @@ public class SwaggerBundle extends AssetsBundle {
             throw new IllegalStateException("Could not get HttpConnectorFactory");
         }
 
-        return String.format("%s:%s%s", host, httpConnectorFactory.getPort(), applicationContextPath);
+        if (!"/".equals(applicationContextPath)) {
+            return String.format("%s:%s%s", host, httpConnectorFactory.getPort(), applicationContextPath);
+        } else {
+            return String.format("%s:%s", host, httpConnectorFactory.getPort());
+        }
+    }
+
+    @Override
+    public void run(Environment environment) {
+        environment.jersey().register(new ApiListingResourceJSON());
+        environment.jersey().register(new ApiDeclarationProvider());
+        environment.jersey().register(new ResourceListingProvider());
+        ScannerFactory.setScanner(new DefaultJaxrsScanner());
+        ClassReaders.setReader(new DefaultJaxrsApiReader());
+        super.run(environment);
     }
 }

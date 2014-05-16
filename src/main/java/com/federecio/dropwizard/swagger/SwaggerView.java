@@ -16,10 +16,20 @@ public class SwaggerView extends View {
     }
 
     public String getSwaggerStaticPath() {
+        if (usingRootPath()) {
+            return SwaggerBundle.PATH;
+        }
         return applicationContextPath + SwaggerBundle.PATH;
     }
 
     public String getContextPath() {
+        if (usingRootPath()) {
+            return "";
+        }
         return applicationContextPath;
+    }
+
+    private boolean usingRootPath() {
+        return applicationContextPath.equals("/");
     }
 }
