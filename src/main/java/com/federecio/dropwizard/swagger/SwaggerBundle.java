@@ -52,7 +52,6 @@ public class SwaggerBundle extends AssetsBundle {
         SwaggerConfig config = ConfigFactory.config();
         String swaggerBasePath = getSwaggerBasePath(configuration);
         config.setBasePath(swaggerBasePath);
-        config.setApiPath(swaggerBasePath);
     }
 
     private static String getSwaggerBasePath(Configuration configuration) throws IOException {
