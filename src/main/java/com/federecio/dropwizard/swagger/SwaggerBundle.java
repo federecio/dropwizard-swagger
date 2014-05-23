@@ -50,26 +50,22 @@ public class SwaggerBundle extends AssetsBundle {
      * can be deployed to an EC2 instance without any changes.
      */
     public static void configure(Configuration configuration) throws IOException {
+        String host = determineHost();
+        configure(configuration, host);
+    }
+
+    /**
+     * Call this method directly if not running locally or in AWS and pass in the host to which Swagger API
+     * should be bound to.
+     */
+    public static void configure(Configuration configuration, String host) {
         SwaggerConfig config = ConfigFactory.config();
-        String swaggerBasePath = getSwaggerBasePath(configuration);
+        String swaggerBasePath = getSwaggerBasePath(configuration, host);
         config.setBasePath(swaggerBasePath);
         config.setApiPath(swaggerBasePath);
     }
 
-    private static String getSwaggerBasePath(Configuration configuration) throws IOException {
-        String host;
-
-        if (!new File("/var/lib/cloud/").exists()) {
-            LOGGER.info("/var/lib/cloud does not exist, assuming that we are running locally");
-            host = "localhost";
-        } else {
-            HttpURLConnection urlConnection = (HttpURLConnection) new URL("http://169.254.169.254/latest/meta-data/public-hostname/").openConnection();
-            urlConnection.setRequestMethod("GET");
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))) {
-                host = reader.readLine();
-            }
-        }
-
+    private static String getSwaggerBasePath(Configuration configuration, String host) {
         String applicationContextPath = null;
         ServerFactory serverFactory = configuration.getServerFactory();
         HttpConnectorFactory httpConnectorFactory = null;
@@ -98,7 +94,6 @@ public class SwaggerBundle extends AssetsBundle {
             }
         }
 
-
         if (httpConnectorFactory == null) {
             throw new IllegalStateException("Could not get HttpConnectorFactory");
         }
@@ -110,6 +105,22 @@ public class SwaggerBundle extends AssetsBundle {
         } else {
             return String.format("%s://%s:%s", protocol, host, httpConnectorFactory.getPort());
         }
+    }
+
+    private static String determineHost() throws IOException {
+        String host;
+
+        if (!new File("/var/lib/cloud/").exists()) {
+            LOGGER.info("/var/lib/cloud does not exist, assuming that we are running locally");
+            host = "localhost";
+        } else {
+            HttpURLConnection urlConnection = (HttpURLConnection) new URL("http://169.254.169.254/latest/meta-data/public-hostname/").openConnection();
+            urlConnection.setRequestMethod("GET");
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))) {
+                host = reader.readLine();
+            }
+        }
+        return host;
     }
 
     @Override
