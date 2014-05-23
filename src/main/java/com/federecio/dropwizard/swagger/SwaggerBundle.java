@@ -24,6 +24,7 @@ import io.dropwizard.Configuration;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.jetty.ConnectorFactory;
 import io.dropwizard.jetty.HttpConnectorFactory;
+import io.dropwizard.jetty.HttpsConnectorFactory;
 import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
@@ -52,6 +53,7 @@ public class SwaggerBundle extends AssetsBundle {
         SwaggerConfig config = ConfigFactory.config();
         String swaggerBasePath = getSwaggerBasePath(configuration);
         config.setBasePath(swaggerBasePath);
+        config.setApiPath(swaggerBasePath);
     }
 
     private static String getSwaggerBasePath(Configuration configuration) throws IOException {
@@ -69,33 +71,44 @@ public class SwaggerBundle extends AssetsBundle {
         }
 
         String applicationContextPath = null;
-
         ServerFactory serverFactory = configuration.getServerFactory();
         HttpConnectorFactory httpConnectorFactory = null;
 
         if (serverFactory instanceof SimpleServerFactory) {
             applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
             ConnectorFactory cf = ((SimpleServerFactory) serverFactory).getConnector();
-            if (cf instanceof HttpConnectorFactory) {
+            if (cf instanceof HttpsConnectorFactory) {
+                httpConnectorFactory = (HttpConnectorFactory) cf;
+            } else if (cf instanceof HttpConnectorFactory) {
                 httpConnectorFactory = (HttpConnectorFactory) cf;
             }
         } else if (serverFactory instanceof DefaultServerFactory) {
             List<ConnectorFactory> applicationConnectors = ((DefaultServerFactory) serverFactory).getApplicationConnectors();
             for (ConnectorFactory connectorFactory : applicationConnectors) {
-                if (connectorFactory instanceof HttpConnectorFactory) {
+                if (connectorFactory instanceof HttpsConnectorFactory) {
                     httpConnectorFactory = (HttpConnectorFactory) connectorFactory;
                 }
             }
+            if (httpConnectorFactory == null) { // not https
+                for (ConnectorFactory connectorFactory : applicationConnectors) {
+                    if (connectorFactory instanceof HttpConnectorFactory) {
+                        httpConnectorFactory = (HttpConnectorFactory) connectorFactory;
+                    }
+                }
+            }
         }
+
 
         if (httpConnectorFactory == null) {
             throw new IllegalStateException("Could not get HttpConnectorFactory");
         }
 
+        String protocol = httpConnectorFactory instanceof HttpsConnectorFactory ? "https" : "http";
+
         if (!"/".equals(applicationContextPath)) {
-            return String.format("%s:%s%s", host, httpConnectorFactory.getPort(), applicationContextPath);
+            return String.format("%s://%s:%s%s", protocol, host, httpConnectorFactory.getPort(), applicationContextPath);
         } else {
-            return String.format("%s:%s", host, httpConnectorFactory.getPort());
+            return String.format("%s://%s:%s", protocol, host, httpConnectorFactory.getPort());
         }
     }
 
