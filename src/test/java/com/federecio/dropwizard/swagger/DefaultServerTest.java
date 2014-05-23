@@ -13,7 +13,7 @@ import com.jayway.restassured.RestAssured;
  * @author Federico Recio
  */
 @RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestService.class, yamlFile = "/test-default.yaml")
+@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-default.yaml")
 public class DefaultServerTest {
 
     @BeforeClass

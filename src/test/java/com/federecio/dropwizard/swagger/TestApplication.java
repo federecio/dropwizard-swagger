@@ -10,7 +10,7 @@ import io.dropwizard.views.ViewBundle;
 /**
  * @author Federico Recio
  */
-public class TestService extends Application<TestConfiguration> {
+public class TestApplication extends Application<TestConfiguration> {
 
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
