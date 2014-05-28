@@ -58,24 +58,24 @@ How to use it (latest snapshot)
         <dependency>
             <groupId>com.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.4-SNAPSHOT</version>
+            <version>0.4.1-SNAPSHOT</version>
         </dependency>
 
 
 * In your service class add the Swagger bundle and the ViewBundle:
 
-        @Override
-        public void initialize(Bootstrap<YourConfiguration> bootstrap) {
-            ...
-            bootstrap.addBundle(new SwaggerBundle());
-            bootstrap.addBundle(new ViewBundle());
-        }
+		private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
 
 		@Override
-		public void run(YourConfiguration config, Environment environment) throws Exception {
+		public void initialize(Bootstrap<TestConfiguration> bootstrap) {
 		    ...
-			environment.jersey().register(new SwaggerResource(your_application_context_path));
-			SwaggerBundle.configure(config);
+			swaggerDropwizard.onInitialize(bootstrap);
+		}
+
+		@Override
+		public void run(TestConfiguration configuration, Environment environment) throws Exception {
+		    ...
+			swaggerDropwizard.onRun(configuration, environment);
 		}
 
 * As usual, add Swagger annotations to your resource classes and methods
@@ -98,10 +98,9 @@ Manually setting the host name
 There might be a few cases where you want to set the host name to which Swagger is bound to. In this case you need to do:
 
 		@Override
-		public void run(YourConfiguration config, Environment environment) throws Exception {
+		public void run(TestConfiguration configuration, Environment environment) throws Exception {
 		    ...
-			environment.jersey().register(new SwaggerResource(your_application_context_path));
-			SwaggerBundle.configure(config, yourHost);
+			swaggerDropwizard.onRun(configuration, environment, "your_host_here");
 		}
 
 Contributors
