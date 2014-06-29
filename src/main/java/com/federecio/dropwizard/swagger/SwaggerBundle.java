@@ -66,7 +66,7 @@ public class SwaggerBundle extends AssetsBundle {
     }
 
     private static String getSwaggerBasePath(Configuration configuration, String host) {
-        String applicationContextPath = null;
+        String applicationContextPath = "/";
         ServerFactory serverFactory = configuration.getServerFactory();
         HttpConnectorFactory httpConnectorFactory = null;
 

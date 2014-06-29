@@ -3,9 +3,9 @@ dropwizard-swagger
 
 a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints.
 
-__NOTE__: current version has been tested with Dropwizard 0.7.0 and Swagger 1.3.2
+__NOTE__: current version has been tested with Dropwizard 0.7.1 and Swagger 1.3.2
 
-How to use it (last stable build)
+How to use it
 ---------------------------------
 
 * Add the Maven repository
@@ -21,48 +21,11 @@ How to use it (last stable build)
         <dependency>
             <groupId>com.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.3</version>
+            <version>0.4</version>
         </dependency>
 
 
-* In your service class add the Swagger bundle:
-
-        @Override
-        public void initialize(Bootstrap<YourConfiguration> bootstrap) {
-            ...
-            bootstrap.addBundle(new SwaggerBundle());
-        }
-
-
-* As usual, add Swagger annotations to your resource classes and methods
-
-
-* Open a browser and hit `http://localhost:8080/swagger-ui/` (replace port 8080 accordingly)
-
-__NOTE__: Make sure you add a `/` at the end, otherwise static resources are not loaded correctly. This is fixed in the next version.
-
-
-How to use it (latest snapshot)
----------------------------------
-
-* Add the Maven repository
-
-        <repository>
-            <id>federecio-snapshots</id>
-            <url>https://repository-federecio1.forge.cloudbees.com/snapshot/</url>
-        </repository>
-
-
-* Add the Maven dependency
-
-        <dependency>
-            <groupId>com.federecio</groupId>
-            <artifactId>dropwizard-swagger</artifactId>
-            <version>0.4.1-SNAPSHOT</version>
-        </dependency>
-
-
-* In your service class add the Swagger bundle and the ViewBundle:
+* In your Application class:
 
 		private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
 

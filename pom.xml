@@ -6,7 +6,7 @@
 
     <groupId>com.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.4.1-SNAPSHOT</version>
+    <version>0.4</version>
 
     <scm>
         <connection>scm:git:git://github.com:federecio/dropwizard-swagger.git</connection>
@@ -15,7 +15,7 @@
     </scm>
 
     <properties>
-        <dropwizard.version>0.7.0</dropwizard.version>
+        <dropwizard.version>0.7.1</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -120,7 +120,7 @@
         <dependency>
             <groupId>com.federecio</groupId>
             <artifactId>dropwizard-junit</artifactId>
-            <version>0.3</version>
+            <version>0.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
