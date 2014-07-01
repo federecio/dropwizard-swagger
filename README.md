@@ -1,7 +1,7 @@
 dropwizard-swagger
 ==================
 
-a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints.
+a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI is static content is taken from https://github.com/wordnik/swagger-ui
 
 __NOTE__: current version has been tested with Dropwizard 0.7.1 and Swagger 1.3.2
 
@@ -71,3 +71,8 @@ Contributors
 
 * Federico Recio ([@federecio](http://twitter.com/federecio))
 * Damien Raude-Morvan ([drazzib](https://github.com/drazzib))
+
+License
+-------
+
+http://www.apache.org/licenses/LICENSE-2.0
