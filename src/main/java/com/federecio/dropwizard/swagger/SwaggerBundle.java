@@ -15,17 +15,6 @@
  */
 package com.federecio.dropwizard.swagger;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.wordnik.swagger.config.ConfigFactory;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.config.SwaggerConfig;
@@ -44,6 +33,18 @@ import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
 import io.dropwizard.setup.Environment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.List;
 
 /**
  * @author Federico Recio
@@ -52,6 +53,7 @@ public class SwaggerBundle extends AssetsBundle {
 
     public static final String PATH = "/swagger-static";
     private static final Logger LOGGER = LoggerFactory.getLogger(SwaggerBundle.class);
+    private static final String DEFAULT_SWAGGER_HOST = "localhost";
 
     public SwaggerBundle() {
         super(PATH);
@@ -122,12 +124,30 @@ public class SwaggerBundle extends AssetsBundle {
         }
     }
 
+    /*
+    Uses InetAddress to get the hostname, returns default if InetAddress throws an exception
+     */
+    private static String getHostForSwagger() {
+        String swaggerHost = null;
+        try {
+            swaggerHost = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            LOGGER.warn("Unable to determine host for swagger");
+        }
+        if (swaggerHost == null) {
+            swaggerHost = DEFAULT_SWAGGER_HOST;
+        }
+
+        LOGGER.info("Setting host for swagger to {}", swaggerHost);
+        return swaggerHost;
+    }
+
     private static String determineHost() throws IOException {
         String host;
 
         if (!new File("/var/lib/cloud/").exists()) {
             LOGGER.info("/var/lib/cloud does not exist, assuming that we are running locally");
-            host = "localhost";
+            host = getHostForSwagger();
         } else {
             HttpURLConnection urlConnection = (HttpURLConnection) new URL("http://169.254.169.254/latest/meta-data/public-hostname/").openConnection();
             urlConnection.setRequestMethod("GET");
