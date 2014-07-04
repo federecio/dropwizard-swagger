@@ -15,8 +15,6 @@
  */
 package com.federecio.dropwizard.swagger;
 
-import java.io.IOException;
-
 import io.dropwizard.Configuration;
 import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
@@ -24,10 +22,13 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 
+import java.io.IOException;
+
 /**
  * @author Federico Recio
  */
 public class SwaggerDropwizard {
+
 
     public void onInitialize(Bootstrap<?> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle());
