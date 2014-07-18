@@ -4,7 +4,7 @@
 
     <groupId>io.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.5-SNAPSHOT</version>
+    <version>0.5</version>
     <inceptionYear>2014</inceptionYear>
 
     <licenses>
@@ -38,7 +38,8 @@
         <connection>scm:git:git://github.com:federecio/dropwizard-swagger.git</connection>
         <developerConnection>scm:git:git@github.com:federecio/dropwizard-swagger.git</developerConnection>
         <url>http://github.com/federecio/dropwizard-swagger</url>
-    </scm>
+      <tag>0.5</tag>
+  </scm>
 
     <properties>
         <dropwizard.version>0.7.1</dropwizard.version>
