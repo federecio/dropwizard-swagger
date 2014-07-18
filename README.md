@@ -69,5 +69,5 @@ Contributors
 ------------
 
 * Federico Recio ([@federecio](http://twitter.com/federecio))
-* Jochen Szostek ([prefabsoft] http://prefabsoft.com)
+* Jochen Szostek ([prefabsoft] (http://prefabsoft.com))
 * Damien Raude-Morvan ([drazzib](https://github.com/drazzib))
