@@ -25,7 +25,7 @@ How to use it
                 <exclusion>
                     <groupId>io.dropwizard</groupId>
                     <artifactId>*</artifactId>
-		</exclusion>
+                </exclusion>
             </exclusions>
         </dependency>
 
