@@ -5,23 +5,22 @@ a Dropwizard bundle that serves Swagger UI static content and loads Swagger endp
 
 __NOTE__: current version has been tested with Dropwizard 0.7.1 and Swagger 1.3.2
 
+
+License
+-------
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+
 How to use it
----------------------------------
-
-* Add the Maven repository
-
-        <repository>
-            <id>federecio-releases</id>
-            <url>https://repository-federecio1.forge.cloudbees.com/release/</url>
-        </repository>
-
+-------------
 
 * Add the Maven dependency
 
         <dependency>
-            <groupId>com.federecio</groupId>
+            <groupId>io.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.4</version>
+            <version>0.5</version>
         </dependency>
 
 
@@ -70,9 +69,5 @@ Contributors
 ------------
 
 * Federico Recio ([@federecio](http://twitter.com/federecio))
+* Jochen Szostek ([prefabsoft] http://prefabsoft.com)
 * Damien Raude-Morvan ([drazzib](https://github.com/drazzib))
-
-License
--------
-
-http://www.apache.org/licenses/LICENSE-2.0
