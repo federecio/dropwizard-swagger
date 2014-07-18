@@ -21,6 +21,12 @@ How to use it
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
             <version>0.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.dropwizard</groupId>
+                    <artifactId>*</artifactId>
+		</exclusion>
+            </exclusions>
         </dependency>
 
 
