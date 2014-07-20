@@ -3,3 +3,4 @@
 *.iws
 target/
 .idea/
+.DS_Store
