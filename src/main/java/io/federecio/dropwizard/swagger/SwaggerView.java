@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.federecio.dropwizard.swagger;
+package io.federecio.dropwizard.swagger;
 
 import com.google.common.base.Charsets;
 import io.dropwizard.views.View;

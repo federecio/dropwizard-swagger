@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.federecio.dropwizard.swagger;
+package io.federecio.dropwizard.swagger;
 
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.BeforeClass;
@@ -28,23 +28,23 @@ import com.jayway.restassured.RestAssured;
  * @author Federico Recio
  */
 @RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple-with-path.yaml")
-public class SimpleServerWithPathTest {
+@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-default.yaml")
+public class DefaultServerTest {
 
     @BeforeClass
     public static void setPort() {
-        RestAssured.port = 55667;
+        RestAssured.port = 44444;
     }
 
     @Test
     public void resourceIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api/test.json");
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/test.json");
     }
 
     @Test
     public void swaggerIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api/api-docs");
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api/api-docs/test");
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api/swagger");
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs");
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs/test");
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/swagger");
     }
 }

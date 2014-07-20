@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.federecio.dropwizard.swagger;
+package io.federecio.dropwizard.swagger;
 
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.BeforeClass;
@@ -28,12 +28,12 @@ import com.jayway.restassured.RestAssured;
  * @author Federico Recio
  */
 @RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplicationExplicitSwaggerHost.class, yamlFile = "/test-simple-with-path-2.yaml")
-public class ExplictSwaggerHostTest {
+@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple-with-path.yaml")
+public class SimpleServerWithPathTest {
 
     @BeforeClass
     public static void setPort() {
-        RestAssured.port = 44447;
+        RestAssured.port = 55667;
     }
 
     @Test
