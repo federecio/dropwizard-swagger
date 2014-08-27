@@ -15,14 +15,13 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import com.jayway.restassured.RestAssured;
+import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
+import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import com.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import com.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import com.jayway.restassured.RestAssured;
 
 /**
  * @author Federico Recio

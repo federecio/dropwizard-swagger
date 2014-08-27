@@ -80,6 +80,7 @@ public class SwaggerBundle extends AssetsBundle {
         String swaggerBasePath = getSwaggerBasePath(configuration, host);
         config.setBasePath(swaggerBasePath);
         config.setApiPath(swaggerBasePath);
+        ConfigFactory.setConfig(config);
     }
 
     private static String getSwaggerBasePath(Configuration configuration, String host) {

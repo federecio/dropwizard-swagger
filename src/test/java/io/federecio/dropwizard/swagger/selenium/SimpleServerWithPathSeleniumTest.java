@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.federecio.dropwizard.swagger;
+package io.federecio.dropwizard.swagger.selenium;
 
-import com.jayway.restassured.RestAssured;
 import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
 import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import org.eclipse.jetty.http.HttpStatus;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import io.federecio.dropwizard.swagger.TestApplication;
 import org.junit.runner.RunWith;
 
 /**
@@ -28,22 +25,10 @@ import org.junit.runner.RunWith;
  */
 @RunWith(DropwizardJunitRunner.class)
 @DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple-with-path.yaml")
-public class SimpleServerWithPathTest {
+public class SimpleServerWithPathSeleniumTest extends SeleniumTest {
 
-    @BeforeClass
-    public static void setPort() {
-        RestAssured.port = 55667;
-    }
-
-    @Test
-    public void resourceIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api/test.json");
-    }
-
-    @Test
-    public void swaggerIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api/api-docs");
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api/api-docs/test");
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api/swagger");
+    @Override
+    protected String getSwaggerUrl() {
+        return "http://localhost:55667/api/swagger";
     }
 }
