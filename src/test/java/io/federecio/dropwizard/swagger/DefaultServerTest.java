@@ -15,12 +15,8 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.jayway.restassured.RestAssured;
 import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
 import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import org.eclipse.jetty.http.HttpStatus;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -28,22 +24,9 @@ import org.junit.runner.RunWith;
  */
 @RunWith(DropwizardJunitRunner.class)
 @DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-default.yaml")
-public class DefaultServerTest {
+public class DefaultServerTest extends DropwizardTest {
 
-    @BeforeClass
-    public static void setPort() {
-        RestAssured.port = 44444;
-    }
-
-    @Test
-    public void resourceIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/test.json");
-    }
-
-    @Test
-    public void swaggerIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs");
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs/test");
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/swagger");
+    public DefaultServerTest() {
+        super(44444, "/");
     }
 }
