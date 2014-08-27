@@ -24,6 +24,7 @@ import io.dropwizard.jetty.HttpsConnectorFactory;
 import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
+import io.dropwizard.setup.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +35,11 @@ import java.util.List;
 public class SwaggerConfiguration {
 
     private final Configuration configuration;
+    private final Environment environment;
 
-    public SwaggerConfiguration(Configuration configuration) {
+    public SwaggerConfiguration(Configuration configuration, Environment environment) {
         this.configuration = configuration;
+        this.environment = environment;
     }
 
     public void setUpSwaggerFor(String host) {
@@ -53,9 +56,20 @@ public class SwaggerConfiguration {
         if (serverFactory instanceof SimpleServerFactory) {
             applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
         } else {
-            applicationContextPath = "/";
+            String urlPattern = environment.jersey().getUrlPattern();
+            if (urlPattern.endsWith("/*")) {
+                urlPattern = urlPattern.substring(0, urlPattern.length() - 1);
+            }
+            if (urlPattern.length() > 1 && urlPattern.endsWith("/")) {
+                urlPattern = urlPattern.substring(0, urlPattern.length() - 1);
+            }
+            applicationContextPath = urlPattern;
         }
         return applicationContextPath;
+    }
+
+    public boolean isSimpleServer() {
+        return configuration.getServerFactory() instanceof SimpleServerFactory;
     }
 
     private String getSwaggerBasePath(String host) {

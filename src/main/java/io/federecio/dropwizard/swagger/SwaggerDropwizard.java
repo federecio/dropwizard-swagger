@@ -36,7 +36,6 @@ import java.io.IOException;
 public class SwaggerDropwizard {
 
     public void onInitialize(Bootstrap<?> bootstrap) {
-        bootstrap.addBundle(new AssetsBundle("/swagger-static"));
         bootstrap.addBundle(new ViewBundle());
     }
 
@@ -50,9 +49,15 @@ public class SwaggerDropwizard {
      * does not work correctly.
      */
     public void onRun(Configuration configuration, Environment environment, String host) {
-        SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration);
+        SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, environment);
 
         String contextPath = swaggerConfiguration.getContextPath();
+        if (contextPath.equals("/") || swaggerConfiguration.isSimpleServer()) {
+            new AssetsBundle("/swagger-static").run(environment);
+        } else {
+            new AssetsBundle("/swagger-static", contextPath + "/swagger-static").run(environment);
+        }
+
         environment.jersey().register(new SwaggerResource(contextPath));
 
         swaggerConfiguration.setUpSwaggerFor(host);
