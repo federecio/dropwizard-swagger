@@ -15,9 +15,15 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import com.wordnik.swagger.config.ScannerFactory;
+import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
+import com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider;
+import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
+import com.wordnik.swagger.jaxrs.listing.ResourceListingProvider;
+import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
+import com.wordnik.swagger.reader.ClassReaders;
 import io.dropwizard.Configuration;
-import io.dropwizard.server.ServerFactory;
-import io.dropwizard.server.SimpleServerFactory;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
@@ -29,15 +35,14 @@ import java.io.IOException;
  */
 public class SwaggerDropwizard {
 
-
     public void onInitialize(Bootstrap<?> bootstrap) {
-        bootstrap.addBundle(new SwaggerBundle());
+        bootstrap.addBundle(new AssetsBundle("/swagger-static"));
         bootstrap.addBundle(new ViewBundle());
     }
 
     public void onRun(Configuration configuration, Environment environment) throws IOException {
-        _onRun(configuration, environment);
-        SwaggerBundle.configure(configuration);
+        String host = SwaggerHostResolver.getSwaggerHost();
+        onRun(configuration, environment, host);
     }
 
     /**
@@ -45,18 +50,17 @@ public class SwaggerDropwizard {
      * does not work correctly.
      */
     public void onRun(Configuration configuration, Environment environment, String host) {
-        _onRun(configuration, environment);
-        SwaggerBundle.configure(configuration, host);
-    }
+        SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration);
 
-    private void _onRun(Configuration configuration, Environment environment) {
-        String applicationContextPath;
-        ServerFactory serverFactory = configuration.getServerFactory();
-        if (serverFactory instanceof SimpleServerFactory) {
-            applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
-        } else {
-            applicationContextPath = "/";
-        }
-        environment.jersey().register(new SwaggerResource(applicationContextPath));
+        String contextPath = swaggerConfiguration.getContextPath();
+        environment.jersey().register(new SwaggerResource(contextPath));
+
+        swaggerConfiguration.setUpSwaggerFor(host);
+
+        environment.jersey().register(new ApiListingResourceJSON());
+        environment.jersey().register(new ApiDeclarationProvider());
+        environment.jersey().register(new ResourceListingProvider());
+        ScannerFactory.setScanner(new DefaultJaxrsScanner());
+        ClassReaders.setReader(new DefaultJaxrsApiReader());
     }
 }
