@@ -48,7 +48,7 @@ How to use it
 Sample Application
 ------------------
 
-Take a look at this sample application that shows how to integrate DropWizard and Swagger: [https://github.com/federecio/dropwizard-swagger-sample-app](dropwizard-swagger-sample-app)
+Take a look at this sample application that shows how to integrate DropWizard and Swagger: [dropwizard-swagger-sample-app](https://github.com/federecio/dropwizard-swagger-sample-app)
 
 Running in AWS
 --------------
