@@ -12,7 +12,6 @@ License
 
 http://www.apache.org/licenses/LICENSE-2.0
 
-
 How to use it
 -------------
 
@@ -46,6 +45,10 @@ How to use it
 
 * Open a browser and hit `http://localhost:8080/swagger` (replace port 8080 accordingly)
 
+Sample Application
+------------------
+
+Take a look at this sample application that shows how to integrate DropWizard and Swagger: [https://github.com/federecio/dropwizard-swagger-sample-app](dropwizard-swagger-sample-app)
 
 Running in AWS
 --------------
