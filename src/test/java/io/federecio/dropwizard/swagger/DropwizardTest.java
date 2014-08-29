@@ -53,10 +53,12 @@ public abstract class DropwizardTest {
             RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs");
             RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/api-docs/test");
             RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/swagger");
+            RestAssured.expect().statusCode(HttpStatus.OK_200).when().get("/swagger/");
         } else {
             RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(path + "/api-docs");
             RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(path + "/api-docs/test");
             RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(path + "/swagger");
+            RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(path + "/swagger/");
         }
     }
 }
