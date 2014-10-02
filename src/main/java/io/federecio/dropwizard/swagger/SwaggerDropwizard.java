@@ -32,6 +32,7 @@ import java.io.IOException;
 
 /**
  * @author Federico Recio
+ * @author Flemming Frandsen
  */
 public class SwaggerDropwizard {
 
@@ -49,6 +50,14 @@ public class SwaggerDropwizard {
      * does not work correctly.
      */
     public void onRun(Configuration configuration, Environment environment, String host) {
+        onRun(configuration, environment, host, null);
+    }
+
+    /**
+     * Call this method instead of {@link this#onRun(Configuration, Environment)} if the automatic host detection
+     * does not work correctly.
+     */
+    public void onRun(Configuration configuration, Environment environment, String host, Integer port) {
         SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, environment);
 
         String contextPath = swaggerConfiguration.getContextPath();
@@ -60,7 +69,7 @@ public class SwaggerDropwizard {
 
         environment.jersey().register(new SwaggerResource(contextPath));
 
-        swaggerConfiguration.setUpSwaggerFor(host);
+        swaggerConfiguration.setUpSwaggerFor(host, port);
 
         environment.jersey().register(new ApiListingResourceJSON());
         environment.jersey().register(new ApiDeclarationProvider());
