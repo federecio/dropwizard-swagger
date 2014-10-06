@@ -58,16 +58,19 @@ Whether this service is running on AWS is determined by checking for the presenc
 Should the directory `/var/lib/cloud` not be present the host is set to the result of `InetAddress.getLocalHost().getHostName()` or `localhost`.
 
 
-Manually setting the host name
-------------------------------
+Manually setting the host name and the port number
+--------------------------------------------------
 
-There might be a few cases where you want to set the host name to which Swagger is bound to. In this case you need to do:
+Swagger needs to be able to tell the client what hostname and port number to talk to, in the simple case where the user talks directly to the dropwizard process, that's easy, but users often stick a reverse proxy, such as nginx, in front of an application server, so the drop wizard process might listen on localhost:4242 while the client talks to it via nginx on api.example.com:80.
+
+If you need to force swagger to generate urls for a different host and port number, then you need to use the longer version of the onRun method:
 
 		@Override
 		public void run(TestConfiguration configuration, Environment environment) throws Exception {
 		    ...
-			swaggerDropwizard.onRun(configuration, environment, "your_host_here");
+			swaggerDropwizard.onRun(configuration, environment, "your_host_here", 4242);
 		}
+
 
 Contributors
 ------------
@@ -76,3 +79,4 @@ Contributors
 * Jochen Szostek [prefabsoft] (http://prefabsoft.com)
 * Damien Raude-Morvan [drazzib] (https://github.com/drazzib)
 * Marcel Stör [marcelstoer] (https://github.com/marcelstoer)
+* Flemming Frandsen https://github.com/dren-dk
