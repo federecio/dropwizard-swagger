@@ -31,6 +31,7 @@ import java.util.List;
 
 /**
  * @author Federico Recio
+ * @author Flemming Frandsen
  */
 public class SwaggerConfiguration {
 
@@ -43,8 +44,12 @@ public class SwaggerConfiguration {
     }
 
     public void setUpSwaggerFor(String host) {
+        setUpSwaggerFor(host, null);
+    }
+
+    public void setUpSwaggerFor(String host, Integer port) {
         SwaggerConfig config = ConfigFactory.config();
-        String swaggerBasePath = getSwaggerBasePath(host);
+        String swaggerBasePath = getSwaggerBasePath(host, port);
         config.setBasePath(swaggerBasePath);
         config.setApiPath(swaggerBasePath);
         ConfigFactory.setConfig(config);
@@ -72,7 +77,7 @@ public class SwaggerConfiguration {
         return configuration.getServerFactory() instanceof SimpleServerFactory;
     }
 
-    private String getSwaggerBasePath(String host) {
+    private String getSwaggerBasePath(String host, Integer port) {
         HttpConnectorFactory httpConnectorFactory = getHttpConnectionFactory();
 
         if (httpConnectorFactory == null) {
@@ -81,10 +86,13 @@ public class SwaggerConfiguration {
 
         String protocol = httpConnectorFactory instanceof HttpsConnectorFactory ? "https" : "http";
         String contextPath = getContextPath();
+        if (port == null) {
+            port = httpConnectorFactory.getPort();
+        }
         if (!"/".equals(contextPath)) {
-            return String.format("%s://%s:%s%s", protocol, host, httpConnectorFactory.getPort(), contextPath);
+            return String.format("%s://%s:%s%s", protocol, host, port, contextPath);
         } else {
-            return String.format("%s://%s:%s", protocol, host, httpConnectorFactory.getPort());
+            return String.format("%s://%s:%s", protocol, host, port);
         }
     }
 
