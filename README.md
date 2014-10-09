@@ -20,7 +20,7 @@ How to use it
         <dependency>
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.5.1</version>
+            <version>0.5.2</version>
         </dependency>
 
 
