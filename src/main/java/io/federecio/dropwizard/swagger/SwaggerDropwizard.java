@@ -22,7 +22,9 @@ import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
 import com.wordnik.swagger.jaxrs.listing.ResourceListingProvider;
 import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
 import com.wordnik.swagger.reader.ClassReaders;
+
 import io.dropwizard.Configuration;
+import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -34,13 +36,23 @@ import java.io.IOException;
  * @author Federico Recio
  * @author Flemming Frandsen
  */
-public class SwaggerDropwizard {
+public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBundle<T> {
+
+    @Override
+    public void initialize(Bootstrap<?> bootstrap) {
+        onInitialize(bootstrap);
+    }
 
     public void onInitialize(Bootstrap<?> bootstrap) {
         bootstrap.addBundle(new ViewBundle());
     }
 
-    public void onRun(Configuration configuration, Environment environment) throws IOException {
+    @Override
+    public void run(T configuration, Environment environment) throws Exception {
+        onRun(configuration, environment);
+    }
+
+    public void onRun(T configuration, Environment environment) throws IOException {
         String host = SwaggerHostResolver.getSwaggerHost();
         onRun(configuration, environment, host);
     }
@@ -49,7 +61,7 @@ public class SwaggerDropwizard {
      * Call this method instead of {@link this#onRun(Configuration, Environment)} if the automatic host detection
      * does not work correctly.
      */
-    public void onRun(Configuration configuration, Environment environment, String host) {
+    public void onRun(T configuration, Environment environment, String host) {
         onRun(configuration, environment, host, null);
     }
 
@@ -57,7 +69,7 @@ public class SwaggerDropwizard {
      * Call this method instead of {@link this#onRun(Configuration, Environment)} if the automatic host detection
      * does not work correctly.
      */
-    public void onRun(Configuration configuration, Environment environment, String host, Integer port) {
+    public void onRun(T configuration, Environment environment, String host, Integer port) {
         SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, environment);
 
         String contextPath = swaggerConfiguration.getContextPath();
@@ -77,4 +89,5 @@ public class SwaggerDropwizard {
         ScannerFactory.setScanner(new DefaultJaxrsScanner());
         ClassReaders.setReader(new DefaultJaxrsApiReader());
     }
+
 }

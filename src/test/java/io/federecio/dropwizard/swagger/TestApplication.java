@@ -24,16 +24,18 @@ import io.dropwizard.setup.Environment;
  */
 public class TestApplication extends Application<TestConfiguration> {
 
-    private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
-
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
-        swaggerDropwizard.onInitialize(bootstrap);
+        bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
+            @Override
+            public SwaggerBundleConfiguration getSwaggerBundleConfiguration(TestConfiguration configuration) {
+                return configuration.swaggerBundleConfiguration;
+            }
+        });
     }
 
     @Override
     public void run(TestConfiguration configuration, Environment environment) throws Exception {
         environment.jersey().register(new TestResource());
-        swaggerDropwizard.onRun(configuration, environment, "localhost");
     }
 }
