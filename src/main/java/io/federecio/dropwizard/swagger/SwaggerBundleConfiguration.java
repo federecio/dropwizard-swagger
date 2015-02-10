@@ -39,9 +39,13 @@ public class SwaggerBundleConfiguration {
         this.host = host;
     }
 
+    public SwaggerBundleConfiguration(Integer port) {
+        this.port = port;
+    }
+
     public SwaggerBundleConfiguration() {
     }
-    
+
     public String getHost() {
         return host;
     }
