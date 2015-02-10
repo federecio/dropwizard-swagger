@@ -39,6 +39,9 @@ public class SwaggerBundleConfiguration {
         this.host = host;
     }
 
+    public SwaggerBundleConfiguration() {
+    }
+    
     public String getHost() {
         return host;
     }
