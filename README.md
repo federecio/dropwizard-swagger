@@ -65,7 +65,7 @@ If you need to force swagger to generate urls for a different host and/or port n
             bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
                 @Override
                 public SwaggerBundleConfiguration getSwaggerBundleConfiguration(YourConfigurationClass configuration) {
-                    // return an instance of SwaggerBundleConfiguration
+                    return new SwaggerBundleConfiguration("your_host_here", 4242);
                 }
             });
             ...
