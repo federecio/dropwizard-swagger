@@ -23,4 +23,6 @@ import io.dropwizard.Configuration;
 public class TestConfiguration extends Configuration {
 
     public String name;
+
+    public SwaggerBundleConfiguration swaggerBundleConfiguration = new SwaggerBundleConfiguration("localhost");
 }

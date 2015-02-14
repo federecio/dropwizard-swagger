@@ -20,25 +20,19 @@ How to use it
         <dependency>
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.5.2</version>
+            <version>0.5.3-SNAPSHOT</version>
         </dependency>
 
 
 * In your Application class:
 
-		private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
-
 		@Override
 		public void initialize(Bootstrap<TestConfiguration> bootstrap) {
 		    ...
-			swaggerDropwizard.onInitialize(bootstrap);
+			bootstrap.addBundle(new SwaggerBundle<TestConfiguration>());
+            ...
 		}
 
-		@Override
-		public void run(TestConfiguration configuration, Environment environment) throws Exception {
-		    ...
-			swaggerDropwizard.onRun(configuration, environment);
-		}
 
 * As usual, add Swagger annotations to your resource classes and methods
 
@@ -63,13 +57,19 @@ Manually setting the host name and the port number
 
 Swagger needs to be able to tell the client what hostname and port number to talk to, in the simple case where the user talks directly to the dropwizard process, that's easy, but users often stick a reverse proxy, such as nginx, in front of an application server, so the drop wizard process might listen on localhost:4242 while the client talks to it via nginx on api.example.com:80.
 
-If you need to force swagger to generate urls for a different host and port number, then you need to use the longer version of the onRun method:
+If you need to force swagger to generate urls for a different host and/or port number, then you need to override the getSwaggerBundleConfiguration method to load the host and/or port number from an instance of a SwaggerBundleConfiguration:
 
 		@Override
-		public void run(TestConfiguration configuration, Environment environment) throws Exception {
-		    ...
-			swaggerDropwizard.onRun(configuration, environment, "your_host_here", 4242);
-		}
+        public void initialize(Bootstrap<TestConfiguration> bootstrap) {
+            ...
+            bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
+                @Override
+                public SwaggerBundleConfiguration getSwaggerBundleConfiguration(YourConfigurationClass configuration) {
+                    return new SwaggerBundleConfiguration("your_host_here", 4242);
+                }
+            });
+            ...
+        }
 
 
 Contributors
@@ -80,3 +80,4 @@ Contributors
 * Damien Raude-Morvan [drazzib] (https://github.com/drazzib)
 * Marcel Stör [marcelstoer] (https://github.com/marcelstoer)
 * Flemming Frandsen https://github.com/dren-dk
+* Tristan Burch [tburch] (https://github.com/tburch)
