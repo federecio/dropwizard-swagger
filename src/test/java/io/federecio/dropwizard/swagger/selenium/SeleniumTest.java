@@ -46,7 +46,7 @@ public abstract class SeleniumTest {
 
     @Test
     public void testResourceIsAccessibleThroughUI() throws Exception {
-        driver.get(getSwaggerUrl() + "#!/test/dummyEndpoint_get_0");
+        driver.get(getSwaggerUrl() + "#!/test/dummyEndpoint");
         driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
 
         clickOnTryOut();
