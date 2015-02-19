@@ -27,9 +27,9 @@ How to use it
 * In your Application class:
 
 		@Override
-		public void initialize(Bootstrap<TestConfiguration> bootstrap) {
+		public void initialize(Bootstrap<YourConfiguration> bootstrap) {
 		    ...
-			bootstrap.addBundle(new SwaggerBundle<TestConfiguration>());
+			bootstrap.addBundle(new SwaggerBundle<YourConfiguration>());
             ...
 		}
 
@@ -60,9 +60,9 @@ Swagger needs to be able to tell the client what hostname and port number to tal
 If you need to force swagger to generate urls for a different host and/or port number, then you need to override the getSwaggerBundleConfiguration method to load the host and/or port number from an instance of a SwaggerBundleConfiguration:
 
 		@Override
-        public void initialize(Bootstrap<TestConfiguration> bootstrap) {
+        public void initialize(Bootstrap<YourConfiguration> bootstrap) {
             ...
-            bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
+            bootstrap.addBundle(new SwaggerBundle<YourConfiguration>() {
                 @Override
                 public SwaggerBundleConfiguration getSwaggerBundleConfiguration(YourConfigurationClass configuration) {
                     return new SwaggerBundleConfiguration("your_host_here", 4242);
@@ -81,3 +81,4 @@ Contributors
 * Marcel Stör [marcelstoer] (https://github.com/marcelstoer)
 * Flemming Frandsen https://github.com/dren-dk
 * Tristan Burch [tburch] (https://github.com/tburch)
+* Matt Carrier [mattcarrier] (https://github.com/mattcarrier)
