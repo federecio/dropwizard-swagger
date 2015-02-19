@@ -22,7 +22,7 @@
   <script src='${swaggerStaticPath}/lib/marked.js' type='text/javascript'></script>
   
     <!-- enabling this will enable oauth2 implicit scope support -->
-  <script src='lib/swagger-oauth.js' type='text/javascript'></script>
+  <script src='${swaggerStaticPath}/lib/swagger-oauth.js' type='text/javascript'></script>
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
