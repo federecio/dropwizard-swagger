@@ -27,8 +27,8 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class SeleniumTest {
 
-    private static final int WAIT_IN_SECONDS = 5;
-    private FirefoxDriver driver;
+    static final int WAIT_IN_SECONDS = 5;
+    FirefoxDriver driver;
 
     protected abstract String getSwaggerUrl();
 

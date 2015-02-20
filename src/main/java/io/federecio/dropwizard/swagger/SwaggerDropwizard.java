@@ -22,7 +22,6 @@ import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
 import com.wordnik.swagger.jaxrs.listing.ResourceListingProvider;
 import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
 import com.wordnik.swagger.reader.ClassReaders;
-
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.assets.AssetsBundle;
@@ -74,9 +73,9 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
 
         String contextPath = swaggerConfiguration.getContextPath();
         if (contextPath.equals("/") || swaggerConfiguration.isSimpleServer()) {
-            new AssetsBundle("/swagger-static").run(environment);
+            new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, Constants.SWAGGER_URI_PATH, null, Constants.SWAGGER_ASSETS_NAME).run(environment);
         } else {
-            new AssetsBundle("/swagger-static", contextPath + "/swagger-static").run(environment);
+            new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, contextPath + Constants.SWAGGER_URI_PATH, null, Constants.SWAGGER_ASSETS_NAME).run(environment);
         }
 
         environment.jersey().register(new SwaggerResource(contextPath));

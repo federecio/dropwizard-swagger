@@ -33,8 +33,6 @@ import java.net.UnknownHostException;
 public class SwaggerHostResolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SwaggerHostResolver.class);
-    private static final String DEFAULT_SWAGGER_HOST = "localhost";
-    private static final String AWS_HOST_NAME_URL = "http://169.254.169.254/latest/meta-data/public-hostname/";
 
     /**
      * Attempts to determine the host to be used in order to configure Swagger, as the time of writing
@@ -42,15 +40,15 @@ public class SwaggerHostResolver {
      * <p/>
      * The strategy is:
      * <p/>
-     * 1 - IF the folder /var/lib/cloud is present THEN set host name to the result of GET http://169.254.169.254/latest/meta-data/public-hostname/
+     * 1 - IF the folder {@link Constants#AWS_FILE_TO_CHECK} is present THEN set host name to the result of GET {@link Constants#AWS_HOST_NAME_URL}
      * 2 - InetAddress.getLocalHost().getHostName()
      * 3 - localhost
      */
     public static String getSwaggerHost() throws IOException {
         String host;
-        if (new File("/var/lib/cloud/").exists()) {
-            LOGGER.info("Folder /var/lib/cloud exists so assuming we are running on AWS, will attempt to get host name from " + AWS_HOST_NAME_URL);
-            HttpURLConnection urlConnection = (HttpURLConnection) new URL(AWS_HOST_NAME_URL).openConnection();
+        if (new File(Constants.AWS_FILE_TO_CHECK).exists()) {
+            LOGGER.info("Folder " + Constants.AWS_FILE_TO_CHECK + " exists so assuming we are running on AWS, will attempt to get host name from " + Constants.AWS_HOST_NAME_URL);
+            HttpURLConnection urlConnection = (HttpURLConnection) new URL(Constants.AWS_HOST_NAME_URL).openConnection();
             urlConnection.setRequestMethod("GET");
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))) {
                 host = reader.readLine();
@@ -58,9 +56,9 @@ public class SwaggerHostResolver {
         } else {
             try {
                 host = InetAddress.getLocalHost().getHostName();
-            } catch (UnknownHostException e) {
+            } catch (UnknownHostException ignored) {
                 LOGGER.warn("Unable to determine host for swagger, using default value");
-                host = DEFAULT_SWAGGER_HOST;
+                host = Constants.DEFAULT_SWAGGER_HOST;
             }
         }
         LOGGER.info("Setting host for swagger to {}", host);

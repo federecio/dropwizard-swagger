@@ -27,6 +27,6 @@ import org.junit.runner.RunWith;
 public class DefaultServerWithPathSetProgramaticallyTest extends DropwizardTest {
 
     public DefaultServerWithPathSetProgramaticallyTest() {
-        super(33333, "/api");
+        super(33333, TestApplicationWithPathSetProgramatically.BASE_PATH);
     }
 }

@@ -36,10 +36,10 @@ public class SwaggerView extends View {
             applicationContextPath = '/' + applicationContextPath;
         }
         if (applicationContextPath.equals("/")) {
-            swaggerAssetsPath = "/swagger-static";
+            swaggerAssetsPath = Constants.SWAGGER_URI_PATH;
             contextPath = "";
         } else {
-            swaggerAssetsPath = applicationContextPath + "/swagger-static";
+            swaggerAssetsPath = applicationContextPath + Constants.SWAGGER_URI_PATH;
             contextPath = applicationContextPath;
         }
     }

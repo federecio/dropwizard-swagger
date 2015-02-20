@@ -15,27 +15,16 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
 
 /**
  * @author Federico Recio
  */
-public class TestApplicationWithPathSetProgramatically extends Application<TestConfiguration> {
-
-    public static final String BASE_PATH = "/api";
-    private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
-
+public class TestApplicationWithAssetsAndPathSetProgramatically extends TestApplicationWithPathSetProgramatically {
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
-        swaggerDropwizard.onInitialize(bootstrap);
-    }
-
-    @Override
-    public void run(TestConfiguration configuration, Environment environment) throws Exception {
-        environment.jersey().setUrlPattern(BASE_PATH + "/*");
-        environment.jersey().register(new TestResource());
-        swaggerDropwizard.onRun(configuration, environment, "localhost");
+        super.initialize(bootstrap);
+        bootstrap.addBundle(new AssetsBundle("/myassets", "/"));
     }
 }
