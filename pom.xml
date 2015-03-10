@@ -47,7 +47,7 @@
     </scm>
 
     <properties>
-        <dropwizard.version>0.7.1</dropwizard.version>
+        <dropwizard.version>0.8.0</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
@@ -137,6 +137,10 @@
                     <groupId>com.google.code.findbugs</groupId>
                     <artifactId>jsr305</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -188,7 +192,7 @@
         <dependency>
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-junit</artifactId>
-            <version>0.5</version>
+            <version>0.6-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
