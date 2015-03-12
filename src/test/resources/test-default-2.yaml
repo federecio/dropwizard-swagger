@@ -1,5 +1,6 @@
 server:
   type: default
+  rootPath: '/api/*'
   applicationConnectors:
     - type: http
       port: 33333

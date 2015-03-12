@@ -34,7 +34,6 @@ public class TestApplicationWithPathSetProgramatically extends Application<TestC
 
     @Override
     public void run(TestConfiguration configuration, Environment environment) throws Exception {
-        environment.jersey().setUrlPattern(BASE_PATH + "/*");
         environment.jersey().register(new TestResource());
         swaggerDropwizard.onRun(configuration, environment, "localhost");
     }

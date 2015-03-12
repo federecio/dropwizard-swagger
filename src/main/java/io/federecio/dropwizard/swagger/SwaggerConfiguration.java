@@ -56,21 +56,23 @@ public class SwaggerConfiguration {
     }
 
     public String getContextPath() {
-        String applicationContextPath;
+        String urlPattern = "/";
         ServerFactory serverFactory = configuration.getServerFactory();
         if (serverFactory instanceof SimpleServerFactory) {
-            applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
-        } else {
-            String urlPattern = environment.jersey().getUrlPattern();
-            if (urlPattern.endsWith("/*")) {
-                urlPattern = urlPattern.substring(0, urlPattern.length() - 1);
-            }
-            if (urlPattern.length() > 1 && urlPattern.endsWith("/")) {
-                urlPattern = urlPattern.substring(0, urlPattern.length() - 1);
-            }
-            applicationContextPath = urlPattern;
+            urlPattern = ((SimpleServerFactory) serverFactory).getJerseyRootPath();
+        } else if (serverFactory instanceof DefaultServerFactory) {
+            urlPattern = ((DefaultServerFactory) serverFactory).getJerseyRootPath();
         }
-        return applicationContextPath;
+
+        if (urlPattern.endsWith("/*")) {
+            urlPattern = urlPattern.substring(0, urlPattern.length() - 1);
+        }
+
+        if (urlPattern.length() > 1 && urlPattern.endsWith("/")) {
+            urlPattern = urlPattern.substring(0, urlPattern.length() - 1);
+        }
+
+        return urlPattern;
     }
 
     public boolean isSimpleServer() {

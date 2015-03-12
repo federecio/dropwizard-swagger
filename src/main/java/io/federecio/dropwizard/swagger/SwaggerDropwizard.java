@@ -15,6 +15,7 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import com.google.common.collect.ImmutableMap;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
 import com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider;
@@ -43,7 +44,15 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
     }
 
     public void onInitialize(Bootstrap<?> bootstrap) {
-        bootstrap.addBundle(new ViewBundle());
+        bootstrap.addBundle(new ViewBundle<Configuration>() {
+            @Override
+            public ImmutableMap<String, ImmutableMap<String, String>> getViewConfiguration(Configuration config) {
+                ImmutableMap.Builder<String, ImmutableMap<String, String>> viewBuilder = ImmutableMap.builder();
+                ImmutableMap.Builder<String, String> optionBuilder = ImmutableMap.builder();
+                viewBuilder.put(".ftl", optionBuilder.build());
+                return viewBuilder.build();
+            }
+        });
     }
 
     @Override
