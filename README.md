@@ -47,9 +47,11 @@ Take a look at this sample application that shows how to integrate DropWizard an
 Running in AWS
 --------------
 
-Whether this service is running on AWS is determined by checking for the presence of the folder "/var/lib/cloud". If the folder is actually present then the host Swagger should be bound to is set to the result of a GET request to "http://169.254.169.254/latest/meta-data/public-hostname/".
+Whether this service is running on AWS is determined by checking for the presence of the folder "/var/lib/cloud". If the folder is actually present then the host Swagger should be bound to is set to the result of a GET request to `http://169.254.169.254/latest/meta-data/public-hostname/`.
 
 Should the directory `/var/lib/cloud` not be present the host is set to the result of `InetAddress.getLocalHost().getHostName()` or `localhost`.
+
+__NOTE__: In order to run correctly in AWS, the VPC must have "DNS hostnames" enabled. Otherwise, the call to `http://169.254.169.254/latest/meta-data/public-hostname/` will return null.
 
 
 Manually setting the host name and the port number
