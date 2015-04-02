@@ -16,6 +16,7 @@
 package io.federecio.dropwizard.swagger;
 
 import io.dropwizard.Application;
+import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
@@ -33,7 +34,8 @@ public class TestApplicationWithPathSetProgramatically extends Application<TestC
     }
 
     @Override
-    public void run(TestConfiguration configuration, Environment environment) throws Exception {
+    public void run(TestConfiguration configuration, final Environment environment) throws Exception {
+        ((DefaultServerFactory) configuration.getServerFactory()).setJerseyRootPath("/api/*");
         environment.jersey().setUrlPattern(BASE_PATH + "/*");
         environment.jersey().register(new TestResource());
         swaggerDropwizard.onRun(configuration, environment, "localhost");
