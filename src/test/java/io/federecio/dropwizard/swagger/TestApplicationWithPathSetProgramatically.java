@@ -26,7 +26,7 @@ import io.dropwizard.setup.Environment;
 public class TestApplicationWithPathSetProgramatically extends Application<TestConfiguration> {
 
     public static final String BASE_PATH = "/api";
-    private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
+    private final SwaggerDropwizard<TestConfiguration> swaggerDropwizard = new SwaggerDropwizard<>();
 
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
