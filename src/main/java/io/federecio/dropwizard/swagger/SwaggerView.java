@@ -30,17 +30,19 @@ public class SwaggerView extends View {
     private final String swaggerAssetsPath;
     private final String contextPath;
 
-    protected SwaggerView(String applicationContextPath) {
+    protected SwaggerView(String urlPattern) {
         super("index.ftl", Charsets.UTF_8);
-        if (applicationContextPath.charAt(0) != '/') {
-            applicationContextPath = '/' + applicationContextPath;
-        }
-        if (applicationContextPath.equals("/")) {
+
+        if (urlPattern.equals("/")) {
             swaggerAssetsPath = Constants.SWAGGER_URI_PATH;
+        } else {
+            swaggerAssetsPath = urlPattern + Constants.SWAGGER_URI_PATH;
+        }
+
+        if (urlPattern.equals("/")) {
             contextPath = "";
         } else {
-            swaggerAssetsPath = applicationContextPath + Constants.SWAGGER_URI_PATH;
-            contextPath = applicationContextPath;
+            contextPath = urlPattern;
         }
     }
 

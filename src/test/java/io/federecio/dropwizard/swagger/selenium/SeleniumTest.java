@@ -15,6 +15,7 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
+import io.federecio.dropwizard.swagger.Constants;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,12 +24,32 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 public abstract class SeleniumTest {
 
+    static final String host;
+
+    static {
+        String tmpHost;
+
+        try {
+            tmpHost = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException ignored) {
+            tmpHost = Constants.DEFAULT_SWAGGER_HOST;
+        }
+
+        host = tmpHost;
+    }
+
     static final int WAIT_IN_SECONDS = 5;
     FirefoxDriver driver;
+
+    protected String getSwaggerUrl(int port, String path) {
+        return String.format("http://%s:%d%s", SeleniumTest.host, port, path);
+    }
 
     protected abstract String getSwaggerUrl();
 
@@ -49,6 +70,7 @@ public abstract class SeleniumTest {
         driver.get(getSwaggerUrl() + "#!/test/dummyEndpoint");
         driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
 
+//        Thread.sleep(300000);
         clickOnTryOut();
         assertResponseCodeIs200();
     }

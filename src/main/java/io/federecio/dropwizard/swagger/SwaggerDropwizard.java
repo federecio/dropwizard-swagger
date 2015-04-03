@@ -78,14 +78,16 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
     public void onRun(T configuration, Environment environment, String host, Integer port) {
         SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, environment);
 
-        String contextPath = swaggerConfiguration.getContextPath();
-        if (contextPath.equals("/") || swaggerConfiguration.isSimpleServer()) {
+        final String rootPath = swaggerConfiguration.getJerseyRootPath();
+        final String urlPattern = swaggerConfiguration.getUrlPattern();
+
+        if (rootPath.equals("/")) {
             new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, Constants.SWAGGER_URI_PATH, null, Constants.SWAGGER_ASSETS_NAME).run(environment);
         } else {
-            new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, contextPath + Constants.SWAGGER_URI_PATH, null, Constants.SWAGGER_ASSETS_NAME).run(environment);
+            new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, rootPath + Constants.SWAGGER_URI_PATH, null, Constants.SWAGGER_ASSETS_NAME).run(environment);
         }
 
-        environment.jersey().register(new SwaggerResource(contextPath));
+        environment.jersey().register(new SwaggerResource(urlPattern));
 
         swaggerConfiguration.setUpSwaggerFor(host, port);
 
@@ -95,5 +97,4 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
         ScannerFactory.setScanner(new DefaultJaxrsScanner());
         ClassReaders.setReader(new DefaultJaxrsApiReader());
     }
-
 }

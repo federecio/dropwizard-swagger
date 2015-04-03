@@ -55,26 +55,63 @@ public class SwaggerConfiguration {
         ConfigFactory.setConfig(config);
     }
 
-    public String getContextPath() {
-        String applicationContextPath;
+    private String stripUrlSlashes(String urlToStrip) {
+       if (urlToStrip.endsWith("/*")) {
+            urlToStrip = urlToStrip.substring(0, urlToStrip.length() - 1);
+        }
+
+        if (urlToStrip.length() > 1 && urlToStrip.endsWith("/")) {
+            urlToStrip = urlToStrip.substring(0, urlToStrip.length() - 1);
+        }
+
+        return urlToStrip;
+    }
+
+    public String getJerseyRootPath() {
+        String rootPath;
+
         ServerFactory serverFactory = configuration.getServerFactory();
+
+        if (serverFactory instanceof SimpleServerFactory) {
+            rootPath = ((SimpleServerFactory) serverFactory).getJerseyRootPath();
+        } else {
+            rootPath = ((DefaultServerFactory) serverFactory).getJerseyRootPath();
+        }
+
+        return stripUrlSlashes(rootPath);
+    }
+
+    public String getApplicationContextPath() {
+         String applicationContextPath;
+
+        ServerFactory serverFactory = configuration.getServerFactory();
+
         if (serverFactory instanceof SimpleServerFactory) {
             applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
         } else {
-            String urlPattern = environment.jersey().getUrlPattern();
-            if (urlPattern.endsWith("/*")) {
-                urlPattern = urlPattern.substring(0, urlPattern.length() - 1);
-            }
-            if (urlPattern.length() > 1 && urlPattern.endsWith("/")) {
-                urlPattern = urlPattern.substring(0, urlPattern.length() - 1);
-            }
-            applicationContextPath = urlPattern;
+            applicationContextPath = ((DefaultServerFactory) serverFactory).getApplicationContextPath();
         }
-        return applicationContextPath;
+
+        return stripUrlSlashes(applicationContextPath);
     }
 
-    public boolean isSimpleServer() {
-        return configuration.getServerFactory() instanceof SimpleServerFactory;
+    public String getUrlPattern() {
+        final String applicationContextPath = getApplicationContextPath();
+        final String rootPath = getJerseyRootPath();
+
+        String urlPattern;
+
+        if (rootPath.equals("/") && applicationContextPath.equals("/")) {
+            urlPattern =  "/";
+        } else if (rootPath.equals("/") && !applicationContextPath.equals("/")) {
+            urlPattern = applicationContextPath;
+        } else if (!rootPath.equals("/") && applicationContextPath.equals("/")) {
+            urlPattern = rootPath;
+        } else {
+            urlPattern = applicationContextPath + rootPath;
+        }
+
+        return urlPattern;
     }
 
     private String getSwaggerBasePath(String host, Integer port) {
@@ -85,12 +122,12 @@ public class SwaggerConfiguration {
         }
 
         String protocol = httpConnectorFactory instanceof HttpsConnectorFactory ? "https" : "http";
-        String contextPath = getContextPath();
+        String urlPattern = getUrlPattern();
         if (port == null) {
             port = httpConnectorFactory.getPort();
         }
-        if (!"/".equals(contextPath)) {
-            return String.format("%s://%s:%s%s", protocol, host, port, contextPath);
+        if (!"/".equals(urlPattern)) {
+            return String.format("%s://%s:%s%s", protocol, host, port, urlPattern);
         } else {
             return String.format("%s://%s:%s", protocol, host, port);
         }
