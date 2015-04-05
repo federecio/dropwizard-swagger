@@ -70,7 +70,6 @@ public abstract class SeleniumTest {
         driver.get(getSwaggerUrl() + "#!/test/dummyEndpoint");
         driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
 
-//        Thread.sleep(300000);
         clickOnTryOut();
         assertResponseCodeIs200();
     }
