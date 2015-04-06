@@ -43,7 +43,7 @@ public class SwaggerBundle<T extends Configuration> extends SwaggerDropwizard<T>
                 onRun(configuration, environment);
             } else {
                 String host = StringUtils.isEmpty(bundleConfiguration.getHost()) ? SwaggerHostResolver.getSwaggerHost() : bundleConfiguration.getHost();
-                super.onRun(configuration, environment, host, bundleConfiguration.getPort());
+                super.onRun(configuration, environment, bundleConfiguration.getProtocol(), host, bundleConfiguration.getPort());
             }
         } catch (IOException e) {
             throw new RuntimeException("Couldn't determine host");

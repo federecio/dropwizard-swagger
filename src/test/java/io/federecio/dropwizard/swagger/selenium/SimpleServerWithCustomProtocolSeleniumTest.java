@@ -15,33 +15,26 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
+import static org.junit.Assert.assertEquals;
+import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
+import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
+import io.federecio.dropwizard.swagger.TestApplicationWithCustomProtocol;
+
 import java.util.concurrent.TimeUnit;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class SeleniumTest {
+@DropwizardTestConfig(applicationClass = TestApplicationWithCustomProtocol.class, yamlFile = "/test-simple-root-path.yaml")
+@RunWith(DropwizardJunitRunner.class)
+public class SimpleServerWithCustomProtocolSeleniumTest extends SeleniumTest {
 
-    static final int WAIT_IN_SECONDS = 5;
-    FirefoxDriver driver;
-
-    protected abstract String getSwaggerUrl();
-
-    @Before
-    public void setUpTests() {
-        driver = new FirefoxDriver();
-    }
-
-    @After
-    public void terminate() throws InterruptedException {
-        if (driver != null) {
-            driver.kill();
-        }
+    @Override
+    protected String getSwaggerUrl() {
+        return "http://localhost:55668/swagger";
     }
 
     @Test
@@ -50,17 +43,14 @@ public abstract class SeleniumTest {
         driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
 
         clickOnTryOut();
-        assertResponseCodeIs200();
+        assertResponseCodeIs0();
+
+        By xpath = By.xpath("//div[@class='block request_url']/pre");
+        assertEquals("https://localhost:55668/test.json", driver.findElement(xpath).getText());
     }
 
-    private void assertResponseCodeIs200() {
+    private void assertResponseCodeIs0() {
         By xpath = By.xpath("//div[@class='block response_code']/pre");
-        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, "200"));
-    }
-
-    protected void clickOnTryOut() {
-        By xpath = By.xpath("//input[@value='Try it out!']");
-        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.presenceOfElementLocated(xpath));
-        driver.findElement(xpath).click();
+        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, "0"));
     }
 }

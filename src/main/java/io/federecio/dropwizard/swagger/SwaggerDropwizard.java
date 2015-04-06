@@ -60,22 +60,22 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
 
     public void onRun(T configuration, Environment environment) throws IOException {
         String host = SwaggerHostResolver.getSwaggerHost();
-        onRun(configuration, environment, host);
+        onRun(configuration, environment, null, host);
     }
 
     /**
      * Call this method instead of {@link this#onRun(Configuration, Environment)} if the automatic host detection
      * does not work correctly.
      */
-    public void onRun(T configuration, Environment environment, String host) {
-        onRun(configuration, environment, host, null);
+    public void onRun(T configuration, Environment environment, String protocol, String host) {
+        onRun(configuration, environment, protocol, host, null);
     }
 
     /**
      * Call this method instead of {@link this#onRun(Configuration, Environment)} if the automatic host detection
      * does not work correctly.
      */
-    public void onRun(T configuration, Environment environment, String host, Integer port) {
+    public void onRun(T configuration, Environment environment, String protocol, String host, Integer port) {
         SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, environment);
 
         String contextPath = swaggerConfiguration.getContextPath();
@@ -87,7 +87,7 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
 
         environment.jersey().register(new SwaggerResource(contextPath));
 
-        swaggerConfiguration.setUpSwaggerFor(host, port);
+        swaggerConfiguration.setUpSwaggerFor(protocol, host, port);
 
         environment.jersey().register(new ApiListingResourceJSON());
         environment.jersey().register(new ApiDeclarationProvider());

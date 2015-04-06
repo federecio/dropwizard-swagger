@@ -25,10 +25,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SwaggerBundleConfiguration {
 
     @JsonProperty
+    private String protocol = null;
+
+    @JsonProperty
     private String host;
 
     @JsonProperty
     private Integer port = null;
+
+    public SwaggerBundleConfiguration(String protocol, String host, Integer port) {
+        this(host, port);
+        this.protocol = protocol;
+    }
+
+    public SwaggerBundleConfiguration(String protocol, String host) {
+        this(host);
+        this.protocol = protocol;
+    }
 
     public SwaggerBundleConfiguration(String host, Integer port) {
         this.host = host;
@@ -62,11 +75,19 @@ public class SwaggerBundleConfiguration {
         this.port = port;
     }
 
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
 
     @Override
     public String toString() {
         return "SwaggerBundleConfiguration{" +
-                "host='" + host + '\'' +
+                "protocol='" + protocol + "'" +
+                ", host='" + host + "'" +
                 ", port=" + port +
                 '}';
     }
@@ -78,6 +99,7 @@ public class SwaggerBundleConfiguration {
 
         SwaggerBundleConfiguration that = (SwaggerBundleConfiguration) o;
 
+        if (protocol != null ? !protocol.equals(that.protocol) : that.protocol != null) return false;
         if (host != null ? !host.equals(that.host) : that.host != null) return false;
         if (port != null ? !port.equals(that.port) : that.port != null) return false;
 
@@ -86,8 +108,11 @@ public class SwaggerBundleConfiguration {
 
     @Override
     public int hashCode() {
-        int result = host != null ? host.hashCode() : 0;
-        result = 31 * result + (port != null ? port.hashCode() : 0);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((host == null) ? 0 : host.hashCode());
+        result = prime * result + ((port == null) ? 0 : port.hashCode());
+        result = prime * result + ((protocol == null) ? 0 : protocol.hashCode());
         return result;
     }
 }
