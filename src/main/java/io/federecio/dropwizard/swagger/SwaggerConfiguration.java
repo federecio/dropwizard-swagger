@@ -43,13 +43,9 @@ public class SwaggerConfiguration {
         this.environment = environment;
     }
 
-    public void setUpSwaggerFor(String host) {
-        setUpSwaggerFor(host, null);
-    }
-
-    public void setUpSwaggerFor(String host, Integer port) {
+    public void setUpSwaggerFor(String protocol, String host, Integer port) {
         SwaggerConfig config = ConfigFactory.config();
-        String swaggerBasePath = getSwaggerBasePath(host, port);
+        String swaggerBasePath = getSwaggerBasePath(protocol, host, port);
         config.setBasePath(swaggerBasePath);
         config.setApiPath(swaggerBasePath);
         ConfigFactory.setConfig(config);
@@ -77,14 +73,15 @@ public class SwaggerConfiguration {
         return configuration.getServerFactory() instanceof SimpleServerFactory;
     }
 
-    private String getSwaggerBasePath(String host, Integer port) {
+    private String getSwaggerBasePath(String protocol, String host, Integer port) {
         HttpConnectorFactory httpConnectorFactory = getHttpConnectionFactory();
+        if(protocol == null) {
+            if (httpConnectorFactory == null) {
+                throw new IllegalStateException("Could not get HttpConnectorFactory");
+            }
 
-        if (httpConnectorFactory == null) {
-            throw new IllegalStateException("Could not get HttpConnectorFactory");
+            protocol = httpConnectorFactory instanceof HttpsConnectorFactory ? "https" : "http";
         }
-
-        String protocol = httpConnectorFactory instanceof HttpsConnectorFactory ? "https" : "http";
         String contextPath = getContextPath();
         if (port == null) {
             port = httpConnectorFactory.getPort();

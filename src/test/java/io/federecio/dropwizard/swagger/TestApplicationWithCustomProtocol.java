@@ -16,28 +16,26 @@
 package io.federecio.dropwizard.swagger;
 
 import io.dropwizard.Application;
-import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 /**
  * @author Federico Recio
  */
-public class TestApplicationWithPathSetProgramatically extends Application<TestConfiguration> {
-
-    public static final String BASE_PATH = "/api";
-    private final SwaggerDropwizard<TestConfiguration> swaggerDropwizard = new SwaggerDropwizard<>();
+public class TestApplicationWithCustomProtocol extends Application<TestConfiguration> {
 
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
-        swaggerDropwizard.onInitialize(bootstrap);
+        bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
+            @Override
+            public SwaggerBundleConfiguration getSwaggerBundleConfiguration(TestConfiguration configuration) {
+                return new SwaggerBundleConfiguration("https", "localhost");
+            }
+        });
     }
 
     @Override
     public void run(TestConfiguration configuration, final Environment environment) throws Exception {
-        ((DefaultServerFactory) configuration.getServerFactory()).setJerseyRootPath("/api/*");
-        environment.jersey().setUrlPattern(BASE_PATH + "/*");
         environment.jersey().register(new TestResource());
-        swaggerDropwizard.onRun(configuration, environment, null, "localhost");
     }
 }
