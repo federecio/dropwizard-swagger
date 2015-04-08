@@ -17,6 +17,7 @@ package io.federecio.dropwizard.swagger.selenium;
 
 import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
 import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
+import io.federecio.dropwizard.swagger.Constants;
 import io.federecio.dropwizard.swagger.TestApplication;
 import org.junit.runner.RunWith;
 
@@ -29,6 +30,6 @@ public class DefaultServerSeleniumTest extends SeleniumTest {
 
     @Override
     protected String getSwaggerUrl() {
-        return getSwaggerUrl(44444, "/swagger");
+        return getSwaggerUrl(44444, Constants.SWAGGER_PATH);
     }
 }

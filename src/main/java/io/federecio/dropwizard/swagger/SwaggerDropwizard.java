@@ -15,15 +15,6 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import io.dropwizard.Configuration;
-import io.dropwizard.ConfiguredBundle;
-import io.dropwizard.assets.AssetsBundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-import io.dropwizard.views.ViewBundle;
-
-import java.io.IOException;
-
 import com.google.common.collect.ImmutableMap;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
@@ -32,6 +23,14 @@ import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
 import com.wordnik.swagger.jaxrs.listing.ResourceListingProvider;
 import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
 import com.wordnik.swagger.reader.ClassReaders;
+import io.dropwizard.Configuration;
+import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.assets.AssetsBundle;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+import io.dropwizard.views.ViewBundle;
+
+import java.io.IOException;
 
 /**
  * @author Federico Recio
@@ -76,7 +75,7 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
      * does not work correctly.
      */
     public void onRun(T configuration, Environment environment, String host, Integer port) {
-        SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, environment);
+        SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration);
 
         final String rootPath = swaggerConfiguration.getJerseyRootPath();
         final String urlPattern = swaggerConfiguration.getUrlPattern();

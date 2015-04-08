@@ -43,4 +43,8 @@ public class Constants {
      * The file to check for its existence to determine if the server is running on AWS.
      */
     public static final String AWS_FILE_TO_CHECK = "/var/lib/cloud/";
+    /**
+     * The path to which Swagger resources are bound to
+     */
+    public static final String SWAGGER_PATH = "/swagger";
 }

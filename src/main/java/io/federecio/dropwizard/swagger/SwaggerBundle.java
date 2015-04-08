@@ -17,23 +17,14 @@ package io.federecio.dropwizard.swagger;
 
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Environment;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Tristan Burch
  */
 public class SwaggerBundle<T extends Configuration> extends SwaggerDropwizard<T> {
-
-    public SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration) {
-        try {
-            return new SwaggerBundleConfiguration(SwaggerHostResolver.getSwaggerHost());
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't determine host");
-        }
-    }
 
     @Override
     public void run(T configuration, Environment environment) {
@@ -43,10 +34,23 @@ public class SwaggerBundle<T extends Configuration> extends SwaggerDropwizard<T>
                 onRun(configuration, environment);
             } else {
                 String host = StringUtils.isEmpty(bundleConfiguration.getHost()) ? SwaggerHostResolver.getSwaggerHost() : bundleConfiguration.getHost();
-                super.onRun(configuration, environment, host, bundleConfiguration.getPort());
+                onRun(configuration, environment, host, bundleConfiguration.getPort());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Couldn't determine host");
+            throw new IllegalStateException(e);
+        }
+    }
+
+    /**
+     * Override this method to provide your own {@link SwaggerBundleConfiguration} which can be constructed
+     * using Dropwizard's configuration instance passed as parameter
+     */
+    @SuppressWarnings("unused")
+    public SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration) {
+        try {
+            return new SwaggerBundleConfiguration(SwaggerHostResolver.getSwaggerHost());
+        } catch (IOException e) {
+            throw new IllegalStateException("Couldn't determine host");
         }
     }
 }

@@ -3,26 +3,26 @@
 <html>
 <head>
   <title>Swagger UI</title>
-  <link href='${swaggerStaticPath}/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='${swaggerStaticPath}/css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='${swaggerStaticPath}/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='${swaggerStaticPath}/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-  <link href='${swaggerStaticPath}/css/screen.css' media='print' rel='stylesheet' type='text/css'/>
-  <script type="text/javascript" src="${swaggerStaticPath}/lib/shred.bundle.js"></script>
-  <script src='${swaggerStaticPath}/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/handlebars-2.0.0.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/underscore-min.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/backbone-min.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/swagger-client.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/swagger-ui.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/highlight.7.3.pack.js' type='text/javascript'></script>
-  <script src='${swaggerStaticPath}/lib/marked.js' type='text/javascript'></script>
+  <link href='${swaggerAssetsPath}/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='${swaggerAssetsPath}/css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='${swaggerAssetsPath}/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='${swaggerAssetsPath}/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
+  <link href='${swaggerAssetsPath}/css/screen.css' media='print' rel='stylesheet' type='text/css'/>
+  <script type="text/javascript" src="${swaggerAssetsPath}/lib/shred.bundle.js"></script>
+  <script src='${swaggerAssetsPath}/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/jquery.slideto.min.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/jquery.wiggle.min.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/handlebars-2.0.0.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/underscore-min.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/backbone-min.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/swagger-client.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/swagger-ui.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/highlight.7.3.pack.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/marked.js' type='text/javascript'></script>
   
     <!-- enabling this will enable oauth2 implicit scope support -->
-  <script src='${swaggerStaticPath}/lib/swagger-oauth.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/swagger-oauth.js' type='text/javascript'></script>
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({

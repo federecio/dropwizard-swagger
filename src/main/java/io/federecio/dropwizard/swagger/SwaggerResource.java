@@ -20,7 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/swagger")
+@Path(Constants.SWAGGER_PATH)
 @Produces(MediaType.TEXT_HTML)
 public class SwaggerResource {
     private final String urlPattern;

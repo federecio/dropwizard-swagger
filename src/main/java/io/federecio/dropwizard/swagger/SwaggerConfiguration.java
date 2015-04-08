@@ -24,9 +24,9 @@ import io.dropwizard.jetty.HttpsConnectorFactory;
 import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
-import io.dropwizard.setup.Environment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,15 +36,9 @@ import java.util.List;
 public class SwaggerConfiguration {
 
     private final Configuration configuration;
-    private final Environment environment;
 
-    public SwaggerConfiguration(Configuration configuration, Environment environment) {
+    public SwaggerConfiguration(Configuration configuration) {
         this.configuration = configuration;
-        this.environment = environment;
-    }
-
-    public void setUpSwaggerFor(String host) {
-        setUpSwaggerFor(host, null);
     }
 
     public void setUpSwaggerFor(String host, Integer port) {
@@ -53,18 +47,6 @@ public class SwaggerConfiguration {
         config.setBasePath(swaggerBasePath);
         config.setApiPath(swaggerBasePath);
         ConfigFactory.setConfig(config);
-    }
-
-    private String stripUrlSlashes(String urlToStrip) {
-       if (urlToStrip.endsWith("/*")) {
-            urlToStrip = urlToStrip.substring(0, urlToStrip.length() - 1);
-        }
-
-        if (urlToStrip.length() > 1 && urlToStrip.endsWith("/")) {
-            urlToStrip = urlToStrip.substring(0, urlToStrip.length() - 1);
-        }
-
-        return urlToStrip;
     }
 
     public String getJerseyRootPath() {
@@ -114,6 +96,18 @@ public class SwaggerConfiguration {
         return urlPattern;
     }
 
+    private String stripUrlSlashes(String urlToStrip) {
+        if (urlToStrip.endsWith("/*")) {
+            urlToStrip = urlToStrip.substring(0, urlToStrip.length() - 1);
+        }
+
+        if (urlToStrip.length() > 1 && urlToStrip.endsWith("/")) {
+            urlToStrip = urlToStrip.substring(0, urlToStrip.length() - 1);
+        }
+
+        return urlToStrip;
+    }
+
     private String getSwaggerBasePath(String host, Integer port) {
         HttpConnectorFactory httpConnectorFactory = getHttpConnectionFactory();
 
@@ -151,14 +145,12 @@ public class SwaggerConfiguration {
 
     private List<ConnectorFactory> getConnectorFactories() {
         ServerFactory serverFactory = configuration.getServerFactory();
-        List<ConnectorFactory> connectorFactories = new ArrayList<>();
         if (serverFactory instanceof SimpleServerFactory) {
-            connectorFactories.add(((SimpleServerFactory) serverFactory).getConnector());
+            return Collections.singletonList(((SimpleServerFactory) serverFactory).getConnector());
         } else if (serverFactory instanceof DefaultServerFactory) {
-            connectorFactories.addAll(((DefaultServerFactory) serverFactory).getApplicationConnectors());
+            return new ArrayList<>(((DefaultServerFactory) serverFactory).getApplicationConnectors());
         } else {
             throw new IllegalStateException("Unknown ServerFactory implementation: " + serverFactory.getClass());
         }
-        return connectorFactories;
     }
 }
