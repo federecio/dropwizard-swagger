@@ -1,6 +1,6 @@
 server:
   type: simple
-  applicationContextPath: /api
+  applicationContextPath: /
   connector:
     type: http
-    port: 44447
+    port: 51378

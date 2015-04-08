@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.federecio.dropwizard.swagger.selenium;
+package io.federecio.dropwizard.swagger;
 
 import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
 import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import io.federecio.dropwizard.swagger.TestApplication;
 import org.junit.runner.RunWith;
 
-/**
- * @author Federico Recio
- */
 @RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-default.yaml")
-public class DefaultServerSeleniumTest extends SeleniumTest {
+@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-default-context-and-root-path.yaml")
+public class DefaultServerWithApplicationContextPathAndRootPathSetTest extends DropwizardTest {
 
-    @Override
-    protected String getSwaggerUrl() {
-        return getSwaggerUrl(44444, "/swagger");
+    public DefaultServerWithApplicationContextPathAndRootPathSetTest() {
+        super(42424, "/app/api");
     }
+
 }

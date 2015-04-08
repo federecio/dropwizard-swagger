@@ -23,10 +23,10 @@ import org.junit.runner.RunWith;
  * @author Federico Recio
  */
 @RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple-root-path.yaml")
+@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple.yaml")
 public class SimpleServerTest extends DropwizardTest {
 
     public SimpleServerTest() {
-        super(55668, "/");
+        super(55668, "/application");
     }
 }

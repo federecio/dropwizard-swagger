@@ -24,11 +24,11 @@ import org.junit.runner.RunWith;
  * @author Federico Recio
  */
 @RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple-with-path.yaml")
-public class SimpleServerWithPathSeleniumTest extends SeleniumTest {
+@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple-with-context-and-root-path.yaml")
+public class SimpleServerWithApplicationContextPathAndRootPathSeleniumTest extends SeleniumTest {
 
     @Override
     protected String getSwaggerUrl() {
-        return "http://localhost:55667/api/swagger";
+        return getSwaggerUrl(51578, "/api/swagger");
     }
 }

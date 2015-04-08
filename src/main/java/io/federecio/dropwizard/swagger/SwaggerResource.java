@@ -23,15 +23,14 @@ import javax.ws.rs.core.MediaType;
 @Path("/swagger")
 @Produces(MediaType.TEXT_HTML)
 public class SwaggerResource {
+    private final String urlPattern;
 
-    private final String applicationContextPath;
-
-    public SwaggerResource(String applicationContextPath) {
-        this.applicationContextPath = applicationContextPath;
+    public SwaggerResource(String urlPattern) {
+        this.urlPattern = urlPattern;
     }
 
     @GET
     public SwaggerView get() {
-        return new SwaggerView(applicationContextPath);
+        return new SwaggerView(urlPattern);
     }
 }

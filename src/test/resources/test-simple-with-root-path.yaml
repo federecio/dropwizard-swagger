@@ -1,0 +1,6 @@
+server:
+  type: simple
+  rootPath: /api/*
+  connector:
+    type: http
+    port: 51478

@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
  * @author Federico Recio
  */
 @RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplicationWithPathSetProgramatically.class, yamlFile = "/test-default-2.yaml")
+@DropwizardTestConfig(applicationClass = TestApplicationWithPathSetProgramatically.class, yamlFile = "/test-default-with-path-set-programatically.yaml")
 public class DefaultServerWithPathSetProgramaticallyTest extends DropwizardTest {
 
     public DefaultServerWithPathSetProgramaticallyTest() {
