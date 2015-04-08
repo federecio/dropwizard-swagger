@@ -13,11 +13,11 @@ http://www.apache.org/licenses/LICENSE-2.0
 Version matrix
 --------------
 
-dropwizard-swagger|Dropwizard|Swagger API 
-------------------|----------|-----------
-     < 0.5        |   0.7.x  |   1.3.2
-       0.5.x      |   0.7.x  |   1.3.12  
-       0.6        |   0.8.0  |   1.3.12  
+dropwizard-swagger|Dropwizard|Swagger API|Swagger UI 
+------------------|----------|-----------|----------
+     < 0.5        |   0.7.x  |   1.3.2   |    ?
+       0.5.x      |   0.7.x  |   1.3.12  | v2.1.4-M1
+       0.6        |   0.8.0  |   1.3.12  | v2.1.4-M1
        
 How to use it
 -------------
@@ -44,7 +44,7 @@ How to use it
 * As usual, add Swagger annotations to your resource classes and methods
 
 
-* Open a browser and hit `http://localhost:8080/swagger` (replace port 8080 accordingly)
+* Open a browser and hit `http://localhost:<your_port>/swagger`
 
 Sample Application
 ------------------
