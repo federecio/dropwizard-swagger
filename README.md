@@ -5,22 +5,29 @@ a Dropwizard bundle that serves Swagger UI static content and loads Swagger endp
 
 Current version has been tested with Dropwizard 0.8.0 and Swagger 1.3.12
 
-__NOTE__: the project's group id has been changed `io.federecio` and therefore all packages have been renamed accordingly
-
 License
 -------
 
 http://www.apache.org/licenses/LICENSE-2.0
 
+Version matrix
+--------------
+
+dropwizard-swagger|Dropwizard|Swagger API 
+------------------|----------|-----------
+     < 0.5        |   0.7.x  |   1.3.2
+       0.5.x      |   0.7.x  |   1.3.12  
+       0.6        |   0.8.0  |   1.3.12  
+       
 How to use it
 -------------
 
-* Add the Maven dependency (__now available in Maven Central!__)
+* Add the Maven dependency (available in Maven Central)
 
         <dependency>
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.5.3</version>
+            <version>0.6</version>
         </dependency>
 
 
