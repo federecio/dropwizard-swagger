@@ -26,11 +26,11 @@ import io.dropwizard.setup.Environment;
 public class TestApplicationWithPathSetProgramatically extends Application<TestConfiguration> {
 
     public static final String BASE_PATH = "/api";
-    private final SwaggerDropwizard<TestConfiguration> swaggerDropwizard = new SwaggerDropwizard<>();
+    private final SwaggerBundle<TestConfiguration> swaggerBundle = new SwaggerBundle<>();
 
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
-        swaggerDropwizard.onInitialize(bootstrap);
+        swaggerBundle.initialize(bootstrap);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class TestApplicationWithPathSetProgramatically extends Application<TestC
         ((DefaultServerFactory) configuration.getServerFactory()).setJerseyRootPath("/api/*");
         environment.jersey().setUrlPattern(BASE_PATH + "/*");
         environment.jersey().register(new TestResource());
-        swaggerDropwizard.onRun(configuration, environment, "localhost");
+        swaggerBundle.run(configuration, environment);
     }
 }
