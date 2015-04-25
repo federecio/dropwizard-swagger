@@ -15,19 +15,10 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.wordnik.swagger.config.ConfigFactory;
-import com.wordnik.swagger.config.SwaggerConfig;
 import io.dropwizard.Configuration;
-import io.dropwizard.jetty.ConnectorFactory;
-import io.dropwizard.jetty.HttpConnectorFactory;
-import io.dropwizard.jetty.HttpsConnectorFactory;
 import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Federico Recio
@@ -39,14 +30,6 @@ public class SwaggerConfiguration {
 
     public SwaggerConfiguration(Configuration configuration) {
         this.configuration = configuration;
-    }
-
-    public void setUpSwaggerFor(String host, Integer port) {
-        SwaggerConfig config = ConfigFactory.config();
-        String swaggerBasePath = getSwaggerBasePath(host, port);
-        config.setBasePath(swaggerBasePath);
-        config.setApiPath(swaggerBasePath);
-        ConfigFactory.setConfig(config);
     }
 
     public String getJerseyRootPath() {
@@ -64,7 +47,7 @@ public class SwaggerConfiguration {
     }
 
     public String getApplicationContextPath() {
-         String applicationContextPath;
+        String applicationContextPath;
 
         ServerFactory serverFactory = configuration.getServerFactory();
 
@@ -84,7 +67,7 @@ public class SwaggerConfiguration {
         String urlPattern;
 
         if (rootPath.equals("/") && applicationContextPath.equals("/")) {
-            urlPattern =  "/";
+            urlPattern = "/";
         } else if (rootPath.equals("/") && !applicationContextPath.equals("/")) {
             urlPattern = applicationContextPath;
         } else if (!rootPath.equals("/") && applicationContextPath.equals("/")) {
@@ -106,51 +89,5 @@ public class SwaggerConfiguration {
         }
 
         return urlToStrip;
-    }
-
-    private String getSwaggerBasePath(String host, Integer port) {
-        HttpConnectorFactory httpConnectorFactory = getHttpConnectionFactory();
-
-        if (httpConnectorFactory == null) {
-            throw new IllegalStateException("Could not get HttpConnectorFactory");
-        }
-
-        String protocol = httpConnectorFactory instanceof HttpsConnectorFactory ? "https" : "http";
-        String urlPattern = getUrlPattern();
-        if (port == null) {
-            port = httpConnectorFactory.getPort();
-        }
-        if (!"/".equals(urlPattern)) {
-            return String.format("%s://%s:%s%s", protocol, host, port, urlPattern);
-        } else {
-            return String.format("%s://%s:%s", protocol, host, port);
-        }
-    }
-
-    private HttpConnectorFactory getHttpConnectionFactory() {
-        List<ConnectorFactory> connectorFactories = getConnectorFactories();
-        for (ConnectorFactory connectorFactory : connectorFactories) {
-            if (connectorFactory instanceof HttpsConnectorFactory) {
-                return (HttpConnectorFactory) connectorFactory;  // if we find https skip the others
-            }
-        }
-        for (ConnectorFactory connectorFactory : connectorFactories) {
-            if (connectorFactory instanceof HttpConnectorFactory) {
-                return (HttpConnectorFactory) connectorFactory; // if not https pick http
-            }
-        }
-
-        throw new IllegalStateException("Unable to find an HttpServerFactory");
-    }
-
-    private List<ConnectorFactory> getConnectorFactories() {
-        ServerFactory serverFactory = configuration.getServerFactory();
-        if (serverFactory instanceof SimpleServerFactory) {
-            return Collections.singletonList(((SimpleServerFactory) serverFactory).getConnector());
-        } else if (serverFactory instanceof DefaultServerFactory) {
-            return new ArrayList<>(((DefaultServerFactory) serverFactory).getApplicationConnectors());
-        } else {
-            throw new IllegalStateException("Unknown ServerFactory implementation: " + serverFactory.getClass());
-        }
     }
 }

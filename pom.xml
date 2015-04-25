@@ -5,7 +5,7 @@
 
     <groupId>io.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.6.1-SNAPSHOT</version>
+    <version>0.7.0-SNAPSHOT</version>
 
     <name>Dropwizard Swagger support</name>
     <description>A simple way to document your REST APIs in DropWizard using Swagger</description>
@@ -52,7 +52,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.7</jdk.version>
-        <swagger.version>1.3.12</swagger.version>
+        <swagger.version>1.5.1-M2</swagger.version>
     </properties>
 
     <dependencies>
@@ -78,81 +78,65 @@
         </dependency>
         <dependency>
             <groupId>com.wordnik</groupId>
-            <artifactId>swagger-jaxrs_2.10</artifactId>
+            <artifactId>swagger-jersey2-jaxrs</artifactId>
             <version>${swagger.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>com.thoughtworks.paranamer</groupId>
-                    <artifactId>paranamer</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.module</groupId>
-                    <artifactId>jackson-module-scala</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
+                    <groupId>com.fasterxml.jackson.dataformat</groupId>
+                    <artifactId>jackson-dataformat-yaml</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.jaxrs</groupId>
                     <artifactId>jackson-jaxrs-json-provider</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.module</groupId>
+                    <artifactId>jackson-module-jaxb-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.datatype</groupId>
+                    <artifactId>jackson-datatype-joda</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-core</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>commons-lang</groupId>
-                    <artifactId>commons-lang</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.glassfish.jersey.media</groupId>
+                    <artifactId>jersey-media-multipart</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>joda-time</groupId>
-                    <artifactId>joda-time</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.scala-lang</groupId>
-                    <artifactId>scala-library</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.scala-lang</groupId>
-                    <artifactId>scala-reflect</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>jsr305</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.javassist</groupId>
-                    <artifactId>javassist</artifactId>
+                    <groupId>org.glassfish.jersey.containers</groupId>
+                    <artifactId>jersey-container-servlet-core</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>2.10.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-reflect</artifactId>
-            <version>2.10.4</version>
-        </dependency>
+
         <!-- xml-apis should be on version 1.4.01 for selenium to work -->
         <dependency>
             <groupId>xml-apis</groupId>

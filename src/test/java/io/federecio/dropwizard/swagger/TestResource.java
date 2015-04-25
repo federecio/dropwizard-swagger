@@ -28,9 +28,10 @@ import javax.ws.rs.core.Response;
 @Path("/test.json")
 @Api("/test")
 public class TestResource {
+    public static final String OPERATION_DESCRIPTION = "This is a dummy endpoint for test";
 
     @GET
-    @ApiOperation("This is a dummy endpoint for test")
+    @ApiOperation(OPERATION_DESCRIPTION)
     public Response dummyEndpoint() {
         return Response.ok().build();
     }

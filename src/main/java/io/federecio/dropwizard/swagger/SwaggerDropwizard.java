@@ -15,14 +15,10 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.ImmutableMap;
-import com.wordnik.swagger.config.ScannerFactory;
-import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
-import com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider;
-import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
-import com.wordnik.swagger.jaxrs.listing.ResourceListingProvider;
-import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
-import com.wordnik.swagger.reader.ClassReaders;
+import com.wordnik.swagger.jaxrs.config.BeanConfig;
+import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.assets.AssetsBundle;
@@ -88,12 +84,16 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
 
         environment.jersey().register(new SwaggerResource(urlPattern));
 
-        swaggerConfiguration.setUpSwaggerFor(host, port);
+        environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-        environment.jersey().register(new ApiListingResourceJSON());
-        environment.jersey().register(new ApiDeclarationProvider());
-        environment.jersey().register(new ResourceListingProvider());
-        ScannerFactory.setScanner(new DefaultJaxrsScanner());
-        ClassReaders.setReader(new DefaultJaxrsApiReader());
+        BeanConfig config = new BeanConfig();
+        config.setTitle("Swagger sample app");
+        config.setVersion("1.0.0");
+
+        config.setBasePath(urlPattern);
+        config.setResourcePackage("io.federecio.dropwizard.swagger");
+        config.setScan(true);
+
+        environment.jersey().register(new ApiListingResource());
     }
 }
