@@ -45,10 +45,15 @@ public class SwaggerBundle<T extends Configuration> implements ConfiguredBundle<
 
     @Override
     public void run(T configuration, Environment environment) throws Exception {
+        String providedUriPrefix = getUriPrefix();
+        if (providedUriPrefix == null) {
+            providedUriPrefix = getUriPrefix(configuration);
+        }
+
         SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration);
 
-        final String rootPath = swaggerConfiguration.getJerseyRootPath();
-        final String urlPattern = swaggerConfiguration.getUrlPattern();
+        final String rootPath = providedUriPrefix != null ? providedUriPrefix : swaggerConfiguration.getJerseyRootPath();
+        final String urlPattern = providedUriPrefix != null ? providedUriPrefix : swaggerConfiguration.getUrlPattern();
 
         String uriPathPrefix = rootPath.equals("/") ? "" : rootPath;
         new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, uriPathPrefix + Constants.SWAGGER_URI_PATH, null, Constants.SWAGGER_ASSETS_NAME).run(environment);
@@ -66,5 +71,15 @@ public class SwaggerBundle<T extends Configuration> implements ConfiguredBundle<
         config.setScan(true);
 
         environment.jersey().register(new ApiListingResource());
+    }
+
+    @SuppressWarnings("unused")
+    protected String getUriPrefix() {
+        return null;
+    }
+
+    @SuppressWarnings("unused")
+    protected String getUriPrefix(T configuration) {
+        return null;
     }
 }

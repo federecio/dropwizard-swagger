@@ -46,20 +46,6 @@ public class SwaggerConfiguration {
         return stripUrlSlashes(rootPath);
     }
 
-    public String getApplicationContextPath() {
-        String applicationContextPath;
-
-        ServerFactory serverFactory = configuration.getServerFactory();
-
-        if (serverFactory instanceof SimpleServerFactory) {
-            applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
-        } else {
-            applicationContextPath = ((DefaultServerFactory) serverFactory).getApplicationContextPath();
-        }
-
-        return stripUrlSlashes(applicationContextPath);
-    }
-
     public String getUrlPattern() {
         final String applicationContextPath = getApplicationContextPath();
         final String rootPath = getJerseyRootPath();
@@ -77,6 +63,20 @@ public class SwaggerConfiguration {
         }
 
         return urlPattern;
+    }
+
+    private String getApplicationContextPath() {
+        String applicationContextPath;
+
+        ServerFactory serverFactory = configuration.getServerFactory();
+
+        if (serverFactory instanceof SimpleServerFactory) {
+            applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
+        } else {
+            applicationContextPath = ((DefaultServerFactory) serverFactory).getApplicationContextPath();
+        }
+
+        return stripUrlSlashes(applicationContextPath);
     }
 
     private String stripUrlSlashes(String urlToStrip) {
