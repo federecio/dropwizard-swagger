@@ -19,12 +19,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * For the meaning of all these properties please refer to Swagger documentation or {@link com.wordnik.swagger.jaxrs.config.BeanConfig}
+ *
  * @author Tristan Burch
  * @author Federico Recio
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SwaggerBundleConfiguration {
 
+    /**
+     * This is the only property that is required for Swagger to work correctly.
+     * <p/>
+     * It is a comma separated list of the all the packages that contain the {@link com.wordnik.swagger.annotations.Api}
+     * annoted resources
+     */
     @JsonProperty
     private String resourcePackage;
 
