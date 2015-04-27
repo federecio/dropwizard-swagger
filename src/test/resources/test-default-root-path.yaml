@@ -7,3 +7,5 @@ server:
   adminConnectors:
     - type: http
       port: 41415
+swagger:
+  resourcePackage: io.federecio.dropwizard.swagger

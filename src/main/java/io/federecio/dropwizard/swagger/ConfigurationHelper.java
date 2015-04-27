@@ -21,18 +21,28 @@ import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
 
 /**
+ * Wrapper around Dropwizard's configuration and the bundle's config that simplifies getting some
+ * information from them.
+ *
  * @author Federico Recio
  * @author Flemming Frandsen
  */
-public class SwaggerConfiguration {
+public class ConfigurationHelper {
 
     private final Configuration configuration;
+    private final SwaggerBundleConfiguration swaggerBundleConfiguration;
 
-    public SwaggerConfiguration(Configuration configuration) {
+    public ConfigurationHelper(Configuration configuration, SwaggerBundleConfiguration swaggerBundleConfiguration) {
         this.configuration = configuration;
+        this.swaggerBundleConfiguration = swaggerBundleConfiguration;
     }
 
     public String getJerseyRootPath() {
+        // if the user explictly defined a path to prefix requests use it instead of derive it
+        if (swaggerBundleConfiguration.getUriPrefix() != null) {
+            return swaggerBundleConfiguration.getUriPrefix();
+        }
+
         String rootPath;
 
         ServerFactory serverFactory = configuration.getServerFactory();
@@ -47,6 +57,11 @@ public class SwaggerConfiguration {
     }
 
     public String getUrlPattern() {
+        // if the user explictly defined a path to prefix requests use it instead of derive it
+        if (swaggerBundleConfiguration.getUriPrefix() != null) {
+            return swaggerBundleConfiguration.getUriPrefix();
+        }
+
         final String applicationContextPath = getApplicationContextPath();
         final String rootPath = getJerseyRootPath();
 
@@ -63,6 +78,12 @@ public class SwaggerConfiguration {
         }
 
         return urlPattern;
+    }
+
+    public String getSwaggerUriPath() {
+        final String jerseyRootPath = getJerseyRootPath();
+        String uriPathPrefix = jerseyRootPath.equals("/") ? "" : jerseyRootPath;
+        return uriPathPrefix + Constants.SWAGGER_URI_PATH;
     }
 
     private String getApplicationContextPath() {

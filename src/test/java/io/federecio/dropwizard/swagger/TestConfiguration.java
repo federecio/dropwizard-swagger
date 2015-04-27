@@ -15,6 +15,7 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 
 /**
@@ -22,7 +23,6 @@ import io.dropwizard.Configuration;
  */
 public class TestConfiguration extends Configuration {
 
-    public String name;
-
-    public SwaggerBundleConfiguration swaggerBundleConfiguration = new SwaggerBundleConfiguration("localhost");
+    @JsonProperty("swagger")
+    public SwaggerBundleConfiguration swaggerBundleConfiguration;
 }

@@ -5,3 +5,5 @@ server:
   connector:
     type: http
     port: 51578
+swagger:
+  resourcePackage: io.federecio.dropwizard.swagger

@@ -31,8 +31,16 @@ public class TestApplicationWithPathSetProgramatically extends Application<TestC
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
             @Override
-            protected String getUriPrefix(TestConfiguration configuration) {
-                return BASE_PATH;
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(TestConfiguration configuration) {
+                SwaggerBundleConfiguration swaggerBundleConfiguration = new SwaggerBundleConfiguration();
+                swaggerBundleConfiguration.setResourcePackage("io.federecio.dropwizard.swagger");
+
+                // since this Application sets the root path in the run() method, we need to
+                // tell the bundle what that path is because by the time the bundle initializes
+                // it will not have the necessary info to derive the path that is later going to
+                // be set below in the run() method.
+                swaggerBundleConfiguration.setUriPrefix(BASE_PATH);
+                return swaggerBundleConfiguration;
             }
         });
     }

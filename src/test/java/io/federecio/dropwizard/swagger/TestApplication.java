@@ -26,7 +26,12 @@ public class TestApplication extends Application<TestConfiguration> {
 
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
-        bootstrap.addBundle(new SwaggerBundle<TestConfiguration>());
+        bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(TestConfiguration configuration) {
+                return configuration.swaggerBundleConfiguration;
+            }
+        });
     }
 
     @Override

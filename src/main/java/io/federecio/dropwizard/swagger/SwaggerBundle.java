@@ -27,11 +27,14 @@ import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 
 /**
+ * A {@link io.dropwizard.ConfiguredBundle} that provides hassle-free configuration of Swagger and Swagger UI
+ * on top of Dropwizard.
+ *
  * @author Federico Recio
  * @author Flemming Frandsen
  * @author Tristan Burch
  */
-public class SwaggerBundle<T extends Configuration> implements ConfiguredBundle<T> {
+public abstract class SwaggerBundle<T extends Configuration> implements ConfiguredBundle<T> {
 
     @Override
     public void initialize(Bootstrap<?> bootstrap) {
@@ -45,41 +48,64 @@ public class SwaggerBundle<T extends Configuration> implements ConfiguredBundle<
 
     @Override
     public void run(T configuration, Environment environment) throws Exception {
-        String providedUriPrefix = getUriPrefix();
-        if (providedUriPrefix == null) {
-            providedUriPrefix = getUriPrefix(configuration);
+        SwaggerBundleConfiguration swaggerBundleConfiguration = getSwaggerBundleConfiguration(configuration);
+        if (swaggerBundleConfiguration == null) {
+            throw new IllegalStateException("You need to provide an instance of SwaggerBundleConfiguration");
         }
 
-        SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration);
+        ConfigurationHelper configurationHelper = new ConfigurationHelper(configuration, swaggerBundleConfiguration);
+        new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, configurationHelper.getSwaggerUriPath(), null, Constants.SWAGGER_ASSETS_NAME).run(environment);
 
-        final String rootPath = providedUriPrefix != null ? providedUriPrefix : swaggerConfiguration.getJerseyRootPath();
-        final String urlPattern = providedUriPrefix != null ? providedUriPrefix : swaggerConfiguration.getUrlPattern();
-
-        String uriPathPrefix = rootPath.equals("/") ? "" : rootPath;
-        new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, uriPathPrefix + Constants.SWAGGER_URI_PATH, null, Constants.SWAGGER_ASSETS_NAME).run(environment);
-
-        environment.jersey().register(new SwaggerResource(urlPattern));
-
+        environment.jersey().register(new SwaggerResource(configurationHelper.getUrlPattern()));
         environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-        BeanConfig config = new BeanConfig();
-        config.setTitle("Swagger sample app");
-        config.setVersion("1.0.0");
-
-        config.setBasePath(urlPattern);
-        config.setResourcePackage("io.federecio.dropwizard.swagger");
-        config.setScan(true);
-
+        setUpSwagger(swaggerBundleConfiguration, configurationHelper.getUrlPattern());
         environment.jersey().register(new ApiListingResource());
     }
 
     @SuppressWarnings("unused")
-    protected String getUriPrefix() {
-        return null;
-    }
+    protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration);
 
-    @SuppressWarnings("unused")
-    protected String getUriPrefix(T configuration) {
-        return null;
+    private void setUpSwagger(SwaggerBundleConfiguration swaggerBundleConfiguration, String urlPattern) {
+        BeanConfig config = new BeanConfig();
+
+        if (swaggerBundleConfiguration.getTitle() != null) {
+            config.setTitle(swaggerBundleConfiguration.getTitle());
+        }
+
+        if (swaggerBundleConfiguration.getVersion() != null) {
+            config.setVersion(swaggerBundleConfiguration.getVersion());
+        }
+
+        if (swaggerBundleConfiguration.getDescription() != null) {
+            config.setDescription(swaggerBundleConfiguration.getDescription());
+        }
+
+        if (swaggerBundleConfiguration.getContact() != null) {
+            config.setContact(swaggerBundleConfiguration.getContact());
+        }
+
+        if (swaggerBundleConfiguration.getLicense() != null) {
+            config.setLicense(swaggerBundleConfiguration.getLicense());
+        }
+
+        if (swaggerBundleConfiguration.getLicenseUrl() != null) {
+            config.setLicenseUrl(swaggerBundleConfiguration.getLicenseUrl());
+        }
+
+        if (swaggerBundleConfiguration.getTermsOfServiceUrl() != null) {
+            config.setTermsOfServiceUrl(swaggerBundleConfiguration.getTermsOfServiceUrl());
+        }
+
+        config.setBasePath(urlPattern);
+
+        if (swaggerBundleConfiguration.getResourcePackage() != null) {
+            config.setResourcePackage(swaggerBundleConfiguration.getResourcePackage());
+        } else {
+            throw new IllegalStateException("Resource package needs to be specified for Swagger to correctly detect annotated resources");
+        }
+
+
+        config.setScan(true);
     }
 }

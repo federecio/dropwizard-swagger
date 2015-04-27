@@ -20,74 +20,130 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Tristan Burch
+ * @author Federico Recio
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SwaggerBundleConfiguration {
 
     @JsonProperty
-    private String host;
+    private String resourcePackage;
 
     @JsonProperty
-    private Integer port = null;
+    private String title;
 
-    public SwaggerBundleConfiguration(String host, Integer port) {
-        this.host = host;
-        this.port = port;
+    @JsonProperty
+    private String version;
+
+    @JsonProperty
+    private String description;
+
+    @JsonProperty
+    private String termsOfServiceUrl;
+
+    @JsonProperty
+    private String contact;
+
+    @JsonProperty
+    private String license;
+
+    @JsonProperty
+    private String licenseUrl;
+
+    /**
+     * For most of the scenarios this property is not needed.
+     * <p/>
+     * This is not a property for Swagger but for bundle to set up Swagger UI correctly.
+     * It only needs to be used of the root path or the context path is set programatically
+     * and therefore cannot be derived correctly. The problem arises in that if you set the
+     * root path or context path in the run() method in your Application subclass the bundle
+     * has already been initialized by that time and so does not know you set the path programatically.
+     */
+    @JsonProperty
+    private String uriPrefix;
+
+    public String getResourcePackage() {
+        return resourcePackage;
     }
 
-    public SwaggerBundleConfiguration(String host) {
-        this.host = host;
+    public void setResourcePackage(String resourcePackage) {
+        this.resourcePackage = resourcePackage;
     }
 
-    public SwaggerBundleConfiguration(Integer port) {
-        this.port = port;
+    public String getTitle() {
+        return title;
     }
 
-    public SwaggerBundleConfiguration() {
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getHost() {
-        return host;
+    public String getVersion() {
+        return version;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public void setVersion(String version) {
+        this.version = version;
     }
 
-    public Integer getPort() {
-        return port;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPort(Integer port) {
-        this.port = port;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
+    public String getTermsOfServiceUrl() {
+        return termsOfServiceUrl;
+    }
+
+    public void setTermsOfServiceUrl(String termsOfServiceUrl) {
+        this.termsOfServiceUrl = termsOfServiceUrl;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public String getLicenseUrl() {
+        return licenseUrl;
+    }
+
+    public void setLicenseUrl(String licenseUrl) {
+        this.licenseUrl = licenseUrl;
+    }
+
+    public String getUriPrefix() {
+        return uriPrefix;
+    }
+
+    public void setUriPrefix(String uriPrefix) {
+        this.uriPrefix = uriPrefix;
+    }
 
     @Override
     public String toString() {
         return "SwaggerBundleConfiguration{" +
-                "host='" + host + '\'' +
-                ", port=" + port +
+                "resourcePackage='" + resourcePackage + '\'' +
+                ", title='" + title + '\'' +
+                ", version='" + version + '\'' +
+                ", description='" + description + '\'' +
+                ", termsOfServiceUrl='" + termsOfServiceUrl + '\'' +
+                ", contact='" + contact + '\'' +
+                ", license='" + license + '\'' +
+                ", licenseUrl='" + licenseUrl + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SwaggerBundleConfiguration that = (SwaggerBundleConfiguration) o;
-
-        if (host != null ? !host.equals(that.host) : that.host != null) return false;
-        if (port != null ? !port.equals(that.port) : that.port != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = host != null ? host.hashCode() : 0;
-        result = 31 * result + (port != null ? port.hashCode() : 0);
-        return result;
     }
 }
