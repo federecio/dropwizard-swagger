@@ -57,7 +57,10 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
         ConfigurationHelper configurationHelper = new ConfigurationHelper(configuration, swaggerBundleConfiguration);
         new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, configurationHelper.getSwaggerUriPath(), null, Constants.SWAGGER_ASSETS_NAME).run(environment);
 
-        environment.jersey().register(new SwaggerResource(configurationHelper.getUrlPattern()));
+        environment.jersey().register(
+            new SwaggerResource(
+                configurationHelper.getUrlPattern(),
+                swaggerBundleConfiguration.getUiConfiguration()));
         environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         BeanConfig beanConfig = setUpSwagger(swaggerBundleConfiguration,

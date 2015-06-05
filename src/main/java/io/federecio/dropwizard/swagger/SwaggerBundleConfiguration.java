@@ -69,6 +69,9 @@ public class SwaggerBundleConfiguration {
     @JsonProperty
     private String uriPrefix;
 
+    @JsonProperty("ui")
+    private SwaggerUIConfiguration uiConfiguration = new SwaggerUIConfiguration();
+
     public String getResourcePackage() {
         return resourcePackage;
     }
@@ -139,6 +142,16 @@ public class SwaggerBundleConfiguration {
 
     public void setUriPrefix(String uriPrefix) {
         this.uriPrefix = uriPrefix;
+    }
+
+    @JsonProperty("ui")
+    public SwaggerUIConfiguration getUiConfiguration() {
+        return uiConfiguration;
+    }
+
+    @JsonProperty("ui")
+    public void setUiConfiguration(SwaggerUIConfiguration ui) {
+        this.uiConfiguration = ui;
     }
 
     @Override
