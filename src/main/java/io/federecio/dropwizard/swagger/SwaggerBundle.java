@@ -62,10 +62,9 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
         BeanConfig beanConfig = setUpSwagger(swaggerBundleConfiguration,
                                              configurationHelper.getUrlPattern());
-        setUpSwagger(beanConfig.getSwagger());
 
-        environment.jersey().register(new ApiListingResource());
         environment.getApplicationContext().setAttribute("swagger", beanConfig.getSwagger());
+        environment.jersey().register(new ApiListingResource());
     }
 
     @SuppressWarnings("unused")
@@ -116,6 +115,7 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
 
         config.setScan(true);
+        setUpSwagger(config.getSwagger());
 
         return config;
     }
