@@ -1,0 +1,9 @@
+server:
+  type: simple
+  applicationContextPath: /
+  rootPath: /api/*
+  connector:
+    type: http
+    port: 51481
+swagger:
+  resourcePackage: ""

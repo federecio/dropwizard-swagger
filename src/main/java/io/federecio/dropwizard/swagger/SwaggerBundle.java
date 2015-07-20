@@ -59,16 +59,15 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
         environment.jersey().register(new SwaggerResource(configurationHelper.getUrlPattern()));
         environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-        setUpSwagger(swaggerBundleConfiguration, configurationHelper.getUrlPattern());
+        setUpSwagger(swaggerBundleConfiguration, configurationHelper.getUrlPattern(), environment);
         environment.jersey().register(new ApiListingResource());
     }
 
     @SuppressWarnings("unused")
     protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration);
 
-    private void setUpSwagger(SwaggerBundleConfiguration swaggerBundleConfiguration, String urlPattern) {
-        BeanConfig config = new BeanConfig();
-
+    private void setUpSwagger(SwaggerBundleConfiguration swaggerBundleConfiguration, String urlPattern, Environment environment) {
+        BeanConfig config = new EnvironmentScanner(environment);
         if (swaggerBundleConfiguration.getTitle() != null) {
             config.setTitle(swaggerBundleConfiguration.getTitle());
         }
@@ -99,12 +98,11 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
         config.setBasePath(urlPattern);
 
-        if (swaggerBundleConfiguration.getResourcePackage() != null) {
+        if (swaggerBundleConfiguration.getResourcePackage() != null
+                && !swaggerBundleConfiguration.getResourcePackage().isEmpty()) {
             config.setResourcePackage(swaggerBundleConfiguration.getResourcePackage());
-        } else {
-            throw new IllegalStateException("Resource package needs to be specified for Swagger to correctly detect annotated resources");
         }
-
+        environment.getApplicationContext().setAttribute("swagger", config.getSwagger());
 
         config.setScan(true);
     }
