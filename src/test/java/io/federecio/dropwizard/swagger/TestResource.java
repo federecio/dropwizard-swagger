@@ -15,11 +15,14 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+import com.google.common.base.Optional;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 /**
@@ -32,7 +35,7 @@ public class TestResource {
 
     @GET
     @ApiOperation(OPERATION_DESCRIPTION)
-    public Response dummyEndpoint() {
+    public Response dummyEndpoint(@QueryParam("dummy") final Optional<String> dummy) {
         return Response.ok().build();
     }
 }
