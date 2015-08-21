@@ -52,7 +52,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.7</jdk.version>
-        <swagger.version>1.5.1-M2</swagger.version>
+        <swagger.version>1.5.3</swagger.version>
     </properties>
 
     <dependencies>
@@ -77,7 +77,7 @@
             <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.wordnik</groupId>
+            <groupId>io.swagger</groupId>
             <artifactId>swagger-jersey2-jaxrs</artifactId>
             <version>${swagger.version}</version>
             <exclusions>
