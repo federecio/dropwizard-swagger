@@ -53,7 +53,6 @@ public abstract class DropwizardTest {
     public static void crap() throws Exception {
         Field initialized = ApiListingResource.class.getDeclaredField("initialized");
         initialized.setAccessible(true);
-        initialized.set(null, false);
     }
 
     @Test
