@@ -47,12 +47,12 @@
     </scm>
 
     <properties>
-        <dropwizard.version>0.8.0</dropwizard.version>
+        <dropwizard.version>0.8.2</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.7</jdk.version>
-        <swagger.version>1.5.1-M2</swagger.version>
+        <swagger.version>1.5.3</swagger.version>
     </properties>
 
     <dependencies>
@@ -77,7 +77,7 @@
             <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.wordnik</groupId>
+            <groupId>io.swagger</groupId>
             <artifactId>swagger-jersey2-jaxrs</artifactId>
             <version>${swagger.version}</version>
             <exclusions>
@@ -176,9 +176,14 @@
         <dependency>
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-junit</artifactId>
-            <version>0.6</version>
+            <version>0.7</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+    		<groupId>org.glassfish.jersey.media</groupId>
+    		<artifactId>jersey-media-multipart</artifactId>
+    		<version>2.19</version>
+		</dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium.client-drivers</groupId>
             <artifactId>selenium-java-client-driver</artifactId>
