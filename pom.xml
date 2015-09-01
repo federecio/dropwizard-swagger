@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.federecio</groupId>
+    <groupId>com.smoketurner</groupId>
     <artifactId>dropwizard-swagger</artifactId>
     <version>0.7.1-SNAPSHOT</version>
 
     <name>Dropwizard Swagger support</name>
     <description>A simple way to document your REST APIs in DropWizard using Swagger</description>
-    <url>https://github.com/federecio/dropwizard-swagger/</url>
+    <url>https://github.com/smoketurner/dropwizard-swagger/</url>
     <inceptionYear>2014</inceptionYear>
 
     <licenses>
