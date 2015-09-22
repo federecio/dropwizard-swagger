@@ -18,12 +18,14 @@ package io.federecio.dropwizard.swagger;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.jayway.restassured.RestAssured;
-import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
+
 import org.eclipse.jetty.http.HttpStatus;
 import org.hamcrest.core.StringContains;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import io.swagger.jaxrs.listing.ApiListingResource;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -51,7 +53,6 @@ public abstract class DropwizardTest {
     public static void crap() throws Exception {
         Field initialized = ApiListingResource.class.getDeclaredField("initialized");
         initialized.setAccessible(true);
-        initialized.set(null, false);
     }
 
     @Test
