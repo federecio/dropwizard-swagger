@@ -63,6 +63,12 @@
         addApiKeyAuthorization();
       });
 
+      $('#input_headerSelect').change(function() {
+          var toShow = $( this ).val();
+          $('#header_'+toShow).show();
+          var toHide = (Number(toShow)+1)%2;
+          $('#header_'+toHide).hide();
+      });
       // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
       /*
         var apiKey = "myApiKeyXXXX123456789";
@@ -81,7 +87,14 @@
     <a id="logo" href="http://swagger.io">swagger</a>
     <form id='api_selector'>
       <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
-      <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+      <div class='input'>
+          <select id="input_headerSelect">
+              <option value="0">api_key</option>
+              <option value="1">Auth Header</option>
+          </select>
+      </div>
+      <div class='input' id="header_0"><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+      <div class='input' id="header_1" style="display: none;"><input placeholder="Basic ..." id="input_authHeader" name="authHeader" type="text"/></div>
       <div class='input'><a id="explore" href="#">Explore</a></div>
     </form>
   </div>
