@@ -44,7 +44,7 @@
           });
         },
         onFailure: function(data) {
-          log("Unable to Load SwaggerUI");
+
         },
         docExpansion: "none",
         sorter : "alpha"
@@ -52,15 +52,24 @@
 
       function addApiKeyAuthorization() {
         var key = $('#input_apiKey')[0].value;
-        log("key: " + key);
         if(key && key.trim() != "") {
-            log("added key " + key);
-            window.authorizations.add("api_key", new ApiKeyAuthorization("api_key", key, "query"));
+            swaggerUi.api.clientAuthorizations.add("api_key", new SwaggerClient.ApiKeyAuthorization("api_key", key, "query"));
         }
       }
 
+        function addAuthorizationHeader() {
+            var key = $('#input_authHeader')[0].value;
+            if(key && key.trim() != "") {
+                swaggerUi.api.clientAuthorizations.add("Custom Authorization", new SwaggerClient.ApiKeyAuthorization("Authorization", key, "header"));
+            }
+        }
+
       $('#input_apiKey').change(function() {
         addApiKeyAuthorization();
+      });
+
+      $('#input_authHeader').change(function() {
+          addAuthorizationHeader();
       });
 
       $('#input_headerSelect').change(function() {
