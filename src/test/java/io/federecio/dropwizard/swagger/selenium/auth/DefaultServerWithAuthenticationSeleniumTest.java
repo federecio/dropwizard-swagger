@@ -21,6 +21,8 @@ import io.federecio.dropwizard.swagger.Constants;
 import io.federecio.dropwizard.swagger.selenium.SeleniumTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
 
@@ -44,5 +46,21 @@ public class DefaultServerWithAuthenticationSeleniumTest extends SeleniumTest {
         clickOnTryOut("auth_protectedDummyEndpoint_content");
         assertResponseCodeIs("auth_protectedDummyEndpoint_content", 401);
     }
+
+    @Test
+    public void testProtectedResourceWithAuthorizationShouldReturn200() throws Exception {
+        driver.get(getSwaggerUrl() + "#!/auth/protectedDummyEndpoint");
+        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
+
+        String token = "secret";
+        
+        new Select(driver.findElement(By.id("input_headerSelect"))).selectByVisibleText("Auth Header");
+        driver.findElement(By.id("input_authHeader")).sendKeys("Bearer " + token);
+
+        clickOnTryOut("auth_protectedDummyEndpoint_content");
+        assertResponseCodeIs("auth_protectedDummyEndpoint_content", 200);
+        assertResponseBodyIs("auth_protectedDummyEndpoint_content", token);
+    }
+
 
 }

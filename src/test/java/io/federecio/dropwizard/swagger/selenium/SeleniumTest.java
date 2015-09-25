@@ -79,6 +79,11 @@ public abstract class SeleniumTest {
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, String.valueOf(code)));
     }
 
+    protected void assertResponseBodyIs(String contentId, String body) {
+        By xpath = By.xpath(String.format("//div[@id='%s']/div[@class='response']/div[@class='block response_body undefined']/pre/code", contentId));
+        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, body));
+    }
+
     protected void clickOnTryOut(String contentId) {
         By xpath = By.xpath(String.format("//div[@id='%s']/form/div[@class='sandbox_header']/input[@value='Try it out!']", contentId));
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.presenceOfElementLocated(xpath));
