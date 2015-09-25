@@ -71,12 +71,12 @@ public abstract class SeleniumTest {
         driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
 
         clickOnTryOut();
-        assertResponseCodeIs200();
+        assertResponseCodeIs(200);
     }
 
-    private void assertResponseCodeIs200() {
+    private void assertResponseCodeIs(int code) {
         By xpath = By.xpath("//div[@id='test_dummyEndpoint_content']/div[@class='response']/div[@class='block response_code']/pre");
-        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, "200"));
+        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, String.valueOf(code)));
     }
 
     private void clickOnTryOut() {
