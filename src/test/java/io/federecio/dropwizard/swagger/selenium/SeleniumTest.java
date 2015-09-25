@@ -44,8 +44,8 @@ public abstract class SeleniumTest {
         host = tmpHost;
     }
 
-    static final int WAIT_IN_SECONDS = 5;
-    FirefoxDriver driver;
+    protected static final int WAIT_IN_SECONDS = 1000;
+    protected FirefoxDriver driver;
 
     protected String getSwaggerUrl(int port, String path) {
         return String.format("http://%s:%d%s", SeleniumTest.host, port, path);
@@ -70,17 +70,17 @@ public abstract class SeleniumTest {
         driver.get(getSwaggerUrl() + "#!/test/dummyEndpoint");
         driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
 
-        clickOnTryOut();
-        assertResponseCodeIs(200);
+        clickOnTryOut("test_dummyEndpoint_content");
+        assertResponseCodeIs("test_dummyEndpoint_content", 200);
     }
 
-    private void assertResponseCodeIs(int code) {
-        By xpath = By.xpath("//div[@id='test_dummyEndpoint_content']/div[@class='response']/div[@class='block response_code']/pre");
+    protected void assertResponseCodeIs(String contentId, int code) {
+        By xpath = By.xpath(String.format("//div[@id='%s']/div[@class='response']/div[@class='block response_code']/pre", contentId));
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, String.valueOf(code)));
     }
 
-    private void clickOnTryOut() {
-        By xpath = By.xpath("//div[@id='test_dummyEndpoint_content']/form/div[@class='sandbox_header']/input[@value='Try it out!']");
+    protected void clickOnTryOut(String contentId) {
+        By xpath = By.xpath(String.format("//div[@id='%s']/form/div[@class='sandbox_header']/input[@value='Try it out!']", contentId));
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.presenceOfElementLocated(xpath));
         driver.findElement(xpath).click();
     }
