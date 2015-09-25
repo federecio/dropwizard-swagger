@@ -62,5 +62,20 @@ public class DefaultServerWithAuthenticationSeleniumTest extends SeleniumTest {
         assertResponseBodyIs("auth_protectedDummyEndpoint_content", token);
     }
 
+    @Test
+    public void testApiKeyResourceWithAuthorizationShouldReturn200() throws Exception {
+        driver.get(getSwaggerUrl() + "#!/auth/apiKeyDummyEndpoint");
+        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
+
+        String apiKey = "bab0d85f-00ea-4463-9ab2-d564518b120e";
+
+        new Select(driver.findElement(By.id("input_headerSelect"))).selectByVisibleText("api_key");
+        driver.findElement(By.id("input_apiKey")).sendKeys(apiKey);
+
+        clickOnTryOut("auth_apiKeyDummyEndpoint_content");
+        assertResponseCodeIs("auth_apiKeyDummyEndpoint_content", 200);
+        assertResponseBodyIs("auth_apiKeyDummyEndpoint_content", apiKey);
+    }
+
 
 }
