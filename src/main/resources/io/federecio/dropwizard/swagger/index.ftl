@@ -8,7 +8,6 @@
   <link href='${swaggerAssetsPath}/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
   <link href='${swaggerAssetsPath}/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
   <link href='${swaggerAssetsPath}/css/screen.css' media='print' rel='stylesheet' type='text/css'/>
-  <script type="text/javascript" src="${swaggerAssetsPath}/lib/shred.bundle.js"></script>
   <script src='${swaggerAssetsPath}/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/jquery.slideto.min.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/jquery.wiggle.min.js' type='text/javascript'></script>
@@ -16,7 +15,6 @@
   <script src='${swaggerAssetsPath}/lib/handlebars-2.0.0.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/underscore-min.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/backbone-min.js' type='text/javascript'></script>
-  <script src='${swaggerAssetsPath}/lib/swagger-client.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/swagger-ui.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/highlight.7.3.pack.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/marked.js' type='text/javascript'></script>
