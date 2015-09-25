@@ -75,12 +75,12 @@ public abstract class SeleniumTest {
     }
 
     private void assertResponseCodeIs200() {
-        By xpath = By.xpath("//div[@class='block response_code']/pre");
+        By xpath = By.xpath("//div[@id='test_dummyEndpoint_content']/div[@class='response']/div[@class='block response_code']/pre");
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, "200"));
     }
 
     private void clickOnTryOut() {
-        By xpath = By.xpath("//input[@value='Try it out!']");
+        By xpath = By.xpath("//div[@id='test_dummyEndpoint_content']/form/div[@class='sandbox_header']/input[@value='Try it out!']");
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.presenceOfElementLocated(xpath));
         driver.findElement(xpath).click();
     }
