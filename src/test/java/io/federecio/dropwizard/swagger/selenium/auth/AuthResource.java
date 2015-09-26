@@ -38,7 +38,7 @@ public class AuthResource {
     @GET
     @ApiOperation(OPERATION_DESCRIPTION)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response protectedDummyEndpoint(@ApiParam(access = "hidden") @Auth String user) {
+    public Response protectedDummyEndpoint(@ApiParam(hidden = true) @Auth String user) {
         return Response.ok().entity(user).build();
     }
 
@@ -46,7 +46,7 @@ public class AuthResource {
     @Path("apiKey")
     @ApiOperation(OPERATION_DESCRIPTION)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response apiKeyDummyEndpoint(@ApiParam(access = "hidden") @QueryParam("api_key") String apiKey) {
+    public Response apiKeyDummyEndpoint(@ApiParam(hidden = true) @QueryParam("api_key") String apiKey) {
         return Response.ok().entity(apiKey).build();
     }
 

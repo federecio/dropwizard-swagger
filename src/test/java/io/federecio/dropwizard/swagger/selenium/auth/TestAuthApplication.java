@@ -16,30 +16,13 @@
 package io.federecio.dropwizard.swagger.selenium.auth;
 
 import com.google.common.base.Optional;
-import io.dropwizard.Application;
 import io.dropwizard.auth.AuthFactory;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
-import io.dropwizard.auth.basic.BasicAuthFactory;
-import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.auth.oauth.OAuthFactory;
-import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.federecio.dropwizard.swagger.SwaggerBundle;
-import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.federecio.dropwizard.swagger.TestApplication;
 import io.federecio.dropwizard.swagger.TestConfiguration;
-import io.federecio.dropwizard.swagger.TestResource;
-import io.swagger.config.FilterFactory;
-import io.swagger.core.filter.SwaggerSpecFilter;
-import io.swagger.model.ApiDescription;
-import io.swagger.models.Model;
-import io.swagger.models.Operation;
-import io.swagger.models.parameters.Parameter;
-import io.swagger.models.properties.Property;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Maximilien Marie
@@ -52,48 +35,15 @@ public class TestAuthApplication extends TestApplication {
         environment.jersey().register(new AuthResource());
 
         environment.jersey().register(AuthFactory.binder(new OAuthFactory<>(new Authenticator<String, String>() {
-                    @Override
-                    public Optional<String> authenticate(String token) throws AuthenticationException {
-                        if ("secret".equals(token)) {
-                            return Optional.of(token);
-                        }
-                        return Optional.absent();
-                    }
-                },
+            @Override
+            public Optional<String> authenticate(String token) throws AuthenticationException {
+                if ("secret" .equals(token)) {
+                    return Optional.of(token);
+                }
+                return Optional.absent();
+            }
+        },
                 "SUPER SECRET STUFF",
                 String.class)));
-
-        FilterFactory.setFilter(new SwaggerSpecFilter() {
-
-            @Override
-            public boolean isOperationAllowed(Operation operation,
-                                              ApiDescription apiDescription,
-                                              Map<String, List<String>> map,
-                                              Map<String, String> map1,
-                                              Map<String, List<String>> map2) {
-                return true;
-            }
-
-            @Override
-            public boolean isParamAllowed(Parameter parameter,
-                                          Operation operation,
-                                          ApiDescription apiDescription,
-                                          Map<String, List<String>> map,
-                                          Map<String, String> map1,
-                                          Map<String, List<String>> map2) {
-                return !parameterAccessValueIsHidden(parameter);
-            }
-
-            @Override
-            public boolean isPropertyAllowed(Model model,
-                                             Property property,
-                                             String s, Map<String, List<String>> map, Map<String, String> map1, Map<String, List<String>> map2) {
-                return true;
-            }
-
-            public boolean parameterAccessValueIsHidden(Parameter parameter) {
-                return parameter.getAccess() != null && parameter.getAccess().equalsIgnoreCase("hidden");
-            }
-        });
     }
 }
