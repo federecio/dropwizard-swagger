@@ -1,7 +1,11 @@
 dropwizard-swagger
 ==================
+[![Build Status](https://travis-ci.org/smoketurner/dropwizard-swagger.svg?branch=master)](https://travis-ci.org/smoketurner/dropwizard-swagger)
+[![Coverage Status](https://coveralls.io/repos/smoketurner/dropwizard-swagger/badge.svg)](https://coveralls.io/r/smoketurner/dropwizard-swagger)
+[![Maven Central](https://img.shields.io/maven-central/v/com.smoketurner/dropwizard-swagger.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.smoketurner/dropwizard-swagger/)
+[![GitHub license](https://img.shields.io/github/license/smoketurner/dropwizard-swagger.svg?style=flat-square)](https://github.com/smoketurner/dropwizard-swagger/tree/master)
 
-a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/wordnik/swagger-ui
+a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/swagger-api/swagger-ui
 
 Current version has been tested with Dropwizard 0.8.4 and Swagger 1.5.3 which supports Swagger 2 spec!
 
@@ -15,14 +19,14 @@ http://www.apache.org/licenses/LICENSE-2.0
 Version matrix
 --------------
 
-dropwizard-swagger|Dropwizard|Swagger API|Swagger UI 
+dropwizard-swagger|Dropwizard|Swagger API|Swagger UI
 ------------------|----------|-----------|----------
      < 0.5        |   0.7.x  |   1.3.2   |    ?
        0.5.x      |   0.7.x  |   1.3.12  | v2.1.4-M1
        0.6.x      |   0.8.0  |   1.3.12  | v2.1.4-M1
        0.7.x      |   0.8.x  |   1.5.1-M2| v2.1.4-M1
        0.7.1      |   0.8.4  |   1.5.3   | v2.1.2
-       
+
 How to use it
 -------------
 
@@ -55,7 +59,7 @@ prop2: value2
 # the only required property is resourcePackage, for more config options see below
 swagger:
   resourcePackage: <a comma separated string of the packages that contain your @Api annotated resources>
-```  
+```
 
 * In your Application class:
 
