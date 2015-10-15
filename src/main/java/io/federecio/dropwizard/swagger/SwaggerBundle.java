@@ -17,7 +17,6 @@ package io.federecio.dropwizard.swagger;
 
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.ImmutableMap;
 
 import io.dropwizard.Configuration;
@@ -27,7 +26,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 import io.swagger.jaxrs.config.BeanConfig;
-import io.swagger.jaxrs.listing.ApiListingResource;
 
 /**
  * A {@link io.dropwizard.ConfiguredBundle} that provides hassle-free configuration of Swagger and Swagger UI
@@ -60,10 +58,10 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
         new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, configurationHelper.getSwaggerUriPath(), null, Constants.SWAGGER_ASSETS_NAME).run(environment);
 
         environment.jersey().register(new SwaggerResource(configurationHelper.getUrlPattern()));
-        environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         setUpSwagger(swaggerBundleConfiguration, configurationHelper.getUrlPattern());
-        environment.jersey().register(new ApiListingResource());
+        environment.jersey().register(io.swagger.jaxrs.listing.ApiListingResource.class);
+        environment.jersey().register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
     }
 
     protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration);
