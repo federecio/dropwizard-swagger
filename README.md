@@ -25,7 +25,7 @@ dropwizard-swagger|Dropwizard|Swagger API|Swagger UI
        0.5.x      |   0.7.x  |   1.3.12  | v2.1.4-M1
        0.6.x      |   0.8.0  |   1.3.12  | v2.1.4-M1
        0.7.x      |   0.8.x  |   1.5.1-M2| v2.1.4-M1
-       0.7.1      |   0.8.4  |   1.5.3   | v2.1.2
+       0.7.2      |   0.8.4  |   1.5.3   | v2.1.2
 
 How to use it
 -------------
@@ -36,7 +36,7 @@ How to use it
 <dependency>
     <groupId>com.smoketurner</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.7.1</version>
+    <version>0.7.2</version>
 </dependency>
 ```
 
