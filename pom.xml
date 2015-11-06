@@ -5,7 +5,7 @@
 
     <groupId>io.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.8.1-wikia</version>
+    <version>0.8.2-wikia</version>
 
     <name>Dropwizard Swagger support</name>
     <description>A simple way to document your REST APIs in DropWizard using Swagger</description>
