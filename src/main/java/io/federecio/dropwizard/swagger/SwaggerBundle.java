@@ -25,6 +25,12 @@ import io.dropwizard.views.ViewBundle;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.models.Swagger;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
+
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
 
 /**
  * A {@link io.dropwizard.ConfiguredBundle} that provides hassle-free configuration of Swagger and Swagger UI
@@ -60,6 +66,8 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
         BeanConfig beanConfig = setUpSwagger(swaggerBundleConfiguration,
                                              configurationHelper.getUrlPattern());
 
+        configureCors(environment, "/swagger.json", "/swagger.yaml");
+
         environment.getApplicationContext().setAttribute("swagger", beanConfig.getSwagger());
         environment.jersey().register(new ApiListingResource());
     }
@@ -69,6 +77,17 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
     @SuppressWarnings("unused")
     protected void setUpSwagger(Swagger swagger) {}
+
+    protected void configureCors(Environment environment, String... urlPatterns) {
+        FilterRegistration.Dynamic
+            filter = environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+        filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, urlPatterns);
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "GET,PUT,POST,DELETE,OPTIONS");
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");
+        filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
+        filter.setInitParameter("allowedHeaders", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin");
+        filter.setInitParameter("allowCredentials", "true");
+    }
 
     private BeanConfig setUpSwagger(SwaggerBundleConfiguration swaggerBundleConfiguration,
                                     String urlPattern) {
