@@ -47,7 +47,7 @@
     </scm>
 
     <properties>
-        <dropwizard.version>0.8.4</dropwizard.version>
+        <dropwizard.version>0.8.1</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
