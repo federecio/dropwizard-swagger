@@ -5,7 +5,7 @@
 
     <groupId>io.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.8.0-SNAPSHOT</version>
+    <version>0.8.1-wikia</version>
 
     <name>Dropwizard Swagger support</name>
     <description>A simple way to document your REST APIs in DropWizard using Swagger</description>
@@ -52,7 +52,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.7</jdk.version>
-        <swagger.version>1.5.4</swagger.version>
+        <swagger.version>1.5.3</swagger.version>
     </properties>
 
     <dependencies>
