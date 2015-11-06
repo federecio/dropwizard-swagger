@@ -16,16 +16,15 @@
 package io.federecio.dropwizard.swagger;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.common.collect.ImmutableMap;
-import com.wordnik.swagger.jaxrs.config.BeanConfig;
-import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
-import com.wordnik.swagger.models.Swagger;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.models.Swagger;
 
 /**
  * A {@link io.dropwizard.ConfiguredBundle} that provides hassle-free configuration of Swagger and Swagger UI
@@ -39,12 +38,7 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
     @Override
     public void initialize(Bootstrap<?> bootstrap) {
-        bootstrap.addBundle(new ViewBundle<Configuration>() {
-            @Override
-            public ImmutableMap<String, ImmutableMap<String, String>> getViewConfiguration(final Configuration configuration) {
-                return ImmutableMap.of();
-            }
-        });
+        bootstrap.addBundle(new ViewBundle<>());
     }
 
     @Override
