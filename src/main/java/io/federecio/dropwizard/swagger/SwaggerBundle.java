@@ -16,15 +16,21 @@
 package io.federecio.dropwizard.swagger;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.common.collect.ImmutableMap;
-import com.wordnik.swagger.jaxrs.config.BeanConfig;
-import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.models.Swagger;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
+
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
 
 /**
  * A {@link io.dropwizard.ConfiguredBundle} that provides hassle-free configuration of Swagger and Swagger UI
@@ -38,12 +44,7 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
     @Override
     public void initialize(Bootstrap<?> bootstrap) {
-        bootstrap.addBundle(new ViewBundle<Configuration>() {
-            @Override
-            public ImmutableMap<String, ImmutableMap<String, String>> getViewConfiguration(final Configuration configuration) {
-                return ImmutableMap.of();
-            }
-        });
+        bootstrap.addBundle(new ViewBundle<>());
     }
 
     @Override
@@ -56,17 +57,40 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
         ConfigurationHelper configurationHelper = new ConfigurationHelper(configuration, swaggerBundleConfiguration);
         new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, configurationHelper.getSwaggerUriPath(), null, Constants.SWAGGER_ASSETS_NAME).run(environment);
 
-        environment.jersey().register(new SwaggerResource(configurationHelper.getUrlPattern()));
+        environment.jersey().register(
+            new SwaggerResource(
+                configurationHelper.getUrlPattern(),
+                swaggerBundleConfiguration.getUiConfiguration()));
         environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-        setUpSwagger(swaggerBundleConfiguration, configurationHelper.getUrlPattern());
+        BeanConfig beanConfig = setUpSwagger(swaggerBundleConfiguration,
+                                             configurationHelper.getUrlPattern());
+
+        configureCors(environment, "/swagger.json", "/swagger.yaml");
+
+        environment.getApplicationContext().setAttribute("swagger", beanConfig.getSwagger());
         environment.jersey().register(new ApiListingResource());
     }
 
     @SuppressWarnings("unused")
     protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration);
 
-    private void setUpSwagger(SwaggerBundleConfiguration swaggerBundleConfiguration, String urlPattern) {
+    @SuppressWarnings("unused")
+    protected void setUpSwagger(Swagger swagger) {}
+
+    protected void configureCors(Environment environment, String... urlPatterns) {
+        FilterRegistration.Dynamic
+            filter = environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+        filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, urlPatterns);
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "GET,PUT,POST,DELETE,OPTIONS");
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");
+        filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
+        filter.setInitParameter("allowedHeaders", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin");
+        filter.setInitParameter("allowCredentials", "true");
+    }
+
+    private BeanConfig setUpSwagger(SwaggerBundleConfiguration swaggerBundleConfiguration,
+                                    String urlPattern) {
         BeanConfig config = new BeanConfig();
 
         if (swaggerBundleConfiguration.getTitle() != null) {
@@ -107,5 +131,8 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
 
         config.setScan(true);
+        setUpSwagger(config.getSwagger());
+
+        return config;
     }
 }

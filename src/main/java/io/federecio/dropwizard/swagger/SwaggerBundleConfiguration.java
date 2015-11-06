@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * For the meaning of all these properties please refer to Swagger documentation or {@link com.wordnik.swagger.jaxrs.config.BeanConfig}
+ * For the meaning of all these properties please refer to Swagger documentation or {@link io.swagger.jaxrs.config.BeanConfig}
  *
  * @author Tristan Burch
  * @author Federico Recio
@@ -30,7 +30,7 @@ public class SwaggerBundleConfiguration {
     /**
      * This is the only property that is required for Swagger to work correctly.
      * <p/>
-     * It is a comma separated list of the all the packages that contain the {@link com.wordnik.swagger.annotations.Api}
+     * It is a comma separated list of the all the packages that contain the {@link io.swagger.annotations.Api}
      * annoted resources
      */
     @JsonProperty
@@ -68,6 +68,9 @@ public class SwaggerBundleConfiguration {
      */
     @JsonProperty
     private String uriPrefix;
+
+    @JsonProperty("ui")
+    private SwaggerUIConfiguration uiConfiguration = new SwaggerUIConfiguration();
 
     public String getResourcePackage() {
         return resourcePackage;
@@ -139,6 +142,16 @@ public class SwaggerBundleConfiguration {
 
     public void setUriPrefix(String uriPrefix) {
         this.uriPrefix = uriPrefix;
+    }
+
+    @JsonProperty("ui")
+    public SwaggerUIConfiguration getUiConfiguration() {
+        return uiConfiguration;
+    }
+
+    @JsonProperty("ui")
+    public void setUiConfiguration(SwaggerUIConfiguration ui) {
+        this.uiConfiguration = ui;
     }
 
     @Override

@@ -27,13 +27,15 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.TEXT_HTML)
 public class SwaggerResource {
     private final String urlPattern;
+    private final SwaggerUIConfiguration config;
 
-    public SwaggerResource(String urlPattern) {
+    public SwaggerResource(String urlPattern, SwaggerUIConfiguration config) {
         this.urlPattern = urlPattern;
+        this.config = config;
     }
 
     @GET
     public SwaggerView get() {
-        return new SwaggerView(urlPattern);
+        return new SwaggerView(urlPattern, config);
     }
 }

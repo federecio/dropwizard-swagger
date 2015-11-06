@@ -29,9 +29,11 @@ public class SwaggerView extends View {
 
     private final String swaggerAssetsPath;
     private final String contextPath;
+    private final SwaggerUIConfiguration config;
 
-    protected SwaggerView(String urlPattern) {
+    protected SwaggerView(String urlPattern, SwaggerUIConfiguration config) {
         super("index.ftl", Charsets.UTF_8);
+        this.config = config;
 
         if (urlPattern.equals("/")) {
             swaggerAssetsPath = Constants.SWAGGER_URI_PATH;
@@ -60,5 +62,20 @@ public class SwaggerView extends View {
     @SuppressWarnings("unused")
     public String getContextPath() {
         return contextPath;
+    }
+
+    @SuppressWarnings("unused")
+    public String getAuthName() {
+        return config.getAuthName();
+    }
+
+    @SuppressWarnings("unused")
+    public String getAuthKey() {
+        return config.getAuthKey();
+    }
+
+    @SuppressWarnings("unused")
+    public String getAuthKeyLocation() {
+        return config.getAuthKeyLocation();
     }
 }
