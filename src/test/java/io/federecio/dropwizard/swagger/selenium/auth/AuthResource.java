@@ -13,29 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.federecio.dropwizard.swagger;
+package io.federecio.dropwizard.swagger.selenium.auth;
 
+import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.google.common.base.Optional;
-
 /**
- * @author Federico Recio
+ * @author Maximilien Marie
  */
-@Path("/test.json")
-@Api("/test")
-public class TestResource {
-    public static final String OPERATION_DESCRIPTION = "This is a dummy endpoint for test";
+@Api("/auth")
+@Path("/auth.json")
+public class AuthResource {
+    public static final String OPERATION_DESCRIPTION = "This is a protected dummy endpoint for test";
 
     @GET
     @ApiOperation(OPERATION_DESCRIPTION)
-    public Response dummyEndpoint(@QueryParam("dummy") final Optional<String> dummy) {
-        return Response.ok().build();
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response protectedDummyEndpoint(@ApiParam(hidden = true) @Auth String user) {
+        return Response.ok().entity(user).build();
     }
+
+    @GET
+    @Path("apiKey")
+    @ApiOperation(OPERATION_DESCRIPTION)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response apiKeyDummyEndpoint(@ApiParam(hidden = true) @QueryParam("api_key") String apiKey) {
+        return Response.ok().entity(apiKey).build();
+    }
+
 }

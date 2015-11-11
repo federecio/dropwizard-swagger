@@ -49,7 +49,6 @@ public class SwaggerView extends View {
     /**
      * Returns the path with which all requests for Swagger's static content need to be prefixed
      */
-    @SuppressWarnings("unused")
     public String getSwaggerAssetsPath() {
         return swaggerAssetsPath;
     }
@@ -57,7 +56,6 @@ public class SwaggerView extends View {
     /**
      * Returns the path with with which all requests made by Swagger's UI to Resources need to be prefixed
      */
-    @SuppressWarnings("unused")
     public String getContextPath() {
         return contextPath;
     }
