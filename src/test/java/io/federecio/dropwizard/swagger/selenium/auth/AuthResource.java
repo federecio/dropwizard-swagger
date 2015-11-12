@@ -16,6 +16,7 @@
 package io.federecio.dropwizard.swagger.selenium.auth;
 
 import io.dropwizard.auth.Auth;
+import io.dropwizard.auth.PrincipalImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -38,8 +39,8 @@ public class AuthResource {
     @GET
     @ApiOperation(OPERATION_DESCRIPTION)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response protectedDummyEndpoint(@ApiParam(hidden = true) @Auth String user) {
-        return Response.ok().entity(user).build();
+    public Response protectedDummyEndpoint(@ApiParam(hidden = true) @Auth PrincipalImpl user) {
+        return Response.ok().entity(user.getName()).build();
     }
 
     @GET

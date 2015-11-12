@@ -15,11 +15,10 @@
  */
 package io.federecio.dropwizard.swagger.selenium.auth;
 
-import com.google.common.base.Optional;
-import io.dropwizard.auth.AuthFactory;
-import io.dropwizard.auth.AuthenticationException;
-import io.dropwizard.auth.Authenticator;
-import io.dropwizard.auth.oauth.OAuthFactory;
+import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.auth.PrincipalImpl;
+import io.dropwizard.auth.oauth.OAuthCredentialAuthFilter;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.TestApplication;
 import io.federecio.dropwizard.swagger.TestConfiguration;
@@ -34,16 +33,12 @@ public class TestAuthApplication extends TestApplication {
         super.run(configuration, environment);
         environment.jersey().register(new AuthResource());
 
-        environment.jersey().register(AuthFactory.binder(new OAuthFactory<>(new Authenticator<String, String>() {
-            @Override
-            public Optional<String> authenticate(String token) throws AuthenticationException {
-                if ("secret" .equals(token)) {
-                    return Optional.of(token);
-                }
-                return Optional.absent();
-            }
-        },
-                "SUPER SECRET STUFF",
-                String.class)));
+        environment.jersey().register(new AuthDynamicFeature(
+                new OAuthCredentialAuthFilter.Builder<PrincipalImpl>()
+                    .setAuthenticator(new TestAuthenticator())
+                    .setRealm("SUPER SECRET STUFF")
+                    .setPrefix("Bearer")
+                    .buildAuthFilter()));
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(PrincipalImpl.class));
     }
 }
