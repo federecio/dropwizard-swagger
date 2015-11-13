@@ -1,7 +1,7 @@
 dropwizard-swagger
 ==================
 [![Build Status](https://travis-ci.org/smoketurner/dropwizard-swagger.svg?branch=master)](https://travis-ci.org/smoketurner/dropwizard-swagger)
-[![Coverage Status](https://coveralls.io/repos/smoketurner/dropwizard-swagger/badge.svg)](https://coveralls.io/r/smoketurner/dropwizard-swagger)
+[![Coverage Status](https://coveralls.io/repos/smoketurner/dropwizard-swagger/badge.svg?branch=master&service=github)](https://coveralls.io/github/smoketurner/dropwizard-swagger?branch=master)
 [![Maven Central](https://img.shields.io/maven-central/v/com.smoketurner/dropwizard-swagger.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.smoketurner/dropwizard-swagger/)
 [![GitHub license](https://img.shields.io/github/license/smoketurner/dropwizard-swagger.svg?style=flat-square)](https://github.com/smoketurner/dropwizard-swagger/tree/master)
 
