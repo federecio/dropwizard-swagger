@@ -40,9 +40,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git://github.com:federecio/dropwizard-swagger.git</connection>
-        <developerConnection>scm:git:git@github.com:federecio/dropwizard-swagger.git</developerConnection>
-        <url>http://github.com/federecio/dropwizard-swagger</url>
+        <connection>scm:git:git://github.com:ExpediaInc/dropwizard-swagger.git</connection>
+        <developerConnection>scm:git:git@github.com:ExpediaInc/dropwizard-swagger.git</developerConnection>
+        <url>https://github.com/ExpediaInc/dropwizard-swagger</url>
         <tag>HEAD</tag>
     </scm>
 
