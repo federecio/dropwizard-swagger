@@ -15,17 +15,20 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import io.federecio.dropwizard.swagger.TestApplicationWithPathSetProgramatically;
-import org.junit.runner.RunWith;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import io.federecio.dropwizard.swagger.TestApplicationWithAssetsAndPathSetProgramatically;
+import io.federecio.dropwizard.swagger.TestConfiguration;
+import org.junit.ClassRule;
 
 /**
  * @author Federico Recio
  */
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplicationWithPathSetProgramatically.class, yamlFile = "/test-default-with-path-set-programatically.yaml")
 public class DefaultServerWithPathSetProgramaticallySeleniumTest extends SeleniumTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE =
+            new DropwizardAppRule<>(TestApplicationWithAssetsAndPathSetProgramatically.class, ResourceHelpers.resourceFilePath("test-default-with-path-set-programatically.yaml"));
 
     @Override
     protected String getSwaggerUrl() {

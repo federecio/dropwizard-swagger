@@ -15,13 +15,15 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import org.junit.runner.RunWith;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import org.junit.ClassRule;
 
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-default-context-and-root-path.yaml")
 public class DefaultServerWithApplicationContextPathAndRootPathSetTest extends DropwizardTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE =
+            new DropwizardAppRule<>(TestApplication.class, ResourceHelpers.resourceFilePath("test-default-context-and-root-path.yaml"));
 
     public DefaultServerWithApplicationContextPathAndRootPathSetTest() {
         super(42424, "/app/api");
