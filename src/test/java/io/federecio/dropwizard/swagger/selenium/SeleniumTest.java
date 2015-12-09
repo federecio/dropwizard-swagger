@@ -61,7 +61,7 @@ public abstract class SeleniumTest {
     @After
     public void terminate() {
         if (driver != null) {
-            driver.kill();
+            driver.quit();
         }
     }
 
