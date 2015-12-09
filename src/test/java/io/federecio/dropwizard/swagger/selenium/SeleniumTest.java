@@ -74,12 +74,12 @@ public abstract class SeleniumTest {
         assertResponseCodeIs200();
     }
 
-    private void assertResponseCodeIs200() {
+    protected void assertResponseCodeIs200() {
         By xpath = By.xpath("//div[@class='block response_code']/pre");
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, "200"));
     }
 
-    private void clickOnTryOut() {
+    protected void clickOnTryOut() {
         By xpath = By.xpath("//input[@value='Try it out!']");
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.presenceOfElementLocated(xpath));
         driver.findElement(xpath).click();
