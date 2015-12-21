@@ -65,7 +65,8 @@
         },
         docExpansion: "none",
         apisSorter: "alpha",
-        showRequestHeaders: false
+        showRequestHeaders: false,
+        validatorUrl: null
       });
 
       function addApiKeyAuthorization(){
