@@ -25,6 +25,8 @@ import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
+import io.swagger.converter.ModelConverters;
+import io.swagger.jackson.ModelResolver;
 import io.swagger.jaxrs.config.BeanConfig;
 
 /**
@@ -45,6 +47,7 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
                 return ImmutableMap.of();
             }
         });
+        ModelConverters.getInstance().addConverter(new ModelResolver(bootstrap.getObjectMapper()));
     }
 
     @Override
