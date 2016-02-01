@@ -25,6 +25,9 @@
     $(function () {
       window.swaggerUi = new SwaggerUi({
         url: "${contextPath}/swagger.json",
+        <#if validationUrlDisabled>
+        validatorUrl: null,
+        </#if>
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
         onComplete: function(swaggerApi, swaggerUi){

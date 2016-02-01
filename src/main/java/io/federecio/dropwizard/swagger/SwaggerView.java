@@ -29,8 +29,9 @@ public class SwaggerView extends View {
 
     private final String swaggerAssetsPath;
     private final String contextPath;
+    private boolean isValidationUrlDisabled;
 
-    protected SwaggerView(String urlPattern) {
+    protected SwaggerView(String urlPattern, final boolean isValidationUrlDisabled) {
         super("index.ftl", Charsets.UTF_8);
 
         if (urlPattern.equals("/")) {
@@ -44,6 +45,8 @@ public class SwaggerView extends View {
         } else {
             contextPath = urlPattern;
         }
+
+        this.isValidationUrlDisabled = isValidationUrlDisabled;
     }
 
     /**
@@ -58,5 +61,10 @@ public class SwaggerView extends View {
      */
     public String getContextPath() {
         return contextPath;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean isValidationUrlDisabled() {
+        return isValidationUrlDisabled;
     }
 }
