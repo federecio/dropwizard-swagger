@@ -27,15 +27,15 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.TEXT_HTML)
 public class SwaggerResource {
     private final String urlPattern;
-    private final boolean isValidationUrlDisabled;
+    private final String validatorUrl;
 
-    public SwaggerResource(String urlPattern, final boolean isValidationUrlDisabled) {
+    public SwaggerResource(String urlPattern, final String validatorUrl) {
         this.urlPattern = urlPattern;
-        this.isValidationUrlDisabled = isValidationUrlDisabled;
+        this.validatorUrl = validatorUrl;
     }
 
     @GET
     public SwaggerView get() {
-        return new SwaggerView(urlPattern, isValidationUrlDisabled);
+        return new SwaggerView(urlPattern, validatorUrl);
     }
 }

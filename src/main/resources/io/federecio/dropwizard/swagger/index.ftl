@@ -37,7 +37,9 @@
       }
       window.swaggerUi = new SwaggerUi({
         url: "${contextPath}/swagger.json",
-        <#if validationUrlDisabled>
+        <#if validatorUrl??>
+        validatorUrl: "${validatorUrl}",
+        <#else>
         validatorUrl: null,
         </#if>
         dom_id: "swagger-ui-container",
