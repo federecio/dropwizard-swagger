@@ -27,7 +27,7 @@ import io.swagger.converter.ModelConverters;
 import io.swagger.jackson.ModelResolver;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
-
+import io.swagger.jaxrs.listing.SwaggerSerializers;
 import java.util.Map;
 
 /**
@@ -66,6 +66,7 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
         setUpSwagger(swaggerBundleConfiguration, configurationHelper.getUrlPattern());
         environment.jersey().register(new ApiListingResource());
+        environment.jersey().register(new SwaggerSerializers());
     }
 
     protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration);
@@ -99,6 +100,10 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
 
         if (swaggerBundleConfiguration.getTermsOfServiceUrl() != null) {
             config.setTermsOfServiceUrl(swaggerBundleConfiguration.getTermsOfServiceUrl());
+        }
+
+        if (swaggerBundleConfiguration.isPrettyPrint()) {
+            config.setPrettyPrint(true);
         }
 
         config.setBasePath(urlPattern);

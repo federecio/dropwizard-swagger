@@ -23,26 +23,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 public abstract class SeleniumTest {
 
-    static final String host;
-
-    static {
-        String tmpHost;
-
-        try {
-            tmpHost = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException ignored) {
-            tmpHost = Constants.DEFAULT_SWAGGER_HOST;
-        }
-
-        host = tmpHost;
-    }
+    static final String host = Constants.DEFAULT_SWAGGER_HOST;
 
     protected static final int WAIT_IN_SECONDS = 1000;
     protected FirefoxDriver driver;

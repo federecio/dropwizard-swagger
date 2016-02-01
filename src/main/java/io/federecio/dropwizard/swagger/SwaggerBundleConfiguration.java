@@ -61,6 +61,9 @@ public class SwaggerBundleConfiguration {
     @JsonProperty
     private boolean isValidationUrlDisabled;
 
+    @JsonProperty
+    private boolean isPrettyPrint = true;
+
     /**
      * For most of the scenarios this property is not needed.
      * <p/>
@@ -153,6 +156,14 @@ public class SwaggerBundleConfiguration {
         this.isValidationUrlDisabled = isValidationUrlDisabled;
     }
 
+    public boolean isPrettyPrint() {
+        return isPrettyPrint;
+    }
+
+    public void setIsPrettyPrint(final boolean isPrettyPrint) {
+        this.isPrettyPrint = isPrettyPrint;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -165,6 +176,7 @@ public class SwaggerBundleConfiguration {
                 .add("license",  license)
                 .add("licenseUrl", licenseUrl)
                 .add("isValidationUrlDisabled", isValidationUrlDisabled)
+                .add("isPrettyPrint", isPrettyPrint)
                 .toString();
     }
 }
