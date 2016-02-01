@@ -15,10 +15,8 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.ImmutableMap;
-
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.assets.AssetsBundle;
@@ -28,6 +26,9 @@ import io.dropwizard.views.ViewBundle;
 import io.swagger.converter.ModelConverters;
 import io.swagger.jackson.ModelResolver;
 import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+
+import java.util.Map;
 
 /**
  * A {@link io.dropwizard.ConfiguredBundle} that provides hassle-free configuration of Swagger and Swagger UI
@@ -60,13 +61,14 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
         ConfigurationHelper configurationHelper = new ConfigurationHelper(configuration, swaggerBundleConfiguration);
         new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, configurationHelper.getSwaggerUriPath(), null, Constants.SWAGGER_ASSETS_NAME).run(environment);
 
-        environment.jersey().register(new SwaggerResource(configurationHelper.getUrlPattern()));
+        environment.jersey().register(new SwaggerResource(configurationHelper.getUrlPattern(), swaggerBundleConfiguration.isValidationUrlDisabled()));
+        environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         setUpSwagger(swaggerBundleConfiguration, configurationHelper.getUrlPattern());
-        environment.jersey().register(io.swagger.jaxrs.listing.ApiListingResource.class);
-        environment.jersey().register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+        environment.jersey().register(new ApiListingResource());
     }
 
+    @SuppressWarnings("unused")
     protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration);
 
     private void setUpSwagger(SwaggerBundleConfiguration swaggerBundleConfiguration, String urlPattern) {

@@ -57,6 +57,9 @@ public class SwaggerBundleConfiguration {
     @JsonProperty
     private String licenseUrl;
 
+    @JsonProperty
+    private boolean isValidationUrlDisabled;
+
     /**
      * For most of the scenarios this property is not needed.
      * <p/>
@@ -141,6 +144,14 @@ public class SwaggerBundleConfiguration {
         this.uriPrefix = uriPrefix;
     }
 
+    public boolean isValidationUrlDisabled() {
+        return isValidationUrlDisabled;
+    }
+
+    public void setIsValidationUrlDisabled(final boolean isValidationUrlDisabled) {
+        this.isValidationUrlDisabled = isValidationUrlDisabled;
+    }
+
     @Override
     public String toString() {
         return "SwaggerBundleConfiguration{" +
@@ -152,6 +163,7 @@ public class SwaggerBundleConfiguration {
                 ", contact='" + contact + '\'' +
                 ", license='" + license + '\'' +
                 ", licenseUrl='" + licenseUrl + '\'' +
+                ", isValidationUrlDisabled='" + isValidationUrlDisabled + '\'' +
                 '}';
     }
 }
