@@ -15,7 +15,7 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
 import io.dropwizard.views.View;
 
 /**
@@ -32,7 +32,7 @@ public class SwaggerView extends View {
     private boolean isValidationUrlDisabled;
 
     protected SwaggerView(String urlPattern, final boolean isValidationUrlDisabled) {
-        super("index.ftl", Charsets.UTF_8);
+        super("index.ftl", StandardCharsets.UTF_8);
 
         if (urlPattern.equals("/")) {
             swaggerAssetsPath = Constants.SWAGGER_URI_PATH;
@@ -63,7 +63,9 @@ public class SwaggerView extends View {
         return contextPath;
     }
 
-    @SuppressWarnings("unused")
+    /**
+     * Returns whether the validation URL is disabled
+     */
     public boolean isValidationUrlDisabled() {
         return isValidationUrlDisabled;
     }

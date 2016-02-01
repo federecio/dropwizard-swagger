@@ -68,7 +68,6 @@ public abstract class SwaggerBundle<T extends Configuration> implements Configur
         environment.jersey().register(new ApiListingResource());
     }
 
-    @SuppressWarnings("unused")
     protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(T configuration);
 
     private void setUpSwagger(SwaggerBundleConfiguration swaggerBundleConfiguration, String urlPattern) {

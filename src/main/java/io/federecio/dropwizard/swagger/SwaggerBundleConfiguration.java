@@ -17,6 +17,7 @@ package io.federecio.dropwizard.swagger;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 /**
  * For the meaning of all these properties please refer to Swagger documentation or {@link io.swagger.jaxrs.config.BeanConfig}
@@ -154,16 +155,16 @@ public class SwaggerBundleConfiguration {
 
     @Override
     public String toString() {
-        return "SwaggerBundleConfiguration{" +
-                "resourcePackage='" + resourcePackage + '\'' +
-                ", title='" + title + '\'' +
-                ", version='" + version + '\'' +
-                ", description='" + description + '\'' +
-                ", termsOfServiceUrl='" + termsOfServiceUrl + '\'' +
-                ", contact='" + contact + '\'' +
-                ", license='" + license + '\'' +
-                ", licenseUrl='" + licenseUrl + '\'' +
-                ", isValidationUrlDisabled='" + isValidationUrlDisabled + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("resourcePackage", resourcePackage)
+                .add("title", title)
+                .add("version", version)
+                .add("description", description)
+                .add("termsOfServiceUrl", termsOfServiceUrl)
+                .add("contact", contact)
+                .add("license",  license)
+                .add("licenseUrl", licenseUrl)
+                .add("isValidationUrlDisabled", isValidationUrlDisabled)
+                .toString();
     }
 }
