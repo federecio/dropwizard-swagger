@@ -34,15 +34,7 @@ public class Constants {
     /**
      * Default host name will be used if the host cannot be determined by other means.
      */
-    public static final String DEFAULT_SWAGGER_HOST = "localhost";
-    /**
-     * The URL to use to determine this host's name when running in AWS.
-     */
-    public static final String AWS_HOST_NAME_URL = "http://169.254.169.254/latest/meta-data/public-hostname/";
-    /**
-     * The file to check for its existence to determine if the server is running on AWS.
-     */
-    public static final String AWS_FILE_TO_CHECK = "/var/lib/cloud/";
+    public static final String DEFAULT_SWAGGER_HOST = "127.0.0.1";
     /**
      * The path to which Swagger resources are bound to
      */

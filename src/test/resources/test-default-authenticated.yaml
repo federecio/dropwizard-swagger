@@ -1,0 +1,10 @@
+server:
+  type: default
+  applicationConnectors:
+    - type: http
+      port: 55555
+  adminConnectors:
+    - type: http
+      port: 55556
+swagger:
+  resourcePackage: io.federecio.dropwizard.swagger

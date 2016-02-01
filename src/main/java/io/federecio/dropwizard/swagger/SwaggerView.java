@@ -15,7 +15,7 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
 import io.dropwizard.views.View;
 
 /**
@@ -29,9 +29,10 @@ public class SwaggerView extends View {
 
     private final String swaggerAssetsPath;
     private final String contextPath;
+    private boolean isValidationUrlDisabled;
 
-    protected SwaggerView(String urlPattern) {
-        super("index.ftl", Charsets.UTF_8);
+    protected SwaggerView(String urlPattern, final boolean isValidationUrlDisabled) {
+        super("index.ftl", StandardCharsets.UTF_8);
 
         if (urlPattern.equals("/")) {
             swaggerAssetsPath = Constants.SWAGGER_URI_PATH;
@@ -44,12 +45,13 @@ public class SwaggerView extends View {
         } else {
             contextPath = urlPattern;
         }
+
+        this.isValidationUrlDisabled = isValidationUrlDisabled;
     }
 
     /**
      * Returns the path with which all requests for Swagger's static content need to be prefixed
      */
-    @SuppressWarnings("unused")
     public String getSwaggerAssetsPath() {
         return swaggerAssetsPath;
     }
@@ -57,8 +59,14 @@ public class SwaggerView extends View {
     /**
      * Returns the path with with which all requests made by Swagger's UI to Resources need to be prefixed
      */
-    @SuppressWarnings("unused")
     public String getContextPath() {
         return contextPath;
+    }
+
+    /**
+     * Returns whether the validation URL is disabled
+     */
+    public boolean isValidationUrlDisabled() {
+        return isValidationUrlDisabled;
     }
 }

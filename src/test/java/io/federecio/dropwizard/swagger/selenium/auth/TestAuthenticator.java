@@ -13,29 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.federecio.dropwizard.swagger;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
+package io.federecio.dropwizard.swagger.selenium.auth;
 
 import com.google.common.base.Optional;
+import io.dropwizard.auth.AuthenticationException;
+import io.dropwizard.auth.Authenticator;
+import io.dropwizard.auth.PrincipalImpl;
 
-/**
- * @author Federico Recio
- */
-@Path("/test.json")
-@Api("/test")
-public class TestResource {
-    public static final String OPERATION_DESCRIPTION = "This is a dummy endpoint for test";
+public class TestAuthenticator implements Authenticator<String, PrincipalImpl>{
 
-    @GET
-    @ApiOperation(OPERATION_DESCRIPTION)
-    public Response dummyEndpoint(@QueryParam("dummy") final Optional<String> dummy) {
-        return Response.ok().build();
+    @Override
+    public Optional<PrincipalImpl> authenticate(String token) throws AuthenticationException {
+        if ("secret" .equals(token)) {
+            return Optional.of(new PrincipalImpl(token));
+        }
+        return Optional.absent();
     }
 }

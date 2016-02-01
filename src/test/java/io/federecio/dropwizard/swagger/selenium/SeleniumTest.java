@@ -23,29 +23,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 public abstract class SeleniumTest {
 
-    static final String host;
+    static final String host = Constants.DEFAULT_SWAGGER_HOST;
 
-    static {
-        String tmpHost;
-
-        try {
-            tmpHost = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException ignored) {
-            tmpHost = Constants.DEFAULT_SWAGGER_HOST;
-        }
-
-        host = tmpHost;
-    }
-
-    static final int WAIT_IN_SECONDS = 5;
-    FirefoxDriver driver;
+    protected static final int WAIT_IN_SECONDS = 1000;
+    protected FirefoxDriver driver;
 
     protected String getSwaggerUrl(int port, String path) {
         return String.format("http://%s:%d%s", SeleniumTest.host, port, path);
@@ -70,17 +55,22 @@ public abstract class SeleniumTest {
         driver.get(getSwaggerUrl() + "#!/test/dummyEndpoint");
         driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
 
-        clickOnTryOut();
-        assertResponseCodeIs200();
+        clickOnTryOut("test_dummyEndpoint_content");
+        assertResponseCodeIs("test_dummyEndpoint_content", 200);
     }
 
-    private void assertResponseCodeIs200() {
-        By xpath = By.xpath("//div[@class='block response_code']/pre");
-        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, "200"));
+    protected void assertResponseCodeIs(String contentId, int code) {
+        By xpath = By.xpath(String.format("//div[@id='%s']/div[@class='response']/div[@class='block response_code']/pre", contentId));
+        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, String.valueOf(code)));
     }
 
-    private void clickOnTryOut() {
-        By xpath = By.xpath("//input[@value='Try it out!']");
+    protected void assertResponseBodyIs(String contentId, String body) {
+        By xpath = By.xpath(String.format("//div[@id='%s']/div[@class='response']/div[@class='block response_body undefined']/pre/code", contentId));
+        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, body));
+    }
+
+    protected void clickOnTryOut(String contentId) {
+        By xpath = By.xpath(String.format("//div[@id='%s']/form/div[@class='sandbox_header']/input[@value='Try it out!']", contentId));
         new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.presenceOfElementLocated(xpath));
         driver.findElement(xpath).click();
     }

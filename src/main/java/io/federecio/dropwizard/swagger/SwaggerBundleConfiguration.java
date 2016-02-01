@@ -17,9 +17,10 @@ package io.federecio.dropwizard.swagger;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 /**
- * For the meaning of all these properties please refer to Swagger documentation or {@link com.wordnik.swagger.jaxrs.config.BeanConfig}
+ * For the meaning of all these properties please refer to Swagger documentation or {@link io.swagger.jaxrs.config.BeanConfig}
  *
  * @author Tristan Burch
  * @author Federico Recio
@@ -30,7 +31,7 @@ public class SwaggerBundleConfiguration {
     /**
      * This is the only property that is required for Swagger to work correctly.
      * <p/>
-     * It is a comma separated list of the all the packages that contain the {@link com.wordnik.swagger.annotations.Api}
+     * It is a comma separated list of the all the packages that contain the {@link io.swagger.annotations.Api}
      * annoted resources
      */
     @JsonProperty
@@ -56,6 +57,12 @@ public class SwaggerBundleConfiguration {
 
     @JsonProperty
     private String licenseUrl;
+
+    @JsonProperty
+    private boolean isValidationUrlDisabled;
+
+    @JsonProperty
+    private boolean isPrettyPrint = true;
 
     /**
      * For most of the scenarios this property is not needed.
@@ -141,17 +148,35 @@ public class SwaggerBundleConfiguration {
         this.uriPrefix = uriPrefix;
     }
 
+    public boolean isValidationUrlDisabled() {
+        return isValidationUrlDisabled;
+    }
+
+    public void setIsValidationUrlDisabled(final boolean isValidationUrlDisabled) {
+        this.isValidationUrlDisabled = isValidationUrlDisabled;
+    }
+
+    public boolean isPrettyPrint() {
+        return isPrettyPrint;
+    }
+
+    public void setIsPrettyPrint(final boolean isPrettyPrint) {
+        this.isPrettyPrint = isPrettyPrint;
+    }
+
     @Override
     public String toString() {
-        return "SwaggerBundleConfiguration{" +
-                "resourcePackage='" + resourcePackage + '\'' +
-                ", title='" + title + '\'' +
-                ", version='" + version + '\'' +
-                ", description='" + description + '\'' +
-                ", termsOfServiceUrl='" + termsOfServiceUrl + '\'' +
-                ", contact='" + contact + '\'' +
-                ", license='" + license + '\'' +
-                ", licenseUrl='" + licenseUrl + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("resourcePackage", resourcePackage)
+                .add("title", title)
+                .add("version", version)
+                .add("description", description)
+                .add("termsOfServiceUrl", termsOfServiceUrl)
+                .add("contact", contact)
+                .add("license",  license)
+                .add("licenseUrl", licenseUrl)
+                .add("isValidationUrlDisabled", isValidationUrlDisabled)
+                .add("isPrettyPrint", isPrettyPrint)
+                .toString();
     }
 }
