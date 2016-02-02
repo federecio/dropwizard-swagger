@@ -3,9 +3,9 @@ server:
   applicationContextPath: /app
   applicationConnectors:
     - type: http
-      port: 43434
+      port: 0
   adminConnectors:
     - type: http
-      port: 43435
+      port: 0
 swagger:
   resourcePackage: io.federecio.dropwizard.swagger

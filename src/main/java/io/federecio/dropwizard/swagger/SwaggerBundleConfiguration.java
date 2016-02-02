@@ -49,7 +49,7 @@ public class SwaggerBundleConfiguration {
     private String license;
     private String licenseUrl;
     private String validatorUrl;
-    private boolean isPrettyPrint = true;
+    private Boolean prettyPrint = true;
 
     /**
      * For most of the scenarios this property is not needed.
@@ -165,12 +165,12 @@ public class SwaggerBundleConfiguration {
 
     @JsonProperty
     public boolean isPrettyPrint() {
-        return isPrettyPrint;
+        return prettyPrint;
     }
 
     @JsonProperty
     public void setIsPrettyPrint(final boolean isPrettyPrint) {
-        this.isPrettyPrint = isPrettyPrint;
+        this.prettyPrint = isPrettyPrint;
     }
 
     @JsonIgnore
@@ -188,7 +188,7 @@ public class SwaggerBundleConfiguration {
         config.setLicense(license);
         config.setLicenseUrl(licenseUrl);
         config.setTermsOfServiceUrl(termsOfServiceUrl);
-        config.setPrettyPrint(isPrettyPrint);
+        config.setPrettyPrint(prettyPrint);
         config.setBasePath(urlPattern);
         config.setResourcePackage(resourcePackage);
         config.setScan(true);

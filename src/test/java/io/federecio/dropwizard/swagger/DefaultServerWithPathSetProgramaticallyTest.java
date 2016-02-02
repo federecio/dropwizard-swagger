@@ -15,18 +15,21 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import org.junit.runner.RunWith;
+import org.junit.ClassRule;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 
-/**
- * @author Federico Recio
- */
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplicationWithPathSetProgramatically.class, yamlFile = "/test-default-with-path-set-programatically.yaml")
-public class DefaultServerWithPathSetProgramaticallyTest extends DropwizardTest {
+public class DefaultServerWithPathSetProgramaticallyTest
+        extends DropwizardTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE = new DropwizardAppRule<TestConfiguration>(
+            TestApplicationWithPathSetProgramatically.class,
+            ResourceHelpers.resourceFilePath(
+                    "test-default-with-path-set-programatically.yaml"));
 
     public DefaultServerWithPathSetProgramaticallyTest() {
-        super(33333, TestApplicationWithPathSetProgramatically.BASE_PATH);
+        super(RULE.getLocalPort(),
+                TestApplicationWithPathSetProgramatically.BASE_PATH);
     }
 }

@@ -4,9 +4,9 @@ server:
   rootPath: /api/*
   applicationConnectors:
     - type: http
-      port: 42424
+      port: 0
   adminConnectors:
     - type: http
-      port: 42425
+      port: 0
 swagger:
   resourcePackage: io.federecio.dropwizard.swagger

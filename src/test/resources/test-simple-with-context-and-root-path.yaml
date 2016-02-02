@@ -4,6 +4,6 @@ server:
   rootPath: /api/*
   connector:
     type: http
-    port: 51578
+    port: 0
 swagger:
   resourcePackage: io.federecio.dropwizard.swagger

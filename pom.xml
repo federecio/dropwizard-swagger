@@ -153,6 +153,11 @@
             <artifactId>dropwizard-views-freemarker</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-testing</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-multipart</artifactId>
         </dependency>
@@ -254,11 +259,6 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-auth</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.federecio</groupId>
-            <artifactId>dropwizard-junit</artifactId>
-            <version>0.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
