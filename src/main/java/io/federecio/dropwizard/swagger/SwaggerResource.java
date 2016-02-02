@@ -20,22 +20,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-/**
- * @author Federico Recio
- */
-@Path(Constants.SWAGGER_PATH)
+@Path("/swagger")
 @Produces(MediaType.TEXT_HTML)
 public class SwaggerResource {
     private final String urlPattern;
-    private final boolean isValidationUrlDisabled;
+    private final String validatorUrl;
 
-    public SwaggerResource(String urlPattern, final boolean isValidationUrlDisabled) {
+    public SwaggerResource(String urlPattern, final String validatorUrl) {
         this.urlPattern = urlPattern;
-        this.isValidationUrlDisabled = isValidationUrlDisabled;
+        this.validatorUrl = validatorUrl;
     }
 
     @GET
     public SwaggerView get() {
-        return new SwaggerView(urlPattern, isValidationUrlDisabled);
+        return new SwaggerView(urlPattern, validatorUrl);
     }
 }

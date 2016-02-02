@@ -21,24 +21,29 @@ import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
 
 /**
- * Wrapper around Dropwizard's configuration and the bundle's config that simplifies getting some
- * information from them.
- *
- * @author Federico Recio
- * @author Flemming Frandsen
+ * Wrapper around Dropwizard's configuration and the bundle's config that
+ * simplifies getting some information from them.
  */
 public class ConfigurationHelper {
 
     private final Configuration configuration;
     private final SwaggerBundleConfiguration swaggerBundleConfiguration;
 
-    public ConfigurationHelper(Configuration configuration, SwaggerBundleConfiguration swaggerBundleConfiguration) {
+    /**
+     * Constructor
+     *
+     * @param configuration
+     * @param swaggerBundleConfiguration
+     */
+    public ConfigurationHelper(Configuration configuration,
+            SwaggerBundleConfiguration swaggerBundleConfiguration) {
         this.configuration = configuration;
         this.swaggerBundleConfiguration = swaggerBundleConfiguration;
     }
 
     public String getJerseyRootPath() {
-        // if the user explictly defined a path to prefix requests use it instead of derive it
+        // if the user explicitly defined a path to prefix requests use it
+        // instead of derive it
         if (swaggerBundleConfiguration.getUriPrefix() != null) {
             return swaggerBundleConfiguration.getUriPrefix();
         }
@@ -48,16 +53,19 @@ public class ConfigurationHelper {
         ServerFactory serverFactory = configuration.getServerFactory();
 
         if (serverFactory instanceof SimpleServerFactory) {
-            rootPath = ((SimpleServerFactory) serverFactory).getJerseyRootPath();
+            rootPath = ((SimpleServerFactory) serverFactory)
+                    .getJerseyRootPath();
         } else {
-            rootPath = ((DefaultServerFactory) serverFactory).getJerseyRootPath();
+            rootPath = ((DefaultServerFactory) serverFactory)
+                    .getJerseyRootPath();
         }
 
         return stripUrlSlashes(rootPath);
     }
 
     public String getUrlPattern() {
-        // if the user explictly defined a path to prefix requests use it instead of derive it
+        // if the user explicitly defined a path to prefix requests use it
+        // instead of derive it
         if (swaggerBundleConfiguration.getUriPrefix() != null) {
             return swaggerBundleConfiguration.getUriPrefix();
         }
@@ -69,9 +77,11 @@ public class ConfigurationHelper {
 
         if (rootPath.equals("/") && applicationContextPath.equals("/")) {
             urlPattern = "/";
-        } else if (rootPath.equals("/") && !applicationContextPath.equals("/")) {
+        } else if (rootPath.equals("/")
+                && !applicationContextPath.equals("/")) {
             urlPattern = applicationContextPath;
-        } else if (!rootPath.equals("/") && applicationContextPath.equals("/")) {
+        } else if (!rootPath.equals("/")
+                && applicationContextPath.equals("/")) {
             urlPattern = rootPath;
         } else {
             urlPattern = applicationContextPath + rootPath;
@@ -83,7 +93,7 @@ public class ConfigurationHelper {
     public String getSwaggerUriPath() {
         final String jerseyRootPath = getJerseyRootPath();
         String uriPathPrefix = jerseyRootPath.equals("/") ? "" : jerseyRootPath;
-        return uriPathPrefix + Constants.SWAGGER_URI_PATH;
+        return uriPathPrefix + "/swagger-static";
     }
 
     private String getApplicationContextPath() {
@@ -92,9 +102,11 @@ public class ConfigurationHelper {
         ServerFactory serverFactory = configuration.getServerFactory();
 
         if (serverFactory instanceof SimpleServerFactory) {
-            applicationContextPath = ((SimpleServerFactory) serverFactory).getApplicationContextPath();
+            applicationContextPath = ((SimpleServerFactory) serverFactory)
+                    .getApplicationContextPath();
         } else {
-            applicationContextPath = ((DefaultServerFactory) serverFactory).getApplicationContextPath();
+            applicationContextPath = ((DefaultServerFactory) serverFactory)
+                    .getApplicationContextPath();
         }
 
         return stripUrlSlashes(applicationContextPath);

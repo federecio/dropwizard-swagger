@@ -15,47 +15,52 @@
  */
 package io.federecio.dropwizard.swagger.selenium.auth;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import io.federecio.dropwizard.swagger.Constants;
-import io.federecio.dropwizard.swagger.selenium.SeleniumTest;
+import java.util.concurrent.TimeUnit;
+import org.junit.ClassRule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import io.federecio.dropwizard.swagger.TestConfiguration;
+import io.federecio.dropwizard.swagger.selenium.SeleniumTest;
 
-import java.util.concurrent.TimeUnit;
-
-/**
- * @author Maximilien Marie
- */
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestAuthApplication.class, yamlFile = "/test-default-authenticated.yaml")
 public class DefaultServerWithAuthenticationSeleniumTest extends SeleniumTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE = new DropwizardAppRule<TestConfiguration>(
+            TestAuthApplication.class, ResourceHelpers
+                    .resourceFilePath("test-default-authenticated.yaml"));
 
     @Override
     protected String getSwaggerUrl() {
-        return getSwaggerUrl(55555, Constants.SWAGGER_PATH);
+        return getSwaggerUrl(RULE.getLocalPort(), "/swagger");
     }
 
     @Test
-    public void testProtectedResourceWithoutAuthorizationShouldReturn401() throws Exception {
+    public void testProtectedResourceWithoutAuthorizationShouldReturn401()
+            throws Exception {
         driver.get(getSwaggerUrl() + "#!/auth/protectedDummyEndpoint");
-        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS,
+                TimeUnit.SECONDS);
 
         clickOnTryOut("auth_protectedDummyEndpoint_content");
         assertResponseCodeIs("auth_protectedDummyEndpoint_content", 401);
     }
 
     @Test
-    public void testProtectedResourceWithAuthorizationShouldReturn200() throws Exception {
+    public void testProtectedResourceWithAuthorizationShouldReturn200()
+            throws Exception {
         driver.get(getSwaggerUrl() + "#!/auth/protectedDummyEndpoint");
-        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS,
+                TimeUnit.SECONDS);
 
         String token = "secret";
 
-        new Select(driver.findElement(By.id("input_headerSelect"))).selectByVisibleText("Auth Header");
-        driver.findElement(By.id("input_authHeader")).sendKeys("Bearer " + token);
+        new Select(driver.findElement(By.id("input_headerSelect")))
+                .selectByVisibleText("Auth Header");
+        driver.findElement(By.id("input_authHeader"))
+                .sendKeys("Bearer " + token);
 
         clickOnTryOut("auth_protectedDummyEndpoint_content");
         assertResponseCodeIs("auth_protectedDummyEndpoint_content", 200);
@@ -63,19 +68,20 @@ public class DefaultServerWithAuthenticationSeleniumTest extends SeleniumTest {
     }
 
     @Test
-    public void testApiKeyResourceWithAuthorizationShouldReturn200() throws Exception {
+    public void testApiKeyResourceWithAuthorizationShouldReturn200()
+            throws Exception {
         driver.get(getSwaggerUrl() + "#!/auth/apiKeyDummyEndpoint");
-        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS,
+                TimeUnit.SECONDS);
 
         String apiKey = "bab0d85f-00ea-4463-9ab2-d564518b120e";
 
-        new Select(driver.findElement(By.id("input_headerSelect"))).selectByVisibleText("api_key");
+        new Select(driver.findElement(By.id("input_headerSelect")))
+                .selectByVisibleText("api_key");
         driver.findElement(By.id("input_apiKey")).sendKeys(apiKey);
 
         clickOnTryOut("auth_apiKeyDummyEndpoint_content");
         assertResponseCodeIs("auth_apiKeyDummyEndpoint_content", 200);
         assertResponseBodyIs("auth_apiKeyDummyEndpoint_content", apiKey);
     }
-
-
 }

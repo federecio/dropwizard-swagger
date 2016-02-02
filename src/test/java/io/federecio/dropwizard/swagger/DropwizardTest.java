@@ -15,25 +15,19 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.jayway.restassured.RestAssured;
-
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.jetty.http.HttpStatus;
 import org.hamcrest.core.StringContains;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.jayway.restassured.RestAssured;
 import io.swagger.jaxrs.listing.ApiListingResource;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * @author Federico Recio
- */
 public abstract class DropwizardTest {
 
     private final int port;
@@ -51,40 +45,49 @@ public abstract class DropwizardTest {
 
     @BeforeClass
     public static void crap() throws Exception {
-        Field initialized = ApiListingResource.class.getDeclaredField("initialized");
+        Field initialized = ApiListingResource.class
+                .getDeclaredField("initialized");
         initialized.setAccessible(true);
     }
 
     @Test
     public void resourceIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(Path.from(basePath, "test.json"));
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when()
+                .get(Path.from(basePath, "test.json"));
     }
 
     @Test
     public void swaggerIsAvailable() throws Exception {
-        RestAssured.expect().statusCode(HttpStatus.OK_200).body(StringContains.containsString(TestResource.OPERATION_DESCRIPTION)).when().get(Path.from(basePath, "swagger.json"));
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(Path.from(basePath, "swagger"));
-        RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(Path.from(basePath, "swagger") + "/");
+        RestAssured.expect().statusCode(HttpStatus.OK_200)
+                .body(StringContains
+                        .containsString(TestResource.OPERATION_DESCRIPTION))
+                .when().get(Path.from(basePath, "swagger.json"));
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when()
+                .get(Path.from(basePath, "swagger"));
+        RestAssured.expect().statusCode(HttpStatus.OK_200).when()
+                .get(Path.from(basePath, "swagger") + "/");
     }
 
     static class Path {
         private final List<String> pathComponents = new ArrayList<>();
 
         public static Path from(String basePath) {
-            Path path = new Path();
-            path.pathComponents.addAll(Splitter.on("/").omitEmptyStrings().splitToList(basePath));
+            final Path path = new Path();
+            path.pathComponents.addAll(
+                    Splitter.on("/").omitEmptyStrings().splitToList(basePath));
             return path;
         }
 
         public static String from(Path basePath, String additionalPath) {
-            List<String> pathComponents = new ArrayList<>();
+            final List<String> pathComponents = new ArrayList<>();
             pathComponents.addAll(basePath.pathComponents);
             pathComponents.add(additionalPath);
             return asString(pathComponents);
         }
 
         public static String asString(List<String> pathComponents) {
-            return pathComponents.isEmpty() ? "/" : Joiner.on("/").join(pathComponents);
+            return pathComponents.isEmpty() ? "/"
+                    : Joiner.on("/").join(pathComponents);
         }
     }
 }

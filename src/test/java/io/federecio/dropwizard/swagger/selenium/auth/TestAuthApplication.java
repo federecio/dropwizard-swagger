@@ -23,9 +23,6 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.TestApplication;
 import io.federecio.dropwizard.swagger.TestConfiguration;
 
-/**
- * @author Maximilien Marie
- */
 public class TestAuthApplication extends TestApplication {
 
     @Override

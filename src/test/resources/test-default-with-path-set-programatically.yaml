@@ -2,7 +2,7 @@ server:
   type: default
   applicationConnectors:
     - type: http
-      port: 33333
+      port: 0
   adminConnectors:
     - type: http
-      port: 44449
+      port: 0

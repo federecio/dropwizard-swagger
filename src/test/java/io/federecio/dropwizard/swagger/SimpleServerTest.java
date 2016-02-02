@@ -15,18 +15,18 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import org.junit.runner.RunWith;
+import org.junit.ClassRule;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 
-/**
- * @author Federico Recio
- */
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple.yaml")
 public class SimpleServerTest extends DropwizardTest {
 
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE = new DropwizardAppRule<TestConfiguration>(
+            TestApplication.class,
+            ResourceHelpers.resourceFilePath("test-simple.yaml"));
+
     public SimpleServerTest() {
-        super(55668, "/application");
+        super(RULE.getLocalPort(), "/application");
     }
 }

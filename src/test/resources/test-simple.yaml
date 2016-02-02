@@ -2,6 +2,6 @@ server:
   type: simple
   connector:
     type: http
-    port: 55668
+    port: 0
 swagger:
   resourcePackage: io.federecio.dropwizard.swagger

@@ -2,9 +2,9 @@ server:
   type: default
   applicationConnectors:
     - type: http
-      port: 44444
+      port: 0
   adminConnectors:
     - type: http
-      port: 44445
+      port: 0
 swagger:
   resourcePackage: io.federecio.dropwizard.swagger
