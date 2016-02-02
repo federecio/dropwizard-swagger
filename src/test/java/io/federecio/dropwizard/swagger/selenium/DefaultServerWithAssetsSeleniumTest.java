@@ -23,7 +23,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
-import io.federecio.dropwizard.swagger.Constants;
 import io.federecio.dropwizard.swagger.TestApplicationWithAssetsAndPathSetProgramatically;
 import io.federecio.dropwizard.swagger.TestApplicationWithPathSetProgramatically;
 import io.federecio.dropwizard.swagger.TestConfiguration;
@@ -39,7 +38,7 @@ public class DefaultServerWithAssetsSeleniumTest extends SeleniumTest {
     protected String getSwaggerUrl() {
         return getSwaggerUrl(RULE.getLocalPort(),
                 TestApplicationWithPathSetProgramatically.BASE_PATH
-                        + Constants.SWAGGER_PATH);
+                        + "/swagger");
     }
 
     @Test

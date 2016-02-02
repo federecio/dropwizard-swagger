@@ -15,7 +15,7 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
-import io.federecio.dropwizard.swagger.Constants;
+import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,17 +23,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.concurrent.TimeUnit;
 
 public abstract class SeleniumTest {
-
-    static final String host = Constants.DEFAULT_SWAGGER_HOST;
 
     protected static final int WAIT_IN_SECONDS = 1000;
     protected FirefoxDriver driver;
 
     protected String getSwaggerUrl(int port, String path) {
-        return String.format("http://%s:%d%s", SeleniumTest.host, port, path);
+        return String.format("http://127.0.0.1:%d%s", port, path);
     }
 
     protected abstract String getSwaggerUrl();
@@ -53,25 +50,35 @@ public abstract class SeleniumTest {
     @Test
     public void testResourceIsAccessibleThroughUI() throws Exception {
         driver.get(getSwaggerUrl() + "#!/test/dummyEndpoint");
-        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(WAIT_IN_SECONDS,
+                TimeUnit.SECONDS);
 
         clickOnTryOut("test_dummyEndpoint_content");
         assertResponseCodeIs("test_dummyEndpoint_content", 200);
     }
 
     protected void assertResponseCodeIs(String contentId, int code) {
-        By xpath = By.xpath(String.format("//div[@id='%s']/div[@class='response']/div[@class='block response_code']/pre", contentId));
-        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, String.valueOf(code)));
+        By xpath = By.xpath(String.format(
+                "//div[@id='%s']/div[@class='response']/div[@class='block response_code']/pre",
+                contentId));
+        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions
+                .textToBePresentInElementLocated(xpath, String.valueOf(code)));
     }
 
     protected void assertResponseBodyIs(String contentId, String body) {
-        By xpath = By.xpath(String.format("//div[@id='%s']/div[@class='response']/div[@class='block response_body undefined']/pre/code", contentId));
-        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(xpath, body));
+        By xpath = By.xpath(String.format(
+                "//div[@id='%s']/div[@class='response']/div[@class='block response_body undefined']/pre/code",
+                contentId));
+        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions
+                .textToBePresentInElementLocated(xpath, body));
     }
 
     protected void clickOnTryOut(String contentId) {
-        By xpath = By.xpath(String.format("//div[@id='%s']/form/div[@class='sandbox_header']/input[@value='Try it out!']", contentId));
-        new WebDriverWait(driver, WAIT_IN_SECONDS).until(ExpectedConditions.presenceOfElementLocated(xpath));
+        By xpath = By.xpath(String.format(
+                "//div[@id='%s']/form/div[@class='sandbox_header']/input[@value='Try it out!']",
+                contentId));
+        new WebDriverWait(driver, WAIT_IN_SECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(xpath));
         driver.findElement(xpath).click();
     }
 }

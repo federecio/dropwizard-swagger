@@ -18,7 +18,6 @@ package io.federecio.dropwizard.swagger.selenium;
 import org.junit.ClassRule;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
-import io.federecio.dropwizard.swagger.Constants;
 import io.federecio.dropwizard.swagger.TestApplication;
 import io.federecio.dropwizard.swagger.TestConfiguration;
 
@@ -32,6 +31,6 @@ public class SimpleServerWithApplicationContextPathSeleniumTest
 
     @Override
     protected String getSwaggerUrl() {
-        return getSwaggerUrl(RULE.getLocalPort(), Constants.SWAGGER_PATH);
+        return getSwaggerUrl(RULE.getLocalPort(), "/swagger");
     }
 }

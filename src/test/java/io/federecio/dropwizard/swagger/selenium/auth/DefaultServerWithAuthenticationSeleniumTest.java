@@ -22,7 +22,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
-import io.federecio.dropwizard.swagger.Constants;
 import io.federecio.dropwizard.swagger.TestConfiguration;
 import io.federecio.dropwizard.swagger.selenium.SeleniumTest;
 
@@ -35,7 +34,7 @@ public class DefaultServerWithAuthenticationSeleniumTest extends SeleniumTest {
 
     @Override
     protected String getSwaggerUrl() {
-        return getSwaggerUrl(RULE.getLocalPort(), Constants.SWAGGER_PATH);
+        return getSwaggerUrl(RULE.getLocalPort(), "/swagger");
     }
 
     @Test
