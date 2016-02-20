@@ -18,7 +18,7 @@ package io.federecio.dropwizard.swagger;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.jayway.restassured.RestAssured;
-import com.wordnik.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.ApiListingResource;
 import org.eclipse.jetty.http.HttpStatus;
 import org.hamcrest.core.StringContains;
 import org.junit.Before;
