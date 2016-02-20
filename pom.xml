@@ -47,12 +47,13 @@
     </scm>
 
     <properties>
-        <dropwizard.version>0.8.0</dropwizard.version>
+        <dropwizard.version>0.9.2</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
-        <jdk.version>1.7</jdk.version>
-        <swagger.version>1.5.1-M2</swagger.version>
+        <jdk.version>1.8</jdk.version>
+        <swagger.version>1.5.7</swagger.version>
+        <glassfish-jersey.version>2.22.1</glassfish-jersey.version>
     </properties>
 
     <dependencies>
@@ -77,7 +78,13 @@
             <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.wordnik</groupId>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${glassfish-jersey.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
             <artifactId>swagger-jersey2-jaxrs</artifactId>
             <version>${swagger.version}</version>
             <exclusions>
@@ -176,7 +183,7 @@
         <dependency>
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-junit</artifactId>
-            <version>0.6</version>
+            <version>0.7-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -188,7 +195,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.45.0</version>
+            <version>2.52.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -224,7 +231,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.3.2</version>
+            <version>4.3.6</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -234,6 +241,31 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.13</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.4</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
