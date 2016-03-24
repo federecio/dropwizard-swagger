@@ -62,10 +62,7 @@ public class ConfigurationHelper {
                     .getJerseyRootPath();
         }
 
-        if (rootPath.equals(Optional.absent()))
-            rootPath = Optional.of("/");
-
-        return stripUrlSlashes(rootPath.get());
+        return stripUrlSlashes(rootPath.or("/"));
     }
 
     public String getUrlPattern() {
