@@ -18,10 +18,8 @@ package io.federecio.dropwizard.swagger;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 
-/**
- * @author Federico Recio
- */
-public class TestApplicationWithAssetsAndPathSetProgramatically extends TestApplicationWithPathSetProgramatically {
+public class TestApplicationWithAssetsAndPathSetProgramatically
+        extends TestApplicationWithPathSetProgramatically {
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
         super.initialize(bootstrap);

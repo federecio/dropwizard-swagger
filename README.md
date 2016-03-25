@@ -1,9 +1,13 @@
 dropwizard-swagger
 ==================
+[![Build Status](https://travis-ci.org/smoketurner/dropwizard-swagger.svg?branch=master)](https://travis-ci.org/smoketurner/dropwizard-swagger)
+[![Coverage Status](https://coveralls.io/repos/smoketurner/dropwizard-swagger/badge.svg?branch=master&service=github)](https://coveralls.io/github/smoketurner/dropwizard-swagger?branch=master)
+[![Maven Central](https://img.shields.io/maven-central/v/com.smoketurner/dropwizard-swagger.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.smoketurner/dropwizard-swagger/)
+[![GitHub license](https://img.shields.io/github/license/smoketurner/dropwizard-swagger.svg?style=flat-square)](https://github.com/smoketurner/dropwizard-swagger/tree/master)
 
-a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/wordnik/swagger-ui
+a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/swagger-api/swagger-ui
 
-Current version has been tested with Dropwizard 0.8.0 and Swagger 1.5.1-M2 which supports Swagger 2 spec!
+Current version has been tested with Dropwizard 0.9.2 and Swagger 1.5.4 which supports Swagger 2 spec!
 
 Note: if you come from previous versions there have been some changes in the way the bundle is configured, see details below.
 
@@ -15,60 +19,64 @@ http://www.apache.org/licenses/LICENSE-2.0
 Version matrix
 --------------
 
-dropwizard-swagger|Dropwizard|Swagger API|Swagger UI 
+dropwizard-swagger|Dropwizard|Swagger API|Swagger UI
 ------------------|----------|-----------|----------
      < 0.5        |   0.7.x  |   1.3.2   |    ?
        0.5.x      |   0.7.x  |   1.3.12  | v2.1.4-M1
        0.6.x      |   0.8.0  |   1.3.12  | v2.1.4-M1
-       0.7.x      |   0.8.0  |   1.5.1-M2| v2.1.4-M1
-       
+       0.7.x      |   0.8.x  |   1.5.1-M2| v2.1.4-M1
+       0.7.2      |   0.8.4  |   1.5.3   | v2.1.2
+       0.9.x      |   0.9.x  |   1.5.4   | v2.1.2
+
 How to use it
 -------------
 
 * Add the Maven dependency (available in Maven Central)
 
-        <dependency>
-            <groupId>io.federecio</groupId>
-            <artifactId>dropwizard-swagger</artifactId>
-            <version>0.7.0</version>
-        </dependency>
+```xml
+<dependency>
+    <groupId>com.smoketurner</groupId>
+    <artifactId>dropwizard-swagger</artifactId>
+    <version>0.9.2-1</version>
+</dependency>
+```
 
 
 * Add the following to your Configuration class:
 
-        public class YourConfiguration extends Configuration {
-        ...
-            @JsonProperty("swagger")
-            public SwaggerBundleConfiguration swaggerBundleConfiguration;
+```java
+public class YourConfiguration extends Configuration {
+
+    @JsonProperty("swagger")
+    public SwaggerBundleConfiguration swaggerBundleConfiguration;
+```
 
 * Add the following your configuration yaml (this is the minimal configuration you need):
 
-        prop1: value1
-        prop2: value2
-        ...
-        # the only required property is resourcePackage, for more config options see below
-        swagger:
-          resourcePackage: <a comma separated string of the packages that contain your @Api annotated resources>
+```yaml
+prop1: value1
+prop2: value2
 
-
+# the only required property is resourcePackage, for more config options see below
+swagger:
+  resourcePackage: <a comma separated string of the packages that contain your @Api annotated resources>
+```
 
 * In your Application class:
 
-		@Override
-		public void initialize(Bootstrap<YourConfiguration> bootstrap) {
-		    ...
-            bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
-                @Override
-                protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(YourConfiguration configuration) {
-                    return configuration.swaggerBundleConfiguration;
-                }
-            });
-            ...
-		}
+```java
+@Override
+public void initialize(Bootstrap<YourConfiguration> bootstrap) {
+    bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
 
+    @Override
+    protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(YourConfiguration configuration) {
+        return configuration.swaggerBundleConfiguration;
+    }
+});
+```
 
 * As usual, add Swagger annotations to your resource classes and methods
-
 
 * Open a browser and hit `http://localhost:<your_port>/swagger`
 
@@ -98,3 +106,5 @@ Contributors
 * Flemming Frandsen https://github.com/dren-dk
 * Tristan Burch [tburch] (https://github.com/tburch)
 * Matt Carrier [mattcarrier] (https://github.com/mattcarrier)
+* Justin Plock [jplock] (https://github.com/jplock)
+

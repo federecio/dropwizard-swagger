@@ -15,20 +15,21 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
+import org.junit.ClassRule;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 import io.federecio.dropwizard.swagger.TestApplication;
-import org.junit.runner.RunWith;
+import io.federecio.dropwizard.swagger.TestConfiguration;
 
-/**
- * @author Federico Recio
- */
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple-with-root-path.yaml")
 public class SimpleServerWithRootPathSeleniumTest extends SeleniumTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE = new DropwizardAppRule<TestConfiguration>(
+            TestApplication.class, ResourceHelpers
+                    .resourceFilePath("test-simple-with-root-path.yaml"));
 
     @Override
     protected String getSwaggerUrl() {
-        return getSwaggerUrl(51478, "/application/api/swagger");
+        return getSwaggerUrl(RULE.getLocalPort(), "/application/api/swagger");
     }
 }

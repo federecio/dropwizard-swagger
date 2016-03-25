@@ -15,28 +15,31 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
+import javax.annotation.Nonnull;
 import io.dropwizard.views.View;
 
 /**
- * Serves the content of Swagger's index page which has been "templatized" to support replacing
- * the directory in which Swagger's static content is located (i.e. JS files) and the path with
- * which requests to resources need to be prefixed
- *
- * @author Federico Recio
+ * Serves the content of Swagger's index page which has been "templatized" to
+ * support replacing the directory in which Swagger's static content is located
+ * (i.e. JS files) and the path with which requests to resources need to be
+ * prefixed.
  */
 public class SwaggerView extends View {
 
+    private static final String SWAGGER_URI_PATH = "/swagger-static";
     private final String swaggerAssetsPath;
     private final String contextPath;
+    private final String validatorUrl;
 
-    protected SwaggerView(String urlPattern) {
-        super("index.ftl", Charsets.UTF_8);
+    public SwaggerView(@Nonnull final String urlPattern,
+            @Nonnull final String validatorUrl) {
+        super("index.ftl", StandardCharsets.UTF_8);
 
         if (urlPattern.equals("/")) {
-            swaggerAssetsPath = Constants.SWAGGER_URI_PATH;
+            swaggerAssetsPath = SWAGGER_URI_PATH;
         } else {
-            swaggerAssetsPath = urlPattern + Constants.SWAGGER_URI_PATH;
+            swaggerAssetsPath = urlPattern + SWAGGER_URI_PATH;
         }
 
         if (urlPattern.equals("/")) {
@@ -44,21 +47,30 @@ public class SwaggerView extends View {
         } else {
             contextPath = urlPattern;
         }
+
+        this.validatorUrl = validatorUrl;
     }
 
     /**
-     * Returns the path with which all requests for Swagger's static content need to be prefixed
+     * Returns the path with which all requests for Swagger's static content
+     * need to be prefixed
      */
-    @SuppressWarnings("unused")
     public String getSwaggerAssetsPath() {
         return swaggerAssetsPath;
     }
 
     /**
-     * Returns the path with with which all requests made by Swagger's UI to Resources need to be prefixed
+     * Returns the path with with which all requests made by Swagger's UI to
+     * Resources need to be prefixed
      */
-    @SuppressWarnings("unused")
     public String getContextPath() {
         return contextPath;
+    }
+
+    /**
+     * Returns whether the validator URL
+     */
+    public String getValidatorUrl() {
+        return validatorUrl;
     }
 }
