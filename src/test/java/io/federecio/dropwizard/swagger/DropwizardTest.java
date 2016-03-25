@@ -26,7 +26,7 @@ import org.junit.Test;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.jayway.restassured.RestAssured;
-import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.BaseApiListingResource;
 
 public abstract class DropwizardTest {
 
@@ -45,7 +45,7 @@ public abstract class DropwizardTest {
 
     @BeforeClass
     public static void crap() throws Exception {
-        Field initialized = ApiListingResource.class
+        Field initialized = BaseApiListingResource.class
                 .getDeclaredField("initialized");
         initialized.setAccessible(true);
     }
