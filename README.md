@@ -7,7 +7,7 @@ dropwizard-swagger
 
 a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/swagger-api/swagger-ui
 
-Current version has been tested with Dropwizard 0.9.2 and Swagger 1.5.4 which supports Swagger 2 spec!
+Current version has been tested with Dropwizard 1.0.0-rc1 and Swagger 1.5.8 which supports Swagger 2 spec!
 
 Note: if you come from previous versions there have been some changes in the way the bundle is configured, see details below.
 
@@ -19,14 +19,15 @@ http://www.apache.org/licenses/LICENSE-2.0
 Version matrix
 --------------
 
-dropwizard-swagger|Dropwizard|Swagger API|Swagger UI
-------------------|----------|-----------|----------
-     < 0.5        |   0.7.x  |   1.3.2   |    ?
-       0.5.x      |   0.7.x  |   1.3.12  | v2.1.4-M1
-       0.6.x      |   0.8.0  |   1.3.12  | v2.1.4-M1
-       0.7.x      |   0.8.x  |   1.5.1-M2| v2.1.4-M1
-       0.7.2      |   0.8.4  |   1.5.3   | v2.1.2
-       0.9.x      |   0.9.x  |   1.5.4   | v2.1.2
+dropwizard-swagger| Dropwizard |Swagger API|Swagger UI
+------------------|------------|-----------|----------
+     < 0.5        |   0.7.x    |   1.3.2   |    ?
+       0.5.x      |   0.7.x    |   1.3.12  | v2.1.4-M1
+       0.6.x      |   0.8.0    |   1.3.12  | v2.1.4-M1
+       0.7.x      |   0.8.x    |   1.5.1-M2| v2.1.4-M1
+       0.7.2      |   0.8.4    |   1.5.3   | v2.1.2
+       0.9.x      |   0.9.x    |   1.5.4   | v2.1.2
+       1.0.0-rc1  |   1.0.0-rc1|   1.5.8   | v2.1.4
 
 How to use it
 -------------
