@@ -15,7 +15,8 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.google.common.base.Optional;
+
+import java.util.Optional;
 
 import io.dropwizard.Configuration;
 import io.dropwizard.server.DefaultServerFactory;
@@ -62,7 +63,7 @@ public class ConfigurationHelper {
                     .getJerseyRootPath();
         }
 
-        return stripUrlSlashes(rootPath.or("/"));
+        return stripUrlSlashes(rootPath.orElse("/"));
     }
 
     public String getUrlPattern() {
