@@ -469,8 +469,10 @@
                     <header>license.txt</header>
                     <excludes>
                         <exclude>**/README</exclude>
+                        <exclude>**/LICENSE</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>
+                        <exclude>src/site/**</exclude>
                         <exclude>*.xml</exclude>
                     </excludes>
                 </configuration>
