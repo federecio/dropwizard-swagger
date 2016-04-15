@@ -16,10 +16,12 @@
 package io.federecio.dropwizard.swagger;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
+
 import io.swagger.jaxrs.config.BeanConfig;
 
 /**
@@ -47,6 +49,8 @@ public class SwaggerBundleConfiguration {
     private String licenseUrl;
     private String validatorUrl;
     private Boolean prettyPrint = true;
+    private String host;
+    private String[] schemes = new String[]{"http"};
 
     /**
      * For most of the scenarios this property is not needed.
@@ -172,6 +176,26 @@ public class SwaggerBundleConfiguration {
         this.prettyPrint = isPrettyPrint;
     }
 
+    @JsonProperty
+    public String getHost() {
+      return host;
+    }
+
+    @JsonProperty
+    public void setHost(String host) {
+      this.host = host;
+    }
+
+    @JsonProperty
+    public String[] getSchemes() {
+      return schemes;
+    }
+
+    @JsonProperty
+    public void setSchemes(String[] schemes) {
+      this.schemes = schemes;
+    }
+
     @JsonIgnore
     public BeanConfig build(String urlPattern) {
         if (Strings.isNullOrEmpty(resourcePackage)) {
@@ -191,6 +215,8 @@ public class SwaggerBundleConfiguration {
         config.setPrettyPrint(prettyPrint);
         config.setBasePath(urlPattern);
         config.setResourcePackage(resourcePackage);
+        config.setSchemes(schemes);
+        config.setHost(host);
         config.setScan(true);
         return config;
     }
