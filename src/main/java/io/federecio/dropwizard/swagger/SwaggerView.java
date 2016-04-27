@@ -33,9 +33,8 @@ public class SwaggerView extends View {
 
     private final SwaggerViewConfiguration viewConfiguration;
 
-
     public SwaggerView(@Nonnull final String urlPattern,
-                       @Nonnull SwaggerViewConfiguration config) {
+            @Nonnull SwaggerViewConfiguration config) {
         super(config.getTemplateUrl(), StandardCharsets.UTF_8);
 
         if (urlPattern.equals("/")) {

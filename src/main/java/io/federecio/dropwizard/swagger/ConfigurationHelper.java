@@ -14,9 +14,7 @@
  */
 package io.federecio.dropwizard.swagger;
 
-
 import java.util.Optional;
-
 import io.dropwizard.Configuration;
 import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
@@ -50,10 +48,9 @@ public class ConfigurationHelper {
             return swaggerBundleConfiguration.getUriPrefix();
         }
 
-        Optional<String> rootPath;
+        final ServerFactory serverFactory = configuration.getServerFactory();
 
-        ServerFactory serverFactory = configuration.getServerFactory();
-
+        final Optional<String> rootPath;
         if (serverFactory instanceof SimpleServerFactory) {
             rootPath = ((SimpleServerFactory) serverFactory)
                     .getJerseyRootPath();
@@ -75,8 +72,7 @@ public class ConfigurationHelper {
         final String applicationContextPath = getApplicationContextPath();
         final String rootPath = getJerseyRootPath();
 
-        String urlPattern;
-
+        final String urlPattern;
         if (rootPath.equals("/") && applicationContextPath.equals("/")) {
             urlPattern = "/";
         } else if (rootPath.equals("/")
@@ -94,15 +90,15 @@ public class ConfigurationHelper {
 
     public String getSwaggerUriPath() {
         final String jerseyRootPath = getJerseyRootPath();
-        String uriPathPrefix = jerseyRootPath.equals("/") ? "" : jerseyRootPath;
+        final String uriPathPrefix = jerseyRootPath.equals("/") ? ""
+                : jerseyRootPath;
         return uriPathPrefix + "/swagger-static";
     }
 
     private String getApplicationContextPath() {
-        String applicationContextPath;
+        final ServerFactory serverFactory = configuration.getServerFactory();
 
-        ServerFactory serverFactory = configuration.getServerFactory();
-
+        final String applicationContextPath;
         if (serverFactory instanceof SimpleServerFactory) {
             applicationContextPath = ((SimpleServerFactory) serverFactory)
                     .getApplicationContextPath();

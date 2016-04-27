@@ -42,14 +42,14 @@ public abstract class SwaggerBundle<T extends Configuration>
 
     @Override
     public void run(T configuration, Environment environment) throws Exception {
-        SwaggerBundleConfiguration swaggerBundleConfiguration = getSwaggerBundleConfiguration(
+        final SwaggerBundleConfiguration swaggerBundleConfiguration = getSwaggerBundleConfiguration(
                 configuration);
         if (swaggerBundleConfiguration == null) {
             throw new IllegalStateException(
                     "You need to provide an instance of SwaggerBundleConfiguration");
         }
 
-        ConfigurationHelper configurationHelper = new ConfigurationHelper(
+        final ConfigurationHelper configurationHelper = new ConfigurationHelper(
                 configuration, swaggerBundleConfiguration);
         new AssetsBundle("/swagger-static",
                 configurationHelper.getSwaggerUriPath(), null, "swagger-assets")
@@ -62,9 +62,9 @@ public abstract class SwaggerBundle<T extends Configuration>
 
         environment.jersey().register(new ApiListingResource());
         environment.jersey().register(new SwaggerSerializers());
-        environment.jersey().register(
-                new SwaggerResource(configurationHelper.getUrlPattern(),
-                        swaggerBundleConfiguration.getSwaggerViewConfiguration()));
+        environment.jersey().register(new SwaggerResource(
+                configurationHelper.getUrlPattern(),
+                swaggerBundleConfiguration.getSwaggerViewConfiguration()));
     }
 
     protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(

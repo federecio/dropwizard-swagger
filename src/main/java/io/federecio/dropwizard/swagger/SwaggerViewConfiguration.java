@@ -13,13 +13,14 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import javax.annotation.Nonnull;
-
 /**
- * Contains all configurable parameters required to render the SwaggerUI View from the default template
+ * Contains all configurable parameters required to render the SwaggerUI View
+ * from the default template
  */
 public class SwaggerViewConfiguration {
 
+    private static final String DEFAULT_TITLE = "Swagger UI";
+    private static final String DEFAULT_TEMPLATE = "index.ftl";
 
     private String pageTitle;
     private String templateUrl;
@@ -27,10 +28,7 @@ public class SwaggerViewConfiguration {
     private boolean showApiSelector;
     private boolean showAuth;
 
-    private static final String DEFAULT_TITLE = "Swagger UI";
-    private static final String DEFAULT_TEMPLATE = "index.ftl";
-
-    public SwaggerViewConfiguration () {
+    public SwaggerViewConfiguration() {
         this.pageTitle = DEFAULT_TITLE;
         this.templateUrl = DEFAULT_TEMPLATE;
         this.validatorUrl = null;
