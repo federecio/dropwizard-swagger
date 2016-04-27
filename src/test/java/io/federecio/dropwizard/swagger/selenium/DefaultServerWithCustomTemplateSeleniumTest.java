@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class DefaultServerWithCustomTemplateTest
+public class DefaultServerWithCustomTemplateSeleniumTest
         extends SeleniumTest {
 
     @ClassRule
