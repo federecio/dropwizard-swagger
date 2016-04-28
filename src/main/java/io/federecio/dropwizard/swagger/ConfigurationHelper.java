@@ -73,13 +73,13 @@ public class ConfigurationHelper {
         final String rootPath = getJerseyRootPath();
 
         final String urlPattern;
-        if (rootPath.equals("/") && applicationContextPath.equals("/")) {
+        if ("/".equals(rootPath) && "/".equals(applicationContextPath)) {
             urlPattern = "/";
-        } else if (rootPath.equals("/")
-                && !applicationContextPath.equals("/")) {
+        } else if ("/".equals(rootPath)
+                && !"/".equals(applicationContextPath)) {
             urlPattern = applicationContextPath;
-        } else if (!rootPath.equals("/")
-                && applicationContextPath.equals("/")) {
+        } else if (!"/".equals(rootPath)
+                && "/".equals(applicationContextPath)) {
             urlPattern = rootPath;
         } else {
             urlPattern = applicationContextPath + rootPath;
