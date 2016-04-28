@@ -14,18 +14,19 @@
  */
 package io.federecio.dropwizard.swagger.selenium.auth;
 
-import java.util.Optional;
+import com.google.common.base.Optional;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.PrincipalImpl;
 
-public class TestAuthenticator implements Authenticator<String, PrincipalImpl>{
+public class TestAuthenticator implements Authenticator<String, PrincipalImpl> {
 
     @Override
-    public Optional<PrincipalImpl> authenticate(String token) throws AuthenticationException {
-        if ("secret" .equals(token)) {
+    public Optional<PrincipalImpl> authenticate(String token)
+            throws AuthenticationException {
+        if ("secret".equals(token)) {
             return Optional.of(new PrincipalImpl(token));
         }
-        return Optional.empty();
+        return Optional.absent();
     }
 }
