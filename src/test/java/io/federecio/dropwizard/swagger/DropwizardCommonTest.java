@@ -14,20 +14,16 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-
-import com.jayway.restassured.RestAssured;
-
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.jayway.restassured.RestAssured;
 import io.swagger.jaxrs.listing.BaseApiListingResource;
 
 public abstract class DropwizardCommonTest {

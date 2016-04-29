@@ -13,14 +13,12 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import org.junit.ClassRule;
-import org.junit.Test;
-
-import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import org.junit.ClassRule;
+import org.junit.Test;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 
 public class DefaultServerWithNoSwaggerTest extends DropwizardNoSwaggerTest {
 

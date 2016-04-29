@@ -13,11 +13,9 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.jayway.restassured.RestAssured;
-
 import org.eclipse.jetty.http.HttpStatus;
-import org.hamcrest.core.StringContains;
 import org.junit.Test;
+import com.jayway.restassured.RestAssured;
 
 public abstract class DropwizardNoSwaggerTest extends DropwizardCommonTest {
 
@@ -34,5 +32,4 @@ public abstract class DropwizardNoSwaggerTest extends DropwizardCommonTest {
         RestAssured.expect().statusCode(HttpStatus.NOT_FOUND_404).when()
                 .get(Path.from(basePath, "swagger") + "/");
     }
-
 }
