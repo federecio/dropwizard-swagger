@@ -47,7 +47,7 @@
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.7</jdk.version>
         <swagger.version>1.5.4</swagger.version>
-        <selenium.version>2.48.2</selenium.version>
+        <selenium.version>2.53.0</selenium.version>
     </properties>
 
     <dependencies>

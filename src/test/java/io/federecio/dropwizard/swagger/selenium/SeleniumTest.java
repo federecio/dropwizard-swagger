@@ -36,7 +36,7 @@ public abstract class SeleniumTest {
         String tmpHost;
 
         try {
-            tmpHost = InetAddress.getLocalHost().getHostName();
+            tmpHost = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException ignored) {
             tmpHost = Constants.DEFAULT_SWAGGER_HOST;
         }
