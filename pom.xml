@@ -4,7 +4,7 @@
 
     <groupId>io.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>0.9.0-expedia</version>
 
     <name>Dropwizard Swagger support</name>
     <description>A simple way to document your REST APIs in DropWizard using Swagger</description>
@@ -37,7 +37,7 @@
         <connection>scm:git:git://github.com:ExpediaInc/dropwizard-swagger.git</connection>
         <developerConnection>scm:git:git@github.com:ExpediaInc/dropwizard-swagger.git</developerConnection>
         <url>https://github.com/ExpediaInc/dropwizard-swagger</url>
-        <tag>HEAD</tag>
+        <tag>0.9.0-expedia</tag>
     </scm>
 
     <properties>
