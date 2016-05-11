@@ -20,6 +20,7 @@
   <script src='${swaggerAssetsPath}/lib/backbone-min.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/swagger-ui.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/highlight.7.3.pack.js' type='text/javascript'></script>
+  <script src='${swaggerAssetsPath}/lib/jsoneditor.min.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/marked.js' type='text/javascript'></script>
   <script src='${swaggerAssetsPath}/lib/swagger-oauth.js' type='text/javascript'></script>
 
@@ -43,10 +44,11 @@
           if(typeof initOAuth == "function") {
             initOAuth({
               clientId: "your-client-id",
-              clientSecret: "your-client-secret",
+              clientSecret: "your-client-secret-if-required",
               realm: "your-realms",
               appName: "your-app-name", 
-              scopeSeparator: ","
+              scopeSeparator: ",",
+              additionalQueryStringParams: {}
             });
           }
 
@@ -63,10 +65,12 @@
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
+        validatorUrl: null,
         docExpansion: "none",
+        jsonEditor: false,
         apisSorter: "alpha",
-        showRequestHeaders: false,
-        validatorUrl: null
+        defaultModelRendering: 'schema',
+        showRequestHeaders: false
       });
 
       function addApiKeyAuthorization(){

@@ -15,6 +15,8 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import io.swagger.annotations.Api;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,6 +27,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path(Constants.SWAGGER_PATH)
 @Produces(MediaType.TEXT_HTML)
+@Api(hidden = true)
 public class SwaggerResource {
     private final String urlPattern;
 

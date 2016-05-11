@@ -16,11 +16,10 @@
 package io.federecio.dropwizard.swagger;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import io.dropwizard.Application;
-import io.dropwizard.auth.AuthFactory;
-import io.dropwizard.auth.AuthenticationException;
-import io.dropwizard.auth.Authenticator;
-import io.dropwizard.auth.basic.BasicAuthFactory;
+import io.dropwizard.auth.*;
+import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -39,16 +38,22 @@ public class TestApplicationWithAuth extends Application<TestConfiguration> {
 
     @Override
     public void run(TestConfiguration configuration, Environment environment) throws Exception {
-        environment.jersey().register(AuthFactory.binder(new BasicAuthFactory<>(new TestAuthenticator(),
-                "Auth", String.class)));
+        environment.jersey().register(new AuthDynamicFeature(
+                new BasicCredentialAuthFilter.Builder<PrincipalImpl>()
+                        .setAuthenticator(new TestAuthenticator())
+                        .buildAuthFilter()));
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(PrincipalImpl.class));
         environment.jersey().register(new TestResourceWithAuth());
     }
 
-    private static class TestAuthenticator implements Authenticator<BasicCredentials, String> {
+    private static class TestAuthenticator implements Authenticator<BasicCredentials, PrincipalImpl> {
 
         @Override
-        public Optional<String> authenticate(BasicCredentials basicCredentials) throws AuthenticationException {
-            return Optional.fromNullable(basicCredentials.getUsername());
+        public Optional<PrincipalImpl> authenticate(BasicCredentials basicCredentials) throws AuthenticationException {
+            if (Strings.isNullOrEmpty(basicCredentials.getUsername())) {
+                return Optional.absent();
+            }
+            return Optional.of(new PrincipalImpl(basicCredentials.getUsername()));
         }
     }
 }
