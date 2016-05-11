@@ -14,7 +14,6 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.assets.AssetsBundle;
@@ -58,9 +57,6 @@ public abstract class SwaggerBundle<T extends Configuration>
         new AssetsBundle("/swagger-static",
                 configurationHelper.getSwaggerUriPath(), null, "swagger-assets")
                         .run(environment);
-
-        environment.getObjectMapper()
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         swaggerBundleConfiguration.build(configurationHelper.getUrlPattern());
 
