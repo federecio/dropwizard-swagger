@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="" type="com.federecio.dropwizard.swagger.SwaggerView" -->
+<#-- @ftlvariable name="" type="io.federecio.dropwizard.swagger.SwaggerView" -->
 <!DOCTYPE html>
 <html>
 <head>
