@@ -13,13 +13,13 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.jayway.restassured.RestAssured;
-import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.eclipse.jetty.http.HttpStatus;
 import org.hamcrest.core.StringContains;
 import org.junit.ClassRule;
 import org.junit.Test;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import io.restassured.RestAssured;
 
 public class DefaultServerWithContactTest extends DropwizardTest {
 

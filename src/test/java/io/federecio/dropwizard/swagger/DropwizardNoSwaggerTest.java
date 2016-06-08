@@ -15,7 +15,7 @@ package io.federecio.dropwizard.swagger;
 
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Test;
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 
 public abstract class DropwizardNoSwaggerTest extends DropwizardCommonTest {
 

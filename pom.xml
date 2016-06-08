@@ -56,12 +56,12 @@
     </scm>
 
     <properties>
-        <dropwizard.version>1.0.0-rc2</dropwizard.version>
+        <dropwizard.version>1.0.0-rc3</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
-        <jdk.version>1.7</jdk.version>
-        <swagger.version>1.5.8</swagger.version>
+        <jdk.version>1.8</jdk.version>
+        <swagger.version>1.5.9</swagger.version>
     </properties>
 
     <ciManagement>
@@ -228,9 +228,9 @@
             <version>1.4.01</version>
         </dependency>
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>2.9.0</version>
+            <version>3.0.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
