@@ -4,7 +4,7 @@
 
     <groupId>com.smoketurner</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.9.2-3-SNAPSHOT</version>
+    <version>1.0.0-rc3-1</version>
 
     <name>Dropwizard Swagger support</name>
     <description>A simple way to document your REST APIs in DropWizard using Swagger</description>
@@ -52,7 +52,7 @@
         <connection>scm:git:git://github.com:smoketurner/dropwizard-swagger.git</connection>
         <developerConnection>scm:git:git@github.com:smoketurner/dropwizard-swagger.git</developerConnection>
         <url>http://github.com/smoketurner/dropwizard-swagger</url>
-        <tag>HEAD</tag>
+        <tag>v1.0.0-rc3-1</tag>
     </scm>
 
     <properties>
