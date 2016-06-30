@@ -23,7 +23,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 import io.swagger.jaxrs.listing.BaseApiListingResource;
 
 public abstract class DropwizardCommonTest {
