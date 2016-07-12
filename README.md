@@ -98,3 +98,7 @@ Contributors
 * Flemming Frandsen https://github.com/dren-dk
 * Tristan Burch [tburch] (https://github.com/tburch)
 * Matt Carrier [mattcarrier] (https://github.com/mattcarrier)
+
+Development
+------------
+Firefox needs to be installed for the selenium tests to run.
