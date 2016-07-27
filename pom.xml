@@ -5,7 +5,7 @@
 
     <groupId>io.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.7.1-SNAPSHOT</version>
+    <version>0.8.0-SNAPSHOT</version>
 
     <name>Dropwizard Swagger support</name>
     <description>A simple way to document your REST APIs in DropWizard using Swagger</description>
@@ -47,11 +47,11 @@
     </scm>
 
     <properties>
-        <dropwizard.version>0.8.0</dropwizard.version>
+        <dropwizard.version>1.0.0</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
-        <jdk.version>1.7</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <swagger.version>1.5.1-M2</swagger.version>
     </properties>
 
@@ -176,7 +176,7 @@
         <dependency>
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-junit</artifactId>
-            <version>0.6</version>
+            <version>0.7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -273,24 +273,6 @@
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.3.1</version>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <configuration>
-                            <rules>
-                                <DependencyConvergence />
-                            </rules>
-                        </configuration>
-                        <goals>
-                            <goal>enforce</goal>
                         </goals>
                     </execution>
                 </executions>
