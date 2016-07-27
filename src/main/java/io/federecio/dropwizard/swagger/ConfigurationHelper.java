@@ -20,6 +20,8 @@ import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
 
+import java.util.Optional;
+
 /**
  * Wrapper around Dropwizard's configuration and the bundle's config that simplifies getting some
  * information from them.
@@ -43,7 +45,7 @@ public class ConfigurationHelper {
             return swaggerBundleConfiguration.getUriPrefix();
         }
 
-        String rootPath;
+        Optional<String> rootPath;
 
         ServerFactory serverFactory = configuration.getServerFactory();
 
@@ -53,7 +55,9 @@ public class ConfigurationHelper {
             rootPath = ((DefaultServerFactory) serverFactory).getJerseyRootPath();
         }
 
-        return stripUrlSlashes(rootPath);
+        String rootPathOrNull = rootPath.orElse(null);
+
+        return stripUrlSlashes(rootPathOrNull);
     }
 
     public String getUrlPattern() {
