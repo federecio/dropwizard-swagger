@@ -10,3 +10,10 @@ engines:
 ratings:
   paths:
   - "**.java"
+
+exclude_paths:
+- "**.png"
+- "**.ttf"
+- "**.ico"
+- "**.js"
+
