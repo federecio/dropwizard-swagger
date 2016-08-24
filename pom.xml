@@ -61,7 +61,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.8</jdk.version>
-        <swagger.version>1.5.9</swagger.version>
+        <swagger.version>1.5.10</swagger.version>
     </properties>
 
     <ciManagement>
@@ -477,12 +477,15 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.11</version>
+                <version>3.0</version>
                 <configuration>
                     <header>license.txt</header>
                     <excludes>
                         <exclude>**/README</exclude>
                         <exclude>**/LICENSE</exclude>
+                        <exclude>**/.editorconfig</exclude>
+                        <exclude>**/.java-version</exclude>
+                        <exclude>**/.gitattributes</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>
                         <exclude>src/site/**</exclude>
