@@ -15,7 +15,6 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import io.dropwizard.Application;
 import io.dropwizard.auth.*;
@@ -23,6 +22,8 @@ import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import java.util.Optional;
 
 public class TestApplicationWithAuth extends Application<TestConfiguration> {
 
@@ -51,7 +52,7 @@ public class TestApplicationWithAuth extends Application<TestConfiguration> {
         @Override
         public Optional<PrincipalImpl> authenticate(BasicCredentials basicCredentials) throws AuthenticationException {
             if (Strings.isNullOrEmpty(basicCredentials.getUsername())) {
-                return Optional.absent();
+                return Optional.empty();
             }
             return Optional.of(new PrincipalImpl(basicCredentials.getUsername()));
         }
