@@ -1,0 +1,2 @@
+io.federecio.dropwizard.swagger.DropwizardSwaggerExtension
+io.swagger.jersey.SwaggerJersey2Jaxrs

@@ -15,13 +15,14 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 import io.federecio.dropwizard.swagger.Constants;
 import io.federecio.dropwizard.swagger.TestApplicationWithAssetsAndPathSetProgramatically;
 import io.federecio.dropwizard.swagger.TestApplicationWithPathSetProgramatically;
+import io.federecio.dropwizard.swagger.TestConfiguration;
+import org.junit.ClassRule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,9 +32,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Federico Recio
  */
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplicationWithAssetsAndPathSetProgramatically.class, yamlFile = "/test-default-assets.yaml")
 public class DefaultServerWithAssetsSeleniumTest extends SeleniumTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE =
+            new DropwizardAppRule<>(TestApplicationWithAssetsAndPathSetProgramatically.class, ResourceHelpers.resourceFilePath("test-default-assets.yaml"));
 
     public static final String BASE_URL = "http://localhost:33355";
     private static final String BASE_URL_WITH_BASE_PATH = BASE_URL + TestApplicationWithPathSetProgramatically.BASE_PATH;

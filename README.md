@@ -1,9 +1,9 @@
 dropwizard-swagger
 ==================
 
-a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/wordnik/swagger-ui
+a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/swagger-api/swagger-ui
 
-Current version has been tested with Dropwizard 0.8.0 and Swagger 1.5.1-M2 which supports Swagger 2 spec!
+Current version has been tested with Dropwizard 0.8.0 and Swagger 1.5.4 which supports Swagger 2 spec!
 
 Note: if you come from previous versions there have been some changes in the way the bundle is configured, see details below.
 
@@ -21,6 +21,8 @@ dropwizard-swagger|Dropwizard|Swagger API|Swagger UI
        0.5.x      |   0.7.x  |   1.3.12  | v2.1.4-M1
        0.6.x      |   0.8.0  |   1.3.12  | v2.1.4-M1
        0.7.x      |   0.8.0  |   1.5.1-M2| v2.1.4-M1
+       0.8.x      |   0.8.5  |   1.5.4   | v2.1.3
+       0.9.x      |   0.9.2  |   1.5.8   | v2.1.4
        
 How to use it
 -------------

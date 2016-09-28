@@ -15,14 +15,17 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 import io.federecio.dropwizard.swagger.TestApplication;
-import org.junit.runner.RunWith;
+import io.federecio.dropwizard.swagger.TestConfiguration;
+import org.junit.ClassRule;
 
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple.yaml")
-@RunWith(DropwizardJunitRunner.class)
 public class SimpleServerSeleniumTest extends SeleniumTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE =
+            new DropwizardAppRule<>(TestApplication.class, ResourceHelpers.resourceFilePath("test-simple.yaml"));
 
     @Override
     protected String getSwaggerUrl() {
