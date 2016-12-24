@@ -20,6 +20,7 @@ import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
+import io.swagger.config.FilterFactory;
 import io.swagger.converter.ModelConverters;
 import io.swagger.jackson.ModelResolver;
 import io.swagger.jaxrs.listing.ApiListingResource;
@@ -59,6 +60,8 @@ public abstract class SwaggerBundle<T extends Configuration>
                         .run(environment);
 
         swaggerBundleConfiguration.build(configurationHelper.getUrlPattern());
+
+        FilterFactory.setFilter(new AuthParamFilter());
 
         environment.jersey().register(new ApiListingResource());
         environment.jersey().register(new SwaggerSerializers());
