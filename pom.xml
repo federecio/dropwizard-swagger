@@ -61,7 +61,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.8</jdk.version>
-        <swagger.version>1.5.11-SNAPSHOT</swagger.version>
+        <swagger.version>1.5.11</swagger.version>
         <selenium.version>3.0.1</selenium.version>
     </properties>
 
