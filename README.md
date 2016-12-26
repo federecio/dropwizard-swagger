@@ -5,11 +5,9 @@ dropwizard-swagger
 [![Maven Central](https://img.shields.io/maven-central/v/com.smoketurner/dropwizard-swagger.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.smoketurner/dropwizard-swagger/)
 [![GitHub license](https://img.shields.io/github/license/smoketurner/dropwizard-swagger.svg?style=flat-square)](https://github.com/smoketurner/dropwizard-swagger/tree/master)
 
-NOTE: A Dropwizard 1.0.x release is blocked until Swagger 1.5.11 is released (see https://github.com/swagger-api/swagger-core/issues/2012)
+A Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/swagger-api/swagger-ui
 
-a Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/swagger-api/swagger-ui
-
-Current version has been tested with Dropwizard 1.0.5 and Swagger 1.5.10 which supports Swagger 2 spec!
+Current version has been tested with Dropwizard 1.0.5 and Swagger 1.5.11 which supports Swagger 2 spec!
 
 Note: if you come from previous versions there have been some changes in the way the bundle is configured, see details below.
 
@@ -29,7 +27,7 @@ dropwizard-swagger| Dropwizard |Swagger API|Swagger UI
        0.7.x      |   0.8.x    |   1.5.1-M2| v2.1.4-M1
        0.7.2      |   0.8.4    |   1.5.3   | v2.1.2
        0.9.x      |   0.9.x    |   1.5.9   | v2.1.5
-       1.0.x      |   1.0.x    |   1.5.10  | v2.2.5
+       1.0.x      |   1.0.x    |   1.5.11  | v2.2.5
 
 How to use it
 -------------
@@ -40,7 +38,7 @@ How to use it
 <dependency>
     <groupId>com.smoketurner</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>1.0.2-1</version>
+    <version>1.0.5-1</version>
 </dependency>
 ```
 
