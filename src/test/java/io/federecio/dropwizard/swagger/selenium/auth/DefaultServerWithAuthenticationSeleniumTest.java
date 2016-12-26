@@ -60,10 +60,10 @@ public class DefaultServerWithAuthenticationSeleniumTest extends SeleniumTest {
         driver.findElement(By.className("authorize__btn")).click();
         final List<WebElement> inputs = driver
                 .findElements(By.className("input_apiKey_entry"));
-        inputs.get(0).sendKeys("Bearer " + token);
+        inputs.get(1).sendKeys("Bearer " + token);
         final List<WebElement> buttons = driver
                 .findElements(By.className("auth_submit__button"));
-        buttons.get(0).click();
+        buttons.get(1).click();
 
         clickOnTryOut("auth_protectedDummyEndpoint_content");
         assertResponseCodeIs("auth_protectedDummyEndpoint_content", 200);
