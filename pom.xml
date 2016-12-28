@@ -61,7 +61,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
         <jdk.version>1.8</jdk.version>
-        <swagger.version>1.5.11</swagger.version>
+        <swagger.version>1.5.12</swagger.version>
         <selenium.version>3.0.1</selenium.version>
     </properties>
 
@@ -74,6 +74,28 @@
         <system>github</system>
         <url>https://github.com/smoketurner/dropwizard-swagger/issues</url>
     </issueManagement>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray</id>
+            <name>bintray</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
