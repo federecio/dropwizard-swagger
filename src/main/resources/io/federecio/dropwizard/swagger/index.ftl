@@ -3,6 +3,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
   <title>${title}</title>
   <link rel="icon" type="image/png" href="${swaggerAssetsPath}/images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="${swaggerAssetsPath}/images/favicon-16x16.png" sizes="16x16" />
@@ -74,7 +75,8 @@
         jsonEditor: false,
         apisSorter: "alpha",
         defaultModelRendering: 'schema',
-        showRequestHeaders: false
+        showRequestHeaders: false,
+        showOperationIds: false
       });
 
       window.swaggerUi.load();
