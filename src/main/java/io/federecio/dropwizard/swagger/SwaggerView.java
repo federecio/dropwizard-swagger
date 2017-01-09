@@ -33,21 +33,21 @@ public class SwaggerView extends View {
 
     private final SwaggerViewConfiguration viewConfiguration;
 
-    public SwaggerView(@Nonnull final String urlPattern,
-            @Nonnull SwaggerViewConfiguration config) {
+    public SwaggerView(@Nonnull final String contextRoot,
+                       @Nonnull final String urlPattern,
+                       @Nonnull SwaggerViewConfiguration config) {
         super(config.getTemplateUrl(), StandardCharsets.UTF_8);
 
-        if ("/".equals(urlPattern)) {
-            swaggerAssetsPath = SWAGGER_URI_PATH;
-        } else {
-            swaggerAssetsPath = urlPattern + SWAGGER_URI_PATH;
+        String contextRootPrefix = "/".equals(contextRoot) ? "" : contextRoot;
+
+        if (!contextRootPrefix.isEmpty()) { //swagger-static should be found on the root context
+            swaggerAssetsPath = contextRootPrefix + SWAGGER_URI_PATH;
+        }
+        else {
+            swaggerAssetsPath = (urlPattern.equals("/") ? SWAGGER_URI_PATH : (urlPattern + SWAGGER_URI_PATH));
         }
 
-        if ("/".equals(urlPattern)) {
-            contextPath = "";
-        } else {
-            contextPath = urlPattern;
-        }
+        contextPath = urlPattern.equals("/") ? contextRootPrefix : (contextRootPrefix + urlPattern);
 
         this.viewConfiguration = config;
     }

@@ -35,7 +35,7 @@ public abstract class SwaggerBundle<T extends Configuration>
 
     @Override
     public void initialize(Bootstrap<?> bootstrap) {
-        bootstrap.addBundle(new ViewBundle<>());
+        bootstrap.addBundle(new ViewBundle<Configuration>());
         ModelConverters.getInstance()
                 .addConverter(new ModelResolver(bootstrap.getObjectMapper()));
     }
@@ -67,7 +67,8 @@ public abstract class SwaggerBundle<T extends Configuration>
         environment.jersey().register(new SwaggerSerializers());
         environment.jersey().register(new SwaggerResource(
                 configurationHelper.getUrlPattern(),
-                swaggerBundleConfiguration.getSwaggerViewConfiguration()));
+                swaggerBundleConfiguration.getSwaggerViewConfiguration(),
+                swaggerBundleConfiguration.getContextRoot()));
     }
 
     protected abstract SwaggerBundleConfiguration getSwaggerBundleConfiguration(
