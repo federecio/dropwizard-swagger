@@ -48,12 +48,12 @@ public class SwaggerBundleConfiguration {
     private String license;
     private String licenseUrl;
     private SwaggerViewConfiguration swaggerViewConfiguration = new SwaggerViewConfiguration();
-    private Boolean prettyPrint = true;
+    private boolean prettyPrint = true;
     private String host;
     private String contextRoot = "/";
     private String[] schemes = new String[] { "http" };
-    private Boolean enabled = true;
-    private Boolean includeSwaggerResource = true;
+    private boolean enabled = true;
+    private boolean includeSwaggerResource = true;
 
     /**
      * For most of the scenarios this property is not needed.
@@ -267,7 +267,8 @@ public class SwaggerBundleConfiguration {
         config.setLicenseUrl(licenseUrl);
         config.setTermsOfServiceUrl(termsOfServiceUrl);
         config.setPrettyPrint(prettyPrint);
-        config.setBasePath(("/".equals(contextRoot) ? "" : contextRoot) + urlPattern);
+        config.setBasePath(
+                ("/".equals(contextRoot) ? "" : contextRoot) + urlPattern);
         config.setResourcePackage(resourcePackage);
         config.setSchemes(schemes);
         config.setHost(host);

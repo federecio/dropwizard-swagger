@@ -13,20 +13,21 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-import io.restassured.RestAssured;
 import org.eclipse.jetty.http.HttpStatus;
 import org.hamcrest.core.StringContains;
 import org.junit.ClassRule;
 import org.junit.Test;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import io.restassured.RestAssured;
 
-public class DefaultServerWithSwaggerResourceDisabledTest extends DropwizardCommonTest {
+public class DefaultServerWithSwaggerResourceDisabledTest
+        extends DropwizardCommonTest {
 
     @ClassRule
     public static final DropwizardAppRule<TestConfiguration> RULE = new DropwizardAppRule<TestConfiguration>(
-            TestApplication.class,
-            ResourceHelpers.resourceFilePath("test-default-without-swagger-resource.yaml"));
+            TestApplication.class, ResourceHelpers.resourceFilePath(
+                    "test-default-without-swagger-resource.yaml"));
 
     public DefaultServerWithSwaggerResourceDisabledTest() {
         super(RULE.getLocalPort(), "/");
@@ -35,12 +36,12 @@ public class DefaultServerWithSwaggerResourceDisabledTest extends DropwizardComm
     @Test
     public void swaggerIsAvailable() throws Exception {
         RestAssured.expect().statusCode(HttpStatus.OK_200)
-            .body(StringContains
-                .containsString(TestResource.OPERATION_DESCRIPTION))
-            .when().get(Path.from(basePath, "swagger.json"));
+                .body(StringContains
+                        .containsString(TestResource.OPERATION_DESCRIPTION))
+                .when().get(Path.from(basePath, "swagger.json"));
         RestAssured.expect().statusCode(HttpStatus.NOT_FOUND_404).when()
-            .get(Path.from(basePath, "swagger"));
+                .get(Path.from(basePath, "swagger"));
         RestAssured.expect().statusCode(HttpStatus.NOT_FOUND_404).when()
-            .get(Path.from(basePath, "swagger") + "/");
+                .get(Path.from(basePath, "swagger") + "/");
     }
 }
