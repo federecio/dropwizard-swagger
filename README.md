@@ -38,7 +38,7 @@ How to use it
 <dependency>
     <groupId>com.smoketurner</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>1.0.5-3</version>
+    <version>1.0.5-4</version>
 </dependency>
 ```
 
