@@ -53,6 +53,7 @@ public class SwaggerBundleConfiguration {
     private String contextRoot = "/";
     private String[] schemes = new String[] { "http" };
     private Boolean enabled = true;
+    private Boolean includeSwaggerResource = true;
 
     /**
      * For most of the scenarios this property is not needed.
@@ -237,6 +238,16 @@ public class SwaggerBundleConfiguration {
     @JsonProperty
     public void setIsEnabled(final boolean isEnabled) {
         this.enabled = isEnabled;
+    }
+
+    @JsonProperty
+    public boolean isIncludeSwaggerResource() {
+        return includeSwaggerResource;
+    }
+
+    @JsonProperty
+    public void setIncludeSwaggerResource(final boolean include) {
+        this.includeSwaggerResource = include;
     }
 
     @JsonIgnore
