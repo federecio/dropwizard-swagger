@@ -1,0 +1,15 @@
+server:
+  type: default
+  applicationConnectors:
+    - type: http
+      port: 0
+  adminConnectors:
+    - type: http
+      port: 0
+swagger:
+  resourcePackage: io.federecio.dropwizard.swagger
+
+  oauth2:
+      clientId: "demoapp"
+      appName: "dropwizard-sample"
+      realm: "smoketurner"

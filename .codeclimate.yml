@@ -1,0 +1,19 @@
+engines:
+  pmd:
+    enabled: true
+    channel: "beta"
+  checkstyle:
+    enabled: true
+    config: checkstyle.xml
+    channel: "beta"
+
+ratings:
+  paths:
+  - "**.java"
+
+exclude_paths:
+- "**.png"
+- "**.ttf"
+- "**.ico"
+- "**.js"
+

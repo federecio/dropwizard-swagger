@@ -1,6 +1,5 @@
+//  Copyright (C) 2014 Federico Recio
 /**
- * Copyright (C) 2014 Federico Recio
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,17 +14,21 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
+import org.junit.ClassRule;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 import io.federecio.dropwizard.swagger.TestApplication;
-import org.junit.runner.RunWith;
+import io.federecio.dropwizard.swagger.TestConfiguration;
 
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-simple.yaml")
-@RunWith(DropwizardJunitRunner.class)
 public class SimpleServerSeleniumTest extends SeleniumTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE = new DropwizardAppRule<TestConfiguration>(
+            TestApplication.class,
+            ResourceHelpers.resourceFilePath("test-simple.yaml"));
 
     @Override
     protected String getSwaggerUrl() {
-        return getSwaggerUrl(55668, "/application/swagger");
+        return getSwaggerUrl(RULE.getLocalPort(), "/application/swagger");
     }
 }

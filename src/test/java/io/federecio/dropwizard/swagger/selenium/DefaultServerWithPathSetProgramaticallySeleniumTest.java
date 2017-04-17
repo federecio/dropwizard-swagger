@@ -1,6 +1,5 @@
+// Copyright (C) 2014 Federico Recio
 /**
- * Copyright (C) 2014 Federico Recio
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,20 +14,24 @@
  */
 package io.federecio.dropwizard.swagger.selenium;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
+import org.junit.ClassRule;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 import io.federecio.dropwizard.swagger.TestApplicationWithPathSetProgramatically;
-import org.junit.runner.RunWith;
+import io.federecio.dropwizard.swagger.TestConfiguration;
 
-/**
- * @author Federico Recio
- */
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplicationWithPathSetProgramatically.class, yamlFile = "/test-default-with-path-set-programatically.yaml")
-public class DefaultServerWithPathSetProgramaticallySeleniumTest extends SeleniumTest {
+public class DefaultServerWithPathSetProgramaticallySeleniumTest
+        extends SeleniumTest {
+
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE = new DropwizardAppRule<TestConfiguration>(
+            TestApplicationWithPathSetProgramatically.class,
+            ResourceHelpers.resourceFilePath(
+                    "test-default-with-path-set-programatically.yaml"));
 
     @Override
     protected String getSwaggerUrl() {
-        return "http://localhost:33333/api/swagger";
+        return String.format("http://127.0.0.1:%s/api/swagger",
+                RULE.getLocalPort());
     }
 }

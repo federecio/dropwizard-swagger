@@ -4,3 +4,7 @@
 target/
 .idea/
 .DS_Store
+release.properties
+.classpath
+.project
+.settings

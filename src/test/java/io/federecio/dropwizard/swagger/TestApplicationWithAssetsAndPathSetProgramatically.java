@@ -1,6 +1,5 @@
+//  Copyright (C) 2014 Federico Recio
 /**
- * Copyright (C) 2014 Federico Recio
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,10 +17,8 @@ package io.federecio.dropwizard.swagger;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 
-/**
- * @author Federico Recio
- */
-public class TestApplicationWithAssetsAndPathSetProgramatically extends TestApplicationWithPathSetProgramatically {
+public class TestApplicationWithAssetsAndPathSetProgramatically
+        extends TestApplicationWithPathSetProgramatically {
     @Override
     public void initialize(Bootstrap<TestConfiguration> bootstrap) {
         super.initialize(bootstrap);

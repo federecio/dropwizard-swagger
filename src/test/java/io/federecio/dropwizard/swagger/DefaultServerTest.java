@@ -1,6 +1,5 @@
+//  Copyright (C) 2014 Federico Recio
 /**
- * Copyright (C) 2014 Federico Recio
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,18 +14,18 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import io.federecio.dropwizard.junitrunner.DropwizardJunitRunner;
-import io.federecio.dropwizard.junitrunner.DropwizardTestConfig;
-import org.junit.runner.RunWith;
+import org.junit.ClassRule;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 
-/**
- * @author Federico Recio
- */
-@RunWith(DropwizardJunitRunner.class)
-@DropwizardTestConfig(applicationClass = TestApplication.class, yamlFile = "/test-default.yaml")
 public class DefaultServerTest extends DropwizardTest {
 
+    @ClassRule
+    public static final DropwizardAppRule<TestConfiguration> RULE = new DropwizardAppRule<TestConfiguration>(
+            TestApplication.class,
+            ResourceHelpers.resourceFilePath("test-default.yaml"));
+
     public DefaultServerTest() {
-        super(44444, "/");
+        super(RULE.getLocalPort(), "/");
     }
 }
