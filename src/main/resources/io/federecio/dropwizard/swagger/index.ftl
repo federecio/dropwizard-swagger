@@ -1,11 +1,14 @@
 <#-- @ftlvariable name="" type="io.federecio.dropwizard.swagger.SwaggerView" -->
+<!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
-<!-- this is for the dev server -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Swagger UI</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="${swaggerAssetsPath}/swagger-ui.css" >
+  <link rel="icon" type="image/png" href="${swaggerAssetsPath}/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="${swaggerAssetsPath}/favicon-16x16.png" sizes="16x16" />
   <style>
     html
     {
@@ -65,7 +68,6 @@
 
 <div id="swagger-ui"></div>
 
-<!-- don't be alarmed, these don't match what's in dist, because webpack-dev-server serves them in memory. -->
 <script src="${swaggerAssetsPath}/swagger-ui-bundle.js"> </script>
 <script src="${swaggerAssetsPath}/swagger-ui-standalone-preset.js"> </script>
 <script>
@@ -110,11 +112,10 @@ window.onload = function() {
     showRequestHeaders: false,
     presets: [
       SwaggerUIBundle.presets.apis,
-      // yay ES6 modules ↘
-      Array.isArray(SwaggerUIStandalonePreset) ? SwaggerUIStandalonePreset : SwaggerUIStandalonePreset.default
+      SwaggerUIStandalonePreset
     ],
     plugins: [
-       SwaggerUIBundle.plugins.DownloadUrl
+      SwaggerUIBundle.plugins.DownloadUrl
     ],
     layout: "StandaloneLayout"
   })
