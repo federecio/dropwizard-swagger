@@ -14,12 +14,11 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import java.util.Optional;
 import io.dropwizard.Configuration;
 import io.dropwizard.server.DefaultServerFactory;
 import io.dropwizard.server.ServerFactory;
 import io.dropwizard.server.SimpleServerFactory;
-
-import java.util.Optional;
 
 /**
  * Wrapper around Dropwizard's configuration and the bundle's config that
@@ -99,7 +98,7 @@ public class ConfigurationHelper {
     public String getOAuth2RedirectUriPath() {
         final String jerseyRootPath = getJerseyRootPath();
         final String uriPathPrefix = jerseyRootPath.equals("/") ? ""
-            : jerseyRootPath;
+                : jerseyRootPath;
         return uriPathPrefix + "/oauth2-redirect.html";
     }
 
@@ -123,7 +122,7 @@ public class ConfigurationHelper {
             urlToStrip = urlToStrip.substring(0, urlToStrip.length() - 1);
         }
 
-        if (urlToStrip.length() > 1 && urlToStrip.endsWith("/")) {
+        if (!urlToStrip.isEmpty() && urlToStrip.endsWith("/")) {
             urlToStrip = urlToStrip.substring(0, urlToStrip.length() - 1);
         }
 

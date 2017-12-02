@@ -5,7 +5,9 @@ swagger:
   title: Sample API
   version: v1
   description: Sample service API
-  contact: jplock@smoketurner.com
+  contact: Justin Plock
+  contactEmail: jplock@smoketurner.com
+  contactUrl: https://smoketurner.com
   license: Apache 2.0
   licenseUrl: https://www.apache.org/licenses/LICENSE-2.0
 
