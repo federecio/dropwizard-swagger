@@ -14,6 +14,7 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import javax.annotation.Nullable;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,21 +37,42 @@ public class SwaggerBundleConfiguration {
      * {@link io.swagger.annotations.Api} annotated resources
      */
     @NotEmpty
-    private String resourcePackage;
+    private String resourcePackage = "";
 
+    @Nullable
     private String title;
+
+    @Nullable
     private String version;
+
+    @Nullable
     private String description;
+
+    @Nullable
     private String termsOfServiceUrl;
+
+    @Nullable
     private String contact;
+
+    @Nullable
     private String contactEmail;
+
+    @Nullable
     private String contactUrl;
+
+    @Nullable
     private String license;
+
+    @Nullable
     private String licenseUrl;
+
     private SwaggerViewConfiguration swaggerViewConfiguration = new SwaggerViewConfiguration();
     private SwaggerOAuth2Configuration swaggerOAuth2Configuration = new SwaggerOAuth2Configuration();
     private boolean prettyPrint = true;
+
+    @Nullable
     private String host;
+
     private String contextRoot = "/";
     private String[] schemes = new String[] { "http" };
     private boolean enabled = true;
@@ -67,7 +89,7 @@ public class SwaggerBundleConfiguration {
      * initialized by that time and so does not know you set the path
      * programmatically.
      */
-    @JsonProperty
+    @Nullable
     private String uriPrefix;
 
     @JsonProperty
@@ -80,103 +102,113 @@ public class SwaggerBundleConfiguration {
         this.resourcePackage = resourcePackage;
     }
 
+    @Nullable
     @JsonProperty
     public String getTitle() {
         return title;
     }
 
     @JsonProperty
-    public void setTitle(String title) {
+    public void setTitle(@Nullable String title) {
         this.title = title;
     }
 
+    @Nullable
     @JsonProperty
     public String getVersion() {
         return version;
     }
 
     @JsonProperty
-    public void setVersion(String version) {
+    public void setVersion(@Nullable String version) {
         this.version = version;
     }
 
+    @Nullable
     @JsonProperty
     public String getDescription() {
         return description;
     }
 
     @JsonProperty
-    public void setDescription(String description) {
+    public void setDescription(@Nullable String description) {
         this.description = description;
     }
 
+    @Nullable
     @JsonProperty
     public String getTermsOfServiceUrl() {
         return termsOfServiceUrl;
     }
 
     @JsonProperty
-    public void setTermsOfServiceUrl(String termsOfServiceUrl) {
+    public void setTermsOfServiceUrl(@Nullable String termsOfServiceUrl) {
         this.termsOfServiceUrl = termsOfServiceUrl;
     }
 
+    @Nullable
     @JsonProperty
     public String getContact() {
         return contact;
     }
 
     @JsonProperty
-    public void setContact(String contact) {
+    public void setContact(@Nullable String contact) {
         this.contact = contact;
     }
 
+    @Nullable
     @JsonProperty
     public String getContactEmail() {
         return contactEmail;
     }
 
     @JsonProperty
-    public void setContactEmail(String contactEmail) {
+    public void setContactEmail(@Nullable String contactEmail) {
         this.contactEmail = contactEmail;
     }
 
+    @Nullable
     @JsonProperty
     public String getContactUrl() {
         return contactUrl;
     }
 
     @JsonProperty
-    public void setContactUrl(String contactUrl) {
+    public void setContactUrl(@Nullable String contactUrl) {
         this.contactUrl = contactUrl;
     }
 
+    @Nullable
     @JsonProperty
     public String getLicense() {
         return license;
     }
 
     @JsonProperty
-    public void setLicense(String license) {
+    public void setLicense(@Nullable String license) {
         this.license = license;
     }
 
+    @Nullable
     @JsonProperty
     public String getLicenseUrl() {
         return licenseUrl;
     }
 
     @JsonProperty
-    public void setLicenseUrl(String licenseUrl) {
+    public void setLicenseUrl(@Nullable String licenseUrl) {
         this.licenseUrl = licenseUrl;
     }
 
+    @Nullable
     @JsonProperty
     public String getUriPrefix() {
         return uriPrefix;
     }
 
     @JsonProperty
-    public void setUriPrefix(String uriPrefix) {
+    public void setUriPrefix(@Nullable String uriPrefix) {
         this.uriPrefix = uriPrefix;
     }
 
@@ -212,13 +244,14 @@ public class SwaggerBundleConfiguration {
         this.prettyPrint = isPrettyPrint;
     }
 
+    @Nullable
     @JsonProperty
     public String getHost() {
         return host;
     }
 
     @JsonProperty
-    public void setHost(String host) {
+    public void setHost(@Nullable String host) {
         this.host = host;
     }
 
