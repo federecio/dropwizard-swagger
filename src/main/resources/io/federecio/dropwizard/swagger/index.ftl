@@ -103,7 +103,7 @@ window.onload = function() {
     plugins: [
       SwaggerUIBundle.plugins.DownloadUrl
     ],
-    oauth2RedirectUrl: "${contextPath}/oauth2-redirect.html",
+    oauth2RedirectUrl: window.location.protocol + "//" + window.location.host + "${contextPath}/oauth2-redirect.html",
     layout: "StandaloneLayout"
   });
 
