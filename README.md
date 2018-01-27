@@ -7,7 +7,7 @@ dropwizard-swagger
 
 A Dropwizard bundle that serves Swagger UI static content and loads Swagger endpoints. Swagger UI static content is taken from https://github.com/swagger-api/swagger-ui
 
-Current version has been tested with Dropwizard 1.2.2 and Swagger 1.5.17 which supports Swagger 2 spec!
+Current version has been tested with Dropwizard 1.2.3 and Swagger 1.5.18 which supports Swagger 2 spec!
 
 Note: if you come from previous versions there have been some changes in the way the bundle is configured, see details below.
 
@@ -29,7 +29,7 @@ dropwizard-swagger| Dropwizard |Swagger API|Swagger UI
        0.9.x      |   0.9.x    |   1.5.9   | v2.1.5
        1.0.x      |   1.0.x    |   1.5.12  | v2.2.10
        1.1.x      |   1.1.x    |   1.5.16  | v2.2.10
-       1.2.x      |   1.2.x    |   1.5.17  | v3.6.0
+       1.2.x      |   1.2.x    |   1.5.18  | v3.9.2
 
 How to use it
 -------------
@@ -40,7 +40,7 @@ How to use it
 <dependency>
     <groupId>com.smoketurner</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>1.2.2-2</version>
+    <version>1.2.3-1</version>
 </dependency>
 ```
 
