@@ -93,7 +93,7 @@ window.onload = function() {
     },
     docExpansion: "none",
     jsonEditor: false,
-    apisSorter: "alpha",
+    tagsSorter: "alpha",
     defaultModelRendering: 'schema',
     showRequestHeaders: false,
     presets: [
