@@ -53,6 +53,7 @@
         supportedSubmitMethods: ["get", "post", "put", "delete", "patch"],
         docExpansion: "none",
         jsonEditor: false,
+        tagsSorter: "alpha",
         operationsSorter: "alpha",
         defaultModelRendering: "schema",
         showRequestHeaders: false,
