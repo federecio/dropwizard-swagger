@@ -56,12 +56,12 @@
     </scm>
 
     <properties>
-        <dropwizard.version>1.3.1</dropwizard.version>
+        <dropwizard.version>1.3.4</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <file.encoding>UTF-8</file.encoding>
         <javadoc.doclint.none>-Xdoclint:none</javadoc.doclint.none>
-        <swagger.version>1.5.19</swagger.version>
+        <swagger.version>1.5.20</swagger.version>
     </properties>
 
     <ciManagement>
@@ -183,7 +183,7 @@
                                 <path>
                                     <groupId>com.uber.nullaway</groupId>
                                     <artifactId>nullaway</artifactId>
-                                    <version>0.4.3</version>
+                                    <version>0.4.6</version>
                                 </path>
                             </annotationProcessorPaths>
                             <compilerArgs>
@@ -209,9 +209,9 @@
             </build>
         </profile>
         <profile>
-            <id>jdk9</id>
+            <id>jdk10</id>
             <activation>
-                <jdk>9</jdk>
+                <jdk>10</jdk>
             </activation>
             <build>
                 <plugins>
@@ -219,8 +219,8 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <configuration>
-                            <source>9</source>
-                            <target>9</target>
+                            <source>10</source>
+                            <target>10</target>
                             <optimize>true</optimize>
                             <debug>true</debug>
                             <forceJavacCompilerUse>true</forceJavacCompilerUse>
