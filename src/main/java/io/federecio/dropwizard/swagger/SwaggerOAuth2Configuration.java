@@ -32,10 +32,7 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 import javax.annotation.Nullable;
 
-/**
- * For the meaning of all these properties please refer to Swagger UI documentation or {@see
- * https://github.com/swagger-api/swagger-ui/blob/master/lib/swagger-oauth.js}
- */
+/** For the meaning of all these properties please refer to Swagger UI documentation */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SwaggerOAuth2Configuration {
 

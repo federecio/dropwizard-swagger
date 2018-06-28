@@ -45,8 +45,8 @@ public class ConfigurationHelper {
   /**
    * Constructor
    *
-   * @param configuration
-   * @param swaggerBundleConfiguration
+   * @param configuration Configuration
+   * @param swaggerBundleConfiguration Bundle Configuration
    */
   public ConfigurationHelper(
       Configuration configuration, SwaggerBundleConfiguration swaggerBundleConfiguration) {

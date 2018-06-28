@@ -70,13 +70,21 @@ public class SwaggerView extends View {
     this.oauth2Configuration = oauth2Configuration;
   }
 
-  /** Returns the title for the browser header */
+  /**
+   * Returns the title for the browser header
+   *
+   * @return String
+   */
   @Nullable
   public String getTitle() {
     return viewConfiguration.getPageTitle();
   }
 
-  /** Returns the path with which all requests for Swagger's static content need to be prefixed */
+  /**
+   * Returns the path with which all requests for Swagger's static content need to be prefixed
+   *
+   * @return String
+   */
   public String getSwaggerAssetsPath() {
     return swaggerAssetsPath;
   }
@@ -84,23 +92,37 @@ public class SwaggerView extends View {
   /**
    * Returns the path with with which all requests made by Swagger's UI to Resources need to be
    * prefixed
+   *
+   * @return String
    */
   public String getContextPath() {
     return contextPath;
   }
 
-  /** Returns the location of the validator URL or null to disable */
+  /**
+   * Returns the location of the validator URL or null to disable
+   *
+   * @return String
+   */
   @Nullable
   public String getValidatorUrl() {
     return viewConfiguration.getValidatorUrl();
   }
 
-  /** Returns whether to display the authorization input boxes */
+  /**
+   * Returns whether to display the authorization input boxes
+   *
+   * @return String
+   */
   public boolean getShowAuth() {
     return viewConfiguration.isShowAuth();
   }
 
-  /** Returns whether to display the swagger spec selector */
+  /**
+   * Returns whether to display the swagger spec selector
+   *
+   * @return boolean
+   */
   public boolean getShowApiSelector() {
     return viewConfiguration.isShowApiSelector();
   }
