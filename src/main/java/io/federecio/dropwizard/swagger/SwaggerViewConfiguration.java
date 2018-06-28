@@ -1,9 +1,11 @@
-/**
+/*
+ * Copyright © 2018 Smoke Turner, LLC (contact@smoketurner.com)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -11,79 +13,87 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.federecio.dropwizard.swagger;
 
 import javax.annotation.Nullable;
 
 /**
- * Contains all configurable parameters required to render the SwaggerUI View
- * from the default template
+ * Contains all configurable parameters required to render the SwaggerUI View from the default
+ * template
  */
 public class SwaggerViewConfiguration {
 
-    private static final String DEFAULT_TITLE = "Swagger UI";
-    private static final String DEFAULT_TEMPLATE = "index.ftl";
+  private static final String DEFAULT_TITLE = "Swagger UI";
+  private static final String DEFAULT_TEMPLATE = "index.ftl";
 
-    @Nullable
-    private String pageTitle;
+  @Nullable private String pageTitle;
 
-    @Nullable
-    private String templateUrl;
+  @Nullable private String templateUrl;
 
-    @Nullable
-    private String validatorUrl;
+  @Nullable private String validatorUrl;
 
-    private boolean showApiSelector;
-    private boolean showAuth;
+  private boolean showApiSelector;
+  private boolean showAuth;
 
-    public SwaggerViewConfiguration() {
-        this.pageTitle = DEFAULT_TITLE;
-        this.templateUrl = DEFAULT_TEMPLATE;
-        this.validatorUrl = null;
-        this.showApiSelector = true;
-        this.showAuth = true;
-    }
+  public SwaggerViewConfiguration() {
+    this.pageTitle = DEFAULT_TITLE;
+    this.templateUrl = DEFAULT_TEMPLATE;
+    this.validatorUrl = null;
+    this.showApiSelector = true;
+    this.showAuth = true;
+  }
 
-    @Nullable
-    public String getPageTitle() {
-        return pageTitle;
-    }
+  @Nullable
+  public String getPageTitle() {
+    return pageTitle;
+  }
 
-    public void setPageTitle(@Nullable String title) {
-        this.pageTitle = title;
-    }
+  public void setPageTitle(@Nullable String title) {
+    this.pageTitle = title;
+  }
 
-    @Nullable
-    public String getTemplateUrl() {
-        return templateUrl;
-    }
+  @Nullable
+  public String getTemplateUrl() {
+    return templateUrl;
+  }
 
-    public void setTemplateUrl(@Nullable String templateUrl) {
-        this.templateUrl = templateUrl;
-    }
+  public void setTemplateUrl(@Nullable String templateUrl) {
+    this.templateUrl = templateUrl;
+  }
 
-    @Nullable
-    public String getValidatorUrl() {
-        return validatorUrl;
-    }
+  @Nullable
+  public String getValidatorUrl() {
+    return validatorUrl;
+  }
 
-    public void setValidatorUrl(@Nullable String validatorUrl) {
-        this.validatorUrl = validatorUrl;
-    }
+  public void setValidatorUrl(@Nullable String validatorUrl) {
+    this.validatorUrl = validatorUrl;
+  }
 
-    public boolean isShowApiSelector() {
-        return showApiSelector;
-    }
+  public boolean isShowApiSelector() {
+    return showApiSelector;
+  }
 
-    public void setShowApiSelector(boolean showApiSelector) {
-        this.showApiSelector = showApiSelector;
-    }
+  public void setShowApiSelector(boolean showApiSelector) {
+    this.showApiSelector = showApiSelector;
+  }
 
-    public boolean isShowAuth() {
-        return showAuth;
-    }
+  public boolean isShowAuth() {
+    return showAuth;
+  }
 
-    public void setShowAuth(boolean showAuth) {
-        this.showAuth = showAuth;
-    }
+  public void setShowAuth(boolean showAuth) {
+    this.showAuth = showAuth;
+  }
 }
