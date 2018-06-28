@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright © 2018 Smoke Turner, LLC (contact@smoketurner.com)
+    Copyright © 2014 Federico Recio (N/A)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@
         </developer>
     </developers>
 
+    <inceptionYear>2014</inceptionYear>
     <scm>
         <connection>scm:git:git://github.com:smoketurner/dropwizard-swagger.git</connection>
         <developerConnection>scm:git:git@github.com:smoketurner/dropwizard-swagger.git</developerConnection>
@@ -89,4 +90,19 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <owner>Federico Recio</owner>
+                        <email>N/A</email>
+                    </properties>
+                 </configuration>
+             </plugin>
+        </plugins>
+    </build>
 </project>
