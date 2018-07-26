@@ -57,7 +57,7 @@ How to use it
 		@Override
 		public void initialize(Bootstrap<YourConfiguration> bootstrap) {
 		    ...
-            bootstrap.addBundle(new SwaggerBundle<TestConfiguration>() {
+            bootstrap.addBundle(new SwaggerBundle<YourConfiguration>() {
                 @Override
                 protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(YourConfiguration configuration) {
                     return configuration.swaggerBundleConfiguration;
