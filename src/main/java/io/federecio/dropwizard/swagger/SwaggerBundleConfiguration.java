@@ -33,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.models.Contact;
+import java.util.Arrays;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.jetbrains.annotations.Nullable;
 
@@ -265,12 +266,12 @@ public class SwaggerBundleConfiguration {
 
   @JsonProperty
   public String[] getSchemes() {
-    return schemes;
+    return Arrays.copyOf(schemes, schemes.length);
   }
 
   @JsonProperty
   public void setSchemes(String[] schemes) {
-    this.schemes = schemes;
+    this.schemes = Arrays.copyOf(schemes, schemes.length);
   }
 
   @JsonProperty
