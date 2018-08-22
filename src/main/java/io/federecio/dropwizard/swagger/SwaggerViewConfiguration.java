@@ -26,7 +26,7 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Contains all configurable parameters required to render the SwaggerUI View from the default

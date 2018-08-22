@@ -30,7 +30,7 @@ package io.federecio.dropwizard.swagger;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Maps;
 import java.util.Map;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /** For the meaning of all these properties please refer to Swagger UI documentation */
 @JsonIgnoreProperties(ignoreUnknown = true)

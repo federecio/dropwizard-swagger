@@ -33,8 +33,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.models.Contact;
-import javax.annotation.Nullable;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * For the meaning of all these properties please refer to Swagger documentation or {@link
