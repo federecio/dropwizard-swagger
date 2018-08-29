@@ -27,10 +27,9 @@
  */
 package io.federecio.dropwizard.swagger;
 
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.dropwizard.views.View;
 import java.nio.charset.StandardCharsets;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Serves the content of Swagger's index page which has been "templatized" to support replacing the
@@ -48,10 +47,10 @@ public class SwaggerView extends View {
   private final SwaggerOAuth2Configuration oauth2Configuration;
 
   public SwaggerView(
-      @NotNull final String contextRoot,
-      @NotNull final String urlPattern,
-      @NotNull SwaggerViewConfiguration viewConfiguration,
-      @NotNull SwaggerOAuth2Configuration oauth2Configuration) {
+      final String contextRoot,
+      final String urlPattern,
+      final SwaggerViewConfiguration viewConfiguration,
+      final SwaggerOAuth2Configuration oauth2Configuration) {
     super(viewConfiguration.getTemplateUrl(), StandardCharsets.UTF_8);
 
     String contextRootPrefix = "/".equals(contextRoot) ? "" : contextRoot;

@@ -29,8 +29,8 @@ package io.federecio.dropwizard.swagger;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Maps;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.util.Map;
-import org.jetbrains.annotations.Nullable;
 
 /** For the meaning of all these properties please refer to Swagger UI documentation */
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -31,11 +31,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.models.Contact;
 import java.util.Arrays;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * For the meaning of all these properties please refer to Swagger documentation or {@link
