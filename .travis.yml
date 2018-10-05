@@ -2,8 +2,7 @@ sudo: false
 dist: trusty
 language: java
 jdk:
-  - openjdk10
-  - oraclejdk10
+  - openjdk11
 before_install:
   - rm ~/.m2/settings.xml || true 
   - ulimit -c unlimited -S

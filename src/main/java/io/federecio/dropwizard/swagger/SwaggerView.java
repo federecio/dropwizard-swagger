@@ -27,9 +27,9 @@
  */
 package io.federecio.dropwizard.swagger;
 
-import edu.umd.cs.findbugs.annotations.Nullable;
 import io.dropwizard.views.View;
 import java.nio.charset.StandardCharsets;
+import javax.annotation.Nullable;
 
 /**
  * Serves the content of Swagger's index page which has been "templatized" to support replacing the
