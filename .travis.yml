@@ -1,6 +1,7 @@
-sudo: false
-dist: trusty
+dist: xenial
 language: java
+os:
+  - linux
 jdk:
   - openjdk11
 before_install:
