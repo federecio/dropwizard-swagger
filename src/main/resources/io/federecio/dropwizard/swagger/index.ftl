@@ -39,7 +39,7 @@
     <script>
     window.onload = function() {
 
-      // Build a system
+      // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
         url: "${contextPath}/swagger.json",
         <#if validatorUrl??>
@@ -78,9 +78,10 @@
           "${additionalQueryStringParamKey}": "${oauth2Configuration.additionalQueryStringParams[additionalQueryStringParamKey]}"
         </#list>
         }
-      });
+      })
+      // End Swagger UI call region
 
-      window.ui = ui;
+      window.ui = ui
     }
   </script>
   </body>
