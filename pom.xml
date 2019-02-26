@@ -21,7 +21,7 @@
     <parent>
         <groupId>com.smoketurner.dropwizard</groupId>
         <artifactId>dropwizard-pom</artifactId>
-        <version>0.0.20</version>
+        <version>1.3.9-1</version>
     </parent>
 
     <groupId>com.smoketurner</groupId>
