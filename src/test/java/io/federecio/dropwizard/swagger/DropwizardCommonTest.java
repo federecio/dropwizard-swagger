@@ -35,9 +35,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jetty.http.HttpStatus;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class DropwizardCommonTest {
 
@@ -49,12 +49,12 @@ public abstract class DropwizardCommonTest {
     this.basePath = Path.from(basePath);
   }
 
-  @Before
+  @BeforeEach
   public void setPort() {
     RestAssured.port = port;
   }
 
-  @BeforeClass
+  @BeforeAll
   public static void crap() throws Exception {
     Field initialized = BaseApiListingResource.class.getDeclaredField("initialized");
     initialized.setAccessible(true);
