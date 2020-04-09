@@ -39,6 +39,7 @@ public class SwaggerResource {
   private final SwaggerOAuth2Configuration oAuth2Configuration;
   private final String contextRoot;
   private final String urlPattern;
+  private final String customJavascriptPath;
 
   public SwaggerResource(
       String urlPattern,
@@ -48,6 +49,7 @@ public class SwaggerResource {
     this.viewConfiguration = viewConfiguration;
     this.oAuth2Configuration = oAuth2Configuration;
     this.contextRoot = "/";
+    this.customJavascriptPath = null;
   }
 
   public SwaggerResource(
@@ -59,10 +61,24 @@ public class SwaggerResource {
     this.oAuth2Configuration = oAuth2Configuration;
     this.urlPattern = urlPattern;
     this.contextRoot = contextRoot;
+    this.customJavascriptPath = null;
+  }
+
+  public SwaggerResource(
+      String urlPattern,
+      SwaggerViewConfiguration viewConfiguration,
+      SwaggerOAuth2Configuration oAuth2Configuration,
+      String contextRoot,
+      String customJavascriptPath) {
+    this.viewConfiguration = viewConfiguration;
+    this.oAuth2Configuration = oAuth2Configuration;
+    this.urlPattern = urlPattern;
+    this.contextRoot = contextRoot;
+    this.customJavascriptPath = customJavascriptPath;
   }
 
   @GET
   public SwaggerView get() {
-    return new SwaggerView(contextRoot, urlPattern, viewConfiguration, oAuth2Configuration);
+    return new SwaggerView(contextRoot, urlPattern, viewConfiguration, oAuth2Configuration, customJavascriptPath);
   }
 }
