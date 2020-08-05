@@ -52,7 +52,7 @@
         <url>http://github.com/smoketurner/dropwizard-swagger</url>
         <tag>HEAD</tag>
     </scm>
-    
+
     <dependencyManagement>
       <dependencies>
         <dependency>
@@ -93,6 +93,13 @@
             <groupId>io.swagger</groupId>
             <artifactId>swagger-jersey2-jaxrs</artifactId>
             <version>1.6.2</version>
+            <!-- Causes runtime issues with jakarta.validation:validation-api in dropwizard-core -->
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
