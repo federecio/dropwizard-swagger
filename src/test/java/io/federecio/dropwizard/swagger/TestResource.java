@@ -35,7 +35,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-
 /** @author Federico Recio */
 @Path("/test.json")
 @Api("/test")

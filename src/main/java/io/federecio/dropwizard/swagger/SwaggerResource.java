@@ -79,6 +79,7 @@ public class SwaggerResource {
 
   @GET
   public SwaggerView get() {
-    return new SwaggerView(contextRoot, urlPattern, viewConfiguration, oAuth2Configuration, customJavascriptPath);
+    return new SwaggerView(
+        contextRoot, urlPattern, viewConfiguration, oAuth2Configuration, customJavascriptPath);
   }
 }
