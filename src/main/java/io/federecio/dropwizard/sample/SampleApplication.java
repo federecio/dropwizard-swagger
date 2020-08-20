@@ -52,7 +52,7 @@ public class SampleApplication extends Application<SampleConfiguration> {
             return configuration.getSwagger();
           }
         });
-  };
+  }
 
   @Override
   public void run(SampleConfiguration configuration, Environment environment) throws Exception {
