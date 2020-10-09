@@ -67,7 +67,9 @@
         ],
         oauth2RedirectUrl: window.location.protocol + "//" + window.location.host + "${contextPath}/oauth2-redirect.html",
         layout: "StandaloneLayout",
+        <#if customJavascriptPath??>
         requestInterceptor: (typeof customRequestInterceptor == 'function' ? customRequestInterceptor : null)
+        </#if>
       });
 
       ui.initOAuth({
