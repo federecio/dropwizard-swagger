@@ -101,11 +101,11 @@ Contributors
 ------------
 
 * Federico Recio [@federecio](http://twitter.com/federecio)
-* Jochen Szostek [prefabsoft] (http://prefabsoft.com)
-* Damien Raude-Morvan [drazzib] (https://github.com/drazzib)
-* Marcel Stör [marcelstoer] (https://github.com/marcelstoer)
-* Flemming Frandsen https://github.com/dren-dk
-* Tristan Burch [tburch] (https://github.com/tburch)
-* Matt Carrier [mattcarrier] (https://github.com/mattcarrier)
-* Justin Plock [jplock] (https://github.com/jplock)
-* Ian Rogers [IanRogers-LShift] (https://github.com/IanRogers-LShift)
+* Jochen Szostek [prefabsoft](http://prefabsoft.com)
+* Damien Raude-Morvan [drazzib](https://github.com/drazzib)
+* Marcel Stör [marcelstoer](https://github.com/marcelstoer)
+* Flemming Frandsen [dren-dk](https://github.com/dren-dk)
+* Tristan Burch [tburch](https://github.com/tburch)
+* Matt Carrier [mattcarrier](https://github.com/mattcarrier)
+* Justin Plock [jplock](https://github.com/jplock)
+* Ian Rogers [IanRogers-LShift](https://github.com/IanRogers-LShift)
