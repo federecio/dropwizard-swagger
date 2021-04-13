@@ -79,7 +79,7 @@ public class SwaggerBundleConfiguration {
   @Nullable private String host;
 
   private String contextRoot = "/";
-  private String[] schemes = new String[] {"http"};
+  private String[] schemes = new String[] {};
   private boolean enabled = true;
   private boolean includeSwaggerResource = true;
 
