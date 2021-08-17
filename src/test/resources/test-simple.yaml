@@ -1,7 +1,0 @@
-server:
-  type: simple
-  connector:
-    type: http
-    port: 55668
-swagger:
-  resourcePackage: io.federecio.dropwizard.swagger

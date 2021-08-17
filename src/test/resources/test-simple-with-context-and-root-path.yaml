@@ -1,9 +1,0 @@
-server:
-  type: simple
-  applicationContextPath: /
-  rootPath: /api/*
-  connector:
-    type: http
-    port: 51578
-swagger:
-  resourcePackage: io.federecio.dropwizard.swagger
