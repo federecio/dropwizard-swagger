@@ -17,6 +17,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: ${{ matrix.java_version }}
+        distribution: 'zulu'
     - name: Print Java and Maven versions
       run: ./mvnw -B -s .github/settings.xml -v
     - name: Build with Maven
