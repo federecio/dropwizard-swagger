@@ -28,6 +28,8 @@
 package io.federecio.dropwizard.swagger;
 
 import io.restassured.RestAssured;
+import io.restassured.path.xml.XmlPath;
+import java.util.List;
 import org.eclipse.jetty.http.HttpStatus;
 import org.hamcrest.core.StringContains;
 import org.junit.jupiter.api.Test;
@@ -39,7 +41,7 @@ public abstract class DropwizardTest extends DropwizardCommonTest {
   }
 
   @Test
-  public void swaggerIsAvailable() throws Exception {
+  public void swaggerIsAvailable() {
     RestAssured.expect()
         .statusCode(HttpStatus.OK_200)
         .body(StringContains.containsString(TestResource.OPERATION_DESCRIPTION))
@@ -50,5 +52,34 @@ public abstract class DropwizardTest extends DropwizardCommonTest {
         .statusCode(HttpStatus.OK_200)
         .when()
         .get(Path.from(basePath, "swagger") + "/");
+  }
+
+  @Test
+  public void linkUrlsResolvableInRenderedIndexPage() {
+
+    XmlPath htmlDoc = RestAssured.get(Path.from(basePath, "swagger") + "/").htmlPath();
+    List<String> links = htmlDoc.getList("html.head.link.@href");
+    links.forEach(link -> RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(link));
+  }
+
+  @Test
+  public void scriptUrlsResolvableInRenderedIndexPage() {
+    XmlPath htmlDoc = RestAssured.get(Path.from(basePath, "swagger") + "/").htmlPath();
+    List<String> links = htmlDoc.getList("html.body.script.@src");
+    links.forEach(link -> RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(link));
+  }
+
+  @Test
+  public void swaggerJsonUrlResolvableInRenderedIndexPage() {
+
+    XmlPath htmlDoc = RestAssured.get(Path.from(basePath, "swagger") + "/").htmlPath();
+    String onloadFunctionAsString = htmlDoc.getString("html.body.script.text()");
+    String urlProperty = "url: ";
+    int indexOfUrlStart = onloadFunctionAsString.indexOf(urlProperty) + urlProperty.length();
+    String pathToSwaggerJson =
+        onloadFunctionAsString.substring(
+            indexOfUrlStart, onloadFunctionAsString.indexOf(",", indexOfUrlStart));
+    pathToSwaggerJson = pathToSwaggerJson.replace("\"", "");
+    RestAssured.expect().statusCode(HttpStatus.OK_200).when().get(pathToSwaggerJson);
   }
 }

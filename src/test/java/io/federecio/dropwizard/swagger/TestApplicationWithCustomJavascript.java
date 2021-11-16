@@ -43,7 +43,7 @@ public class TestApplicationWithCustomJavascript extends Application<TestConfigu
             SwaggerBundleConfiguration swaggerBundleConfiguration =
                 new SwaggerBundleConfiguration();
             swaggerBundleConfiguration.setResourcePackage("io.federecio.dropwizard.swagger");
-            swaggerBundleConfiguration.setCustomJavascript("/myassests/customJavascript.js");
+            swaggerBundleConfiguration.setCustomJavascript("/myassets/customJavascript.js");
 
             return swaggerBundleConfiguration;
           }
@@ -55,7 +55,7 @@ public class TestApplicationWithCustomJavascript extends Application<TestConfigu
   @Override
   public void run(TestConfiguration configuration, Environment environment) throws Exception {
     environment.jersey().register(TestResource.class);
-    new AssetsBundle("/myassests/customJavascript.js", "/customJavascript.js", null, "")
+    new AssetsBundle("/myassets/customJavascript.js", "/customJavascript.js", null, "")
         .run(configuration, environment);
   }
 }

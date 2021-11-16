@@ -60,7 +60,7 @@ public class SwaggerView extends View {
 
     // swagger-static should be found on the root context
     if (!contextRootPrefix.isEmpty()) {
-      swaggerAssetsPath = contextRootPrefix + SWAGGER_URI_PATH;
+      swaggerAssetsPath = contextRootPrefix + urlPattern + SWAGGER_URI_PATH;
     } else {
       swaggerAssetsPath =
           (urlPattern.equals("/") ? SWAGGER_URI_PATH : (urlPattern + SWAGGER_URI_PATH));

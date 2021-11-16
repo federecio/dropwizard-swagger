@@ -18,9 +18,11 @@ package io.federecio.dropwizard.swagger;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
+@Disabled("Disabled pending review of the 'behind proxy hosting' support")
 public class DefaultServerWithCustomTemplateTest extends DropwizardTest {
 
   private static DropwizardAppExtension<TestConfiguration> RULE =
